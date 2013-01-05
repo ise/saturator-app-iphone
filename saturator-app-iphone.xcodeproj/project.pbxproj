@@ -20,6 +20,10 @@
 		78690013169805B000E11631 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78690011169805B000E11631 /* DetailViewController.xib */; };
 		786900171698508200E11631 /* AnimeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 786900151698508200E11631 /* AnimeListViewController.m */; };
 		786900181698508200E11631 /* AnimeListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 786900161698508200E11631 /* AnimeListViewController.xib */; };
+		7869001C1698608F00E11631 /* FavoriteListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7869001A1698608F00E11631 /* FavoriteListViewController.m */; };
+		7869001D1698608F00E11631 /* FavoriteListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7869001B1698608F00E11631 /* FavoriteListViewController.xib */; };
+		78690021169860AF00E11631 /* ConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7869001F169860AF00E11631 /* ConfigViewController.m */; };
+		78690022169860AF00E11631 /* ConfigViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78690020169860AF00E11631 /* ConfigViewController.xib */; };
 		7869FFBF1698023800E11631 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7869FFBE1698023800E11631 /* UIKit.framework */; };
 		7869FFC11698023800E11631 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7869FFC01698023800E11631 /* Foundation.framework */; };
 		7869FFC31698023800E11631 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7869FFC21698023800E11631 /* CoreGraphics.framework */; };
@@ -58,6 +62,12 @@
 		786900141698508200E11631 /* AnimeListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimeListViewController.h; sourceTree = "<group>"; };
 		786900151698508200E11631 /* AnimeListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimeListViewController.m; sourceTree = "<group>"; };
 		786900161698508200E11631 /* AnimeListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnimeListViewController.xib; sourceTree = "<group>"; };
+		786900191698608F00E11631 /* FavoriteListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteListViewController.h; sourceTree = "<group>"; };
+		7869001A1698608F00E11631 /* FavoriteListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoriteListViewController.m; sourceTree = "<group>"; };
+		7869001B1698608F00E11631 /* FavoriteListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FavoriteListViewController.xib; sourceTree = "<group>"; };
+		7869001E169860AF00E11631 /* ConfigViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigViewController.h; sourceTree = "<group>"; };
+		7869001F169860AF00E11631 /* ConfigViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigViewController.m; sourceTree = "<group>"; };
+		78690020169860AF00E11631 /* ConfigViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConfigViewController.xib; sourceTree = "<group>"; };
 		7869FFBA1698023800E11631 /* saturator-app-iphone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "saturator-app-iphone.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7869FFBE1698023800E11631 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		7869FFC01698023800E11631 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -241,6 +251,12 @@
 				786900141698508200E11631 /* AnimeListViewController.h */,
 				786900151698508200E11631 /* AnimeListViewController.m */,
 				786900161698508200E11631 /* AnimeListViewController.xib */,
+				786900191698608F00E11631 /* FavoriteListViewController.h */,
+				7869001A1698608F00E11631 /* FavoriteListViewController.m */,
+				7869001B1698608F00E11631 /* FavoriteListViewController.xib */,
+				7869001E169860AF00E11631 /* ConfigViewController.h */,
+				7869001F169860AF00E11631 /* ConfigViewController.m */,
+				78690020169860AF00E11631 /* ConfigViewController.xib */,
 			);
 			path = viewcontroller;
 			sourceTree = "<group>";
@@ -326,6 +342,8 @@
 				7869000D1698038B00E11631 /* MainListViewController.xib in Resources */,
 				78690013169805B000E11631 /* DetailViewController.xib in Resources */,
 				786900181698508200E11631 /* AnimeListViewController.xib in Resources */,
+				7869001D1698608F00E11631 /* FavoriteListViewController.xib in Resources */,
+				78690022169860AF00E11631 /* ConfigViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,6 +387,8 @@
 				7869000E1698038B00E11631 /* Article.m in Sources */,
 				78690012169805B000E11631 /* DetailViewController.m in Sources */,
 				786900171698508200E11631 /* AnimeListViewController.m in Sources */,
+				7869001C1698608F00E11631 /* FavoriteListViewController.m in Sources */,
+				78690021169860AF00E11631 /* ConfigViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -13,6 +13,8 @@
 @synthesize tabBarController = _tabBarController;
 @synthesize mainListViewController = _mainListViewController;
 @synthesize animeListViewController = _animeListViewController;
+@synthesize favoriteListViewController = _favoriteListViewController;
+@synthesize configViewController = _configViewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -21,15 +23,18 @@
     
     self.mainListViewController = [[MainListViewController alloc] init];
     self.animeListViewController = [[AnimeListViewController alloc] init];
-    
+    self.favoriteListViewController = [[FavoriteListViewController alloc] init];
+    self.configViewController = [[ConfigViewController alloc] init];
     UINavigationController *mainNavi = [[UINavigationController alloc] initWithRootViewController:self.mainListViewController];
     mainNavi.navigationBar.tintColor = [UIColor blackColor];
     UINavigationController *animeNavi = [[UINavigationController alloc] initWithRootViewController:self.animeListViewController];
     animeNavi.navigationBar.tintColor = [UIColor blackColor];
+    UINavigationController *favNavi = [[UINavigationController alloc] initWithRootViewController:self.favoriteListViewController];
+    favNavi.navigationBar.tintColor = [UIColor blackColor];
     
     //TODO:tabbarのデザイン（アイコン？）修正
     self.tabBarController = [[UITabBarController alloc] initWithNibName:nil bundle:nil];
-    NSArray *controllers = [[NSArray alloc] initWithObjects:mainNavi,animeNavi,nil];
+    NSArray *controllers = [[NSArray alloc] initWithObjects:mainNavi,animeNavi,favNavi,self.configViewController,nil];
 
     [self.tabBarController setViewControllers:controllers];
     [self.window addSubview:self.tabBarController.view];
