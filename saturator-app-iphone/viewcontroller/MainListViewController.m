@@ -9,6 +9,7 @@
 #import "MainListViewController.h"
 #import "MainListViewCellController.h"
 #import "MainListAuthorViewCellController.h"
+#import "DetailViewController.h"
 #import "Article.h"
 #import "BaseListViewCell.h"
 
@@ -29,7 +30,7 @@
     if (self) {
         self.articleList = [[NSMutableArray alloc] init];
         self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg.png"]];
-        self.tableView.allowsSelection = NO;
+        //self.tableView.allowsSelection = NO;
     }
     
     return self;
@@ -153,14 +154,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //TODO:選択されたら、詳細画面へ遷移させる
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    DetailViewController *detail = [[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil];
+    [detail setArticle:[self.articleList objectAtIndex:indexPath.section]];
+    [self.navigationController pushViewController:detail animated:YES];
 }
 
 @end

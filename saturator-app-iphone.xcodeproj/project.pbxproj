@@ -16,6 +16,8 @@
 		7869000C1698038B00E11631 /* MainListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 786900011698038B00E11631 /* MainListViewController.m */; };
 		7869000D1698038B00E11631 /* MainListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 786900021698038B00E11631 /* MainListViewController.xib */; };
 		7869000E1698038B00E11631 /* Article.m in Sources */ = {isa = PBXBuildFile; fileRef = 786900051698038B00E11631 /* Article.m */; };
+		78690012169805B000E11631 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78690010169805B000E11631 /* DetailViewController.m */; };
+		78690013169805B000E11631 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78690011169805B000E11631 /* DetailViewController.xib */; };
 		7869FFBF1698023800E11631 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7869FFBE1698023800E11631 /* UIKit.framework */; };
 		7869FFC11698023800E11631 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7869FFC01698023800E11631 /* Foundation.framework */; };
 		7869FFC31698023800E11631 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7869FFC21698023800E11631 /* CoreGraphics.framework */; };
@@ -48,6 +50,9 @@
 		786900021698038B00E11631 /* MainListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainListViewController.xib; sourceTree = "<group>"; };
 		786900041698038B00E11631 /* Article.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Article.h; sourceTree = "<group>"; };
 		786900051698038B00E11631 /* Article.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Article.m; sourceTree = "<group>"; };
+		7869000F169805B000E11631 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		78690010169805B000E11631 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		78690011169805B000E11631 /* DetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
 		7869FFBA1698023800E11631 /* saturator-app-iphone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "saturator-app-iphone.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7869FFBE1698023800E11631 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		7869FFC01698023800E11631 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -225,6 +230,9 @@
 				786900001698038B00E11631 /* MainListViewController.h */,
 				786900011698038B00E11631 /* MainListViewController.m */,
 				786900021698038B00E11631 /* MainListViewController.xib */,
+				7869000F169805B000E11631 /* DetailViewController.h */,
+				78690010169805B000E11631 /* DetailViewController.m */,
+				78690011169805B000E11631 /* DetailViewController.xib */,
 			);
 			path = viewcontroller;
 			sourceTree = "<group>";
@@ -308,6 +316,7 @@
 				786900091698038B00E11631 /* MainListAuthorViewCellController.xib in Resources */,
 				7869000B1698038B00E11631 /* MainListViewCellController.xib in Resources */,
 				7869000D1698038B00E11631 /* MainListViewController.xib in Resources */,
+				78690013169805B000E11631 /* DetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -349,6 +358,7 @@
 				7869000A1698038B00E11631 /* MainListViewCellController.m in Sources */,
 				7869000C1698038B00E11631 /* MainListViewController.m in Sources */,
 				7869000E1698038B00E11631 /* Article.m in Sources */,
+				78690012169805B000E11631 /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
