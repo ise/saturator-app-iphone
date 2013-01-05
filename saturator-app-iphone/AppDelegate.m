@@ -2,7 +2,7 @@
 //  AppDelegate.m
 //  saturator-app-iphone
 //
-//  Created by Masaaki Takeuchi on 2013/01/05.
+//  Created by Masaaki Takeuchi on 2013/01/04.
 //  Copyright (c) 2013年 Masaaki Takeuchi. All rights reserved.
 //
 
@@ -10,11 +10,23 @@
 
 @implementation AppDelegate
 
+@synthesize navigationController = _navigationController;
+@synthesize mainListViewController = _mainListViewController;
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
+    
+    self.mainListViewController = [[MainListViewController alloc] init];
+    self.navigationController = [[UINavigationController alloc] initWithRootViewController:self.mainListViewController];
+    //[self.navigationController setNavigationBarHidden:YES animated: NO];
+    //[self.navigationController setToolbarHidden:NO animated:NO];
+    self.navigationController.navigationBar.tintColor = [UIColor blackColor];
+    
+    [self.window addSubview:self.navigationController.view];
+    
     [self.window makeKeyAndVisible];
     return YES;
 }
