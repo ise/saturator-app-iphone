@@ -10,23 +10,29 @@
 
 @implementation AppDelegate
 
-@synthesize navigationController = _navigationController;
+@synthesize tabBarController = _tabBarController;
 @synthesize mainListViewController = _mainListViewController;
+@synthesize animeListViewController = _animeListViewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     
     self.mainListViewController = [[MainListViewController alloc] init];
-    self.navigationController = [[UINavigationController alloc] initWithRootViewController:self.mainListViewController];
-    //[self.navigationController setNavigationBarHidden:YES animated: NO];
-    //[self.navigationController setToolbarHidden:NO animated:NO];
-    self.navigationController.navigationBar.tintColor = [UIColor blackColor];
+    self.animeListViewController = [[AnimeListViewController alloc] init];
     
-    [self.window addSubview:self.navigationController.view];
+    UINavigationController *mainNavi = [[UINavigationController alloc] initWithRootViewController:self.mainListViewController];
+    mainNavi.navigationBar.tintColor = [UIColor blackColor];
+    UINavigationController *animeNavi = [[UINavigationController alloc] initWithRootViewController:self.animeListViewController];
+    animeNavi.navigationBar.tintColor = [UIColor blackColor];
     
+    //TODO:tabbarのデザイン（アイコン？）修正
+    self.tabBarController = [[UITabBarController alloc] initWithNibName:nil bundle:nil];
+    NSArray *controllers = [[NSArray alloc] initWithObjects:mainNavi,animeNavi,nil];
+
+    [self.tabBarController setViewControllers:controllers];
+    [self.window addSubview:self.tabBarController.view];
     [self.window makeKeyAndVisible];
     return YES;
 }

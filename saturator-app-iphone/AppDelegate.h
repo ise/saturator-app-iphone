@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "MainListViewController.h"
+#import "AnimeListViewController.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-@property (strong, nonatomic) UINavigationController *navigationController;
+@property (strong, nonatomic) UITabBarController *tabBarController;
 @property (strong, nonatomic) MainListViewController *mainListViewController;
+@property (strong, nonatomic) AnimeListViewController *animeListViewController;
 
 @end
