@@ -14,7 +14,9 @@
 @property (strong, nonatomic) NSString *description;
 @property (strong, nonatomic) NSString *image;
 @property (strong, nonatomic) NSString *date;
+@property (readwrite) int unixtime;
 @property (strong, nonatomic) NSString *feedName;
 @property (strong, nonatomic) NSString *feedIcon;
 @property (strong, nonatomic) NSString *feedUrl;
+- (id)initWithDict:(NSDictionary*)dic;
 @end

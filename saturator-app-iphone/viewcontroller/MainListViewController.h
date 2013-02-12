@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
+#import "ArticleDataManager.h"
+#define RGB(r, g, b) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1]
 
-@interface MainListViewController : UITableViewController
+@interface MainListViewController : UITableViewController <ArticleDataManagerDelegate>
 
 @property (strong, nonatomic) NSMutableArray *articleList;
-
+- (void)buildView:(NSMutableArray *)articles;
 @end

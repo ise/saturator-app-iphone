@@ -30,6 +30,7 @@ Article *article;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    ((UITabBarController *)self.parentViewController.parentViewController).tabBar.hidden = YES;
     NSLog(@"Request to %@", article.url);
     NSURL *url = [NSURL URLWithString:article.url];
     NSURLRequest *req = [NSURLRequest requestWithURL:url];

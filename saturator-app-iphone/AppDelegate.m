@@ -35,8 +35,22 @@
     //TODO:tabbarのデザイン（アイコン？）修正
     self.tabBarController = [[UITabBarController alloc] initWithNibName:nil bundle:nil];
     NSArray *controllers = [[NSArray alloc] initWithObjects:mainNavi,animeNavi,favNavi,self.configViewController,nil];
-
     [self.tabBarController setViewControllers:controllers];
+    
+    for (UITabBarItem *item in self.tabBarController.tabBar.items) {
+        //UITabBarItem *item = [self.tabBarController.tabBar.items objectAtIndex:0];
+        UIImage *selectedImage = [UIImage imageNamed:@"home.png"];
+        UIImage *unselectedImage = [UIImage imageNamed:@"home.png"];
+        //タブバー選択・非選択時の画像を設定
+        [item setFinishedSelectedImage:selectedImage withFinishedUnselectedImage:unselectedImage];
+        //タブバーの文字色を設定(選択前)
+        [item setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1.0], UITextAttributeTextColor,nil] forState:UIControlStateNormal];
+        //タブバーの文字色を設定(選択中)
+        [item setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:0.99 green:0.0 blue:0.789 alpha:1.0], UITextAttributeTextColor,nil] forState:UIControlStateSelected];
+        //[item setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], UITextAttributeTextColor,nil] forState:UIControlStateSelected];
+        [item setTitle:@"HOME"];
+    }
+    
     [self.window addSubview:self.tabBarController.view];
     [self.window makeKeyAndVisible];
     return YES;

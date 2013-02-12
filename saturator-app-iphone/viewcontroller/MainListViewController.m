@@ -12,6 +12,8 @@
 #import "DetailViewController.h"
 #import "Article.h"
 #import "BaseListViewCell.h"
+#import "ArticleDataManager.h"
+#import "SVProgressHUD.h"
 
 /*
 @interface MainListViewController ()
@@ -53,10 +55,39 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    /*
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 480, 44)];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont boldSystemFontOfSize: 20.0f];
+    label.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
+    label.textAlignment = NSTextAlignmentCenter;
+    //#FF007F
+    label.textColor = [UIColor colorWithRed:1.0 green:0.0 blue:0.5 alpha:1.0];
+    label.textColor = RGB(255, 0, 127);
+    label.text = @"SATURATOR";
+    [self.navigationItem setTitleView:label];
+     */
+    [self setTitle:@"SATURATOR"];
     
-    [self.articleList addObject:[self _getArticle:1]];
-    [self.articleList addObject:[self _getArticle:2]];
-    [self.articleList addObject:[self _getArticle:3]];
+    //[self.articleList addObject:[self _getArticle:1]];
+    //[self.articleList addObject:[self _getArticle:2]];
+    //[self.articleList addObject:[self _getArticle:3]];
+    
+    ArticleDataManager *manager = [ArticleDataManager sharedInstance];
+    NSMutableArray *tids = [[NSMutableArray alloc] init];
+    [tids addObject:@"853"];
+    [tids addObject:@"2762"];
+    [tids addObject:@"2732"];
+    [tids addObject:@"2738"];
+    //[manager getArticles:tids];
+    [manager updateList:self Tids:tids];
+    
+    [SVProgressHUD show];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    ((UITabBarController *)self.parentViewController.parentViewController).tabBar.hidden = NO;
 }
 
 - (void)didReceiveMemoryWarning
@@ -156,7 +187,15 @@
 {
     DetailViewController *detail = [[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil];
     [detail setArticle:[self.articleList objectAtIndex:indexPath.section]];
+    detail.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detail animated:YES];
+}
+
+- (void)buildView:(NSMutableArray *)articles
+{
+    self.articleList = articles;
+    [SVProgressHUD dismiss];
+    [self.tableView reloadData];
 }
 
 @end
