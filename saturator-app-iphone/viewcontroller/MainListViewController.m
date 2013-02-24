@@ -75,8 +75,8 @@
     
     ArticleDataManager *manager = [ArticleDataManager sharedInstance];
     NSMutableArray *tids = [[NSMutableArray alloc] init];
-    [tids addObject:@"853"];
-    [tids addObject:@"2762"];
+    [tids addObject:@"2709"];
+    [tids addObject:@"2716"];
     [tids addObject:@"2732"];
     [tids addObject:@"2738"];
     //[manager getArticles:tids];
@@ -110,6 +110,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    Article *article = [self.articleList objectAtIndex:indexPath.section];
+    NSLog(@"%@", article.image);
     BaseListViewCell *cell;
     if (indexPath.row % 2 == 0) {
         static NSString *CellIdentifier = @"MainListViewCell";
@@ -126,7 +128,6 @@
             cell = (MainListAuthorViewCell *)controller.view;
         }
     }
-    Article *article = [self.articleList objectAtIndex:indexPath.section];
     [cell setArticle:article];
     return cell;
 }

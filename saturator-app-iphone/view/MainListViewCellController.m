@@ -7,13 +7,16 @@
 //
 
 #import "MainListViewCellController.h"
+#import "JMImageCache.h"
 
 @implementation MainListViewCell
 - (void)setArticle:(Article *)article
 {
     self.title.text = article.title;
-    NSData *d = [[NSData alloc] initWithContentsOfURL:[[NSURL alloc] initWithString:article.image]];
-    self.headImage.image = [[UIImage alloc] initWithData:d];
+    //NSData *d = [[NSData alloc] initWithContentsOfURL:[[NSURL alloc] initWithString:article.image]];
+    [self.headImage setImageWithURL:[NSURL URLWithString:article.image] placeholder:[UIImage imageNamed:@"placeholder.png"]];
+    //self.headImage.image = [[UIImage alloc] initWithData:d];
+    //self.headImage.image = [[JMImageCache sharedCache] imageForURL:[NSURL URLWithString:article.image] delegate:self];
 }
 @end
 

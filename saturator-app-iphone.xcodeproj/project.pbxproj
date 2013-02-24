@@ -77,6 +77,12 @@
 		7869FFEA1698023900E11631 /* saturator_app_iphoneTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7869FFE91698023900E11631 /* saturator_app_iphoneTests.m */; };
 		78AA61C616A5A22F00A1CAC4 /* ArticleDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 78AA61C516A5A22F00A1CAC4 /* ArticleDataManager.m */; };
 		78AA61CA16A7370E00A1CAC4 /* ArticleDataManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 78AA61C916A7370E00A1CAC4 /* ArticleDataManagerTests.m */; };
+		78B70A7316CA8E2800AB7A28 /* JMImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 78B70A7016CA8E2800AB7A28 /* JMImageCache.m */; };
+		78B70A7416CA8E2800AB7A28 /* JMImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 78B70A7016CA8E2800AB7A28 /* JMImageCache.m */; };
+		78B70A7516CA8E2800AB7A28 /* UIImageView+JMImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 78B70A7216CA8E2800AB7A28 /* UIImageView+JMImageCache.m */; };
+		78B70A7616CA8E2800AB7A28 /* UIImageView+JMImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 78B70A7216CA8E2800AB7A28 /* UIImageView+JMImageCache.m */; };
+		78B70A7816CBDD5500AB7A28 /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 78B70A7716CBDD5500AB7A28 /* placeholder.png */; };
+		78B70A7916CBDD5500AB7A28 /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 78B70A7716CBDD5500AB7A28 /* placeholder.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -181,6 +187,11 @@
 		78AA61C516A5A22F00A1CAC4 /* ArticleDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleDataManager.m; sourceTree = "<group>"; };
 		78AA61C816A7370E00A1CAC4 /* ArticleDataManagerTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleDataManagerTests.h; sourceTree = "<group>"; };
 		78AA61C916A7370E00A1CAC4 /* ArticleDataManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleDataManagerTests.m; sourceTree = "<group>"; };
+		78B70A6F16CA8E2800AB7A28 /* JMImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMImageCache.h; sourceTree = "<group>"; };
+		78B70A7016CA8E2800AB7A28 /* JMImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMImageCache.m; sourceTree = "<group>"; };
+		78B70A7116CA8E2800AB7A28 /* UIImageView+JMImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+JMImageCache.h"; sourceTree = "<group>"; };
+		78B70A7216CA8E2800AB7A28 /* UIImageView+JMImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+JMImageCache.m"; sourceTree = "<group>"; };
+		78B70A7716CBDD5500AB7A28 /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -330,6 +341,7 @@
 		7869FFF31698038B00E11631 /* resource */ = {
 			isa = PBXGroup;
 			children = (
+				78B70A7716CBDD5500AB7A28 /* placeholder.png */,
 				78690036169B110B00E11631 /* star.png */,
 				78690037169B110B00E11631 /* home.png */,
 				7869FFF41698038B00E11631 /* bg.png */,
@@ -340,6 +352,7 @@
 		7869FFF51698038B00E11631 /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				78B70A6E16CA8E0300AB7A28 /* jmimagecache */,
 				781D6E7816C8E9420003BD09 /* SVProgressHUD */,
 				78AA61CB16A7401500A1CAC4 /* sbjson */,
 				7869003A169C5F8A00E11631 /* fmdb */,
@@ -416,6 +429,17 @@
 				78372EF416C7AAD500E1ED37 /* SBJsonWriter.m */,
 			);
 			path = sbjson;
+			sourceTree = "<group>";
+		};
+		78B70A6E16CA8E0300AB7A28 /* jmimagecache */ = {
+			isa = PBXGroup;
+			children = (
+				78B70A6F16CA8E2800AB7A28 /* JMImageCache.h */,
+				78B70A7016CA8E2800AB7A28 /* JMImageCache.m */,
+				78B70A7116CA8E2800AB7A28 /* UIImageView+JMImageCache.h */,
+				78B70A7216CA8E2800AB7A28 /* UIImageView+JMImageCache.m */,
+			);
+			path = jmimagecache;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -504,6 +528,7 @@
 				78690038169B110B00E11631 /* star.png in Resources */,
 				78690039169B110B00E11631 /* home.png in Resources */,
 				781D6E7C16C8E95D0003BD09 /* SVProgressHUD.bundle in Resources */,
+				78B70A7816CBDD5500AB7A28 /* placeholder.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -513,6 +538,7 @@
 			files = (
 				7869FFE71698023900E11631 /* InfoPlist.strings in Resources */,
 				781D6E7D16C8E95D0003BD09 /* SVProgressHUD.bundle in Resources */,
+				78B70A7916CBDD5500AB7A28 /* placeholder.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -569,6 +595,8 @@
 				78372F0916C7AAD500E1ED37 /* SBJsonUTF8Stream.m in Sources */,
 				78372F0B16C7AAD500E1ED37 /* SBJsonWriter.m in Sources */,
 				781D6E7E16C8E95D0003BD09 /* SVProgressHUD.m in Sources */,
+				78B70A7316CA8E2800AB7A28 /* JMImageCache.m in Sources */,
+				78B70A7516CA8E2800AB7A28 /* UIImageView+JMImageCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -591,6 +619,8 @@
 				78372F0A16C7AAD500E1ED37 /* SBJsonUTF8Stream.m in Sources */,
 				78372F0C16C7AAD500E1ED37 /* SBJsonWriter.m in Sources */,
 				781D6E7F16C8E95D0003BD09 /* SVProgressHUD.m in Sources */,
+				78B70A7416CA8E2800AB7A28 /* JMImageCache.m in Sources */,
+				78B70A7616CA8E2800AB7A28 /* UIImageView+JMImageCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
