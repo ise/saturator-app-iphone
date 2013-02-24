@@ -8,6 +8,7 @@
 
 #import "MainListViewController.h"
 #import "MainListViewCellController.h"
+#import "MainListViewCellWithoutImageController.h"
 #import "MainListAuthorViewCellController.h"
 #import "DetailViewController.h"
 #import "Article.h"
@@ -75,10 +76,11 @@
     
     ArticleDataManager *manager = [ArticleDataManager sharedInstance];
     NSMutableArray *tids = [[NSMutableArray alloc] init];
-    [tids addObject:@"2709"];
-    [tids addObject:@"2716"];
-    [tids addObject:@"2732"];
-    [tids addObject:@"2738"];
+//    [tids addObject:@"2709"];
+//    [tids addObject:@"2716"];
+//    [tids addObject:@"2732"];
+//    [tids addObject:@"2738"];
+    [tids addObject:@"853"];
     //[manager getArticles:tids];
     [manager updateList:self Tids:tids];
     
@@ -111,14 +113,25 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Article *article = [self.articleList objectAtIndex:indexPath.section];
-    NSLog(@"%@", article.image);
     BaseListViewCell *cell;
     if (indexPath.row % 2 == 0) {
-        static NSString *CellIdentifier = @"MainListViewCell";
-        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        if (cell == nil) {
-            MainListViewCellController *controller = [[MainListViewCellController alloc] initWithNibName:@"MainListViewCellController" bundle:nil];
-            cell = (MainListViewCell *)controller.view;
+        if ([article.image isEqualToString:@""]){ 
+            //画像が無い場合
+            NSLog(@"Without image = %@", article.title);
+            static NSString *CellIdentifier = @"MainListViewCellWithoutImage";
+            cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (cell == nil) {
+                MainListViewCellWithoutImageController *controller = [[MainListViewCellWithoutImageController alloc] initWithNibName:@"MainListViewCellWithoutImageController" bundle:nil];
+                cell = (MainListViewCellWithoutImage *)controller.view;
+            }
+        } else {
+            //画像がある場合
+            static NSString *CellIdentifier = @"MainListViewCell";
+            cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (cell == nil) {
+                MainListViewCellController *controller = [[MainListViewCellController alloc] initWithNibName:@"MainListViewCellController" bundle:nil];
+                cell = (MainListViewCell *)controller.view;
+            }
         }
     } else {
         static NSString *CellIdentifier = @"MainListAuthorViewCell";
@@ -136,6 +149,11 @@
 {
     //TODO:セルの内容に合わせたサイズを返すように修正
     if (indexPath.row % 2 == 0) {
+        Article *article = [self.articleList objectAtIndex:indexPath.section];
+        if ([article.image isEqualToString:@""]) {
+            //画像なし
+            return 100;
+        }
         return 260;
     } else {
         return 60;
