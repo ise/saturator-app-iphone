@@ -37,11 +37,29 @@
 
 - (NSString *)_displayDate:(int)timestamp
 {
+    NSDate *now = [NSDate date];
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:(NSTimeInterval)timestamp];
+    NSTimeInterval passed = [now timeIntervalSinceDate:date];
+
+    int min = passed / 60;
+    if (min <= 1) {
+        return @"1分前";
+    }
+    if (min < 60) {
+        return [NSString stringWithFormat:@"%d分前", min];
+    }
+    int hour = min / 60;
+    if (hour < 24) {
+        return [NSString stringWithFormat:@"%d時間前", hour];
+    }
+    int day = hour / 24;
+    return [NSString stringWithFormat:@"%d日前", day];
+    /*
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy/MM/dd HH:mm:ss"];
     NSString *disp = [formatter stringFromDate:date];
     return disp;
+     */
 }
 
 @end
