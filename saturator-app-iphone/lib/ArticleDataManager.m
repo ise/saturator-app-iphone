@@ -62,9 +62,10 @@ static ArticleDataManager *_sharedInstance;
 }
 
 //記事リストの更新
-- (void)updateList:(id<ArticleDataManagerDelegate>) view Tids:(NSMutableArray *)tids
+- (void)updateList:(id<ArticleDataManagerDelegate>) view Tids:(NSMutableArray *)tids Page:(int) page
 {
     NSString *urlStr = @"http://localhost:9000/v1/article";
+    urlStr = [NSString stringWithFormat:@"%@?page=%d", urlStr, page];
     NSURL *url = [[NSURL alloc] initWithString:urlStr];
     NSString *param = [NSString stringWithFormat:@"[%@]", [tids componentsJoinedByString:@","]];
     
@@ -81,6 +82,10 @@ static ArticleDataManager *_sharedInstance;
      {
          NSHTTPURLResponse *res = (NSHTTPURLResponse *)response;
          NSLog(@"StatusCode=%d",res.statusCode);
+         if (error) {
+             NSLog(@"error: %@", [error localizedDescription]);
+             return;
+         }
          
          if (data) {
              NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];

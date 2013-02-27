@@ -9,6 +9,7 @@
 #import "MainListViewController.h"
 #import "MainListViewCellController.h"
 #import "MainListViewCellWithoutImageController.h"
+#import "MainLIstViewFooterCellController.h"
 #import "MainListAuthorViewCellController.h"
 #import "DetailViewController.h"
 #import "Article.h"
@@ -27,10 +28,15 @@
 
 @synthesize articleList = _articleList;
 
+int currentPage = 1;
+bool hasNext = true;
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
+        UIBarButtonItem *reloadButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh:)];
+        self.navigationItem.rightBarButtonItem = reloadButton;
         self.articleList = [[NSMutableArray alloc] init];
         self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg.png"]];
         //self.tableView.allowsSelection = NO;
@@ -56,35 +62,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    /*
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 480, 44)];
-    label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont boldSystemFontOfSize: 20.0f];
-    label.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
-    label.textAlignment = NSTextAlignmentCenter;
-    //#FF007F
-    label.textColor = [UIColor colorWithRed:1.0 green:0.0 blue:0.5 alpha:1.0];
-    label.textColor = RGB(255, 0, 127);
-    label.text = @"SATURATOR";
-    [self.navigationItem setTitleView:label];
-     */
-    [self setTitle:@"SATURATOR"];
-    
-    //[self.articleList addObject:[self _getArticle:1]];
-    //[self.articleList addObject:[self _getArticle:2]];
-    //[self.articleList addObject:[self _getArticle:3]];
-    
-    ArticleDataManager *manager = [ArticleDataManager sharedInstance];
-    NSMutableArray *tids = [[NSMutableArray alloc] init];
-//    [tids addObject:@"2709"];
-//    [tids addObject:@"2716"];
-//    [tids addObject:@"2732"];
-//    [tids addObject:@"2738"];
-    [tids addObject:@"853"];
-    //[manager getArticles:tids];
-    [manager updateList:self Tids:tids];
-    
-    [SVProgressHUD show];
+    [self loadArticles:1];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -102,18 +80,40 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return self.articleList.count;
+    int count = self.articleList.count;
+    if (count == 0) {
+        return 0;
+    }
+    if (hasNext) {
+        return count + 1;
+    }
+    return count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (section >= self.articleList.count) {
+        //次を読み込むボタン
+        return 1;
+    }
     return 2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Article *article = [self.articleList objectAtIndex:indexPath.section];
     BaseListViewCell *cell;
+    if (indexPath.section >= self.articleList.count) {
+        //次を読み込むボタン
+        static NSString *CellIdentifier = @"MainListViewFooterCell";
+        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            MainListViewFooterCellController *controller = [[MainListViewFooterCellController alloc] initWithNibName:@"MainListViewFooterCellController" bundle:nil];
+            cell = (MainListViewFooterCell *)controller.view;
+        }
+        return cell;
+    }
+    
+    Article *article = [self.articleList objectAtIndex:indexPath.section];
     if (indexPath.row % 2 == 0) {
         if ([article.image isEqualToString:@""]){ 
             //画像が無い場合
@@ -147,7 +147,10 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //TODO:セルの内容に合わせたサイズを返すように修正
+    if (indexPath.section >= self.articleList.count) {
+        //次を読み込むボタン
+        return 50;
+    }
     if (indexPath.row % 2 == 0) {
         Article *article = [self.articleList objectAtIndex:indexPath.section];
         if ([article.image isEqualToString:@""]) {
@@ -204,17 +207,60 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    DetailViewController *detail = [[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil];
-    [detail setArticle:[self.articleList objectAtIndex:indexPath.section]];
-    detail.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:detail animated:YES];
+    if (indexPath.section >= self.articleList.count) {
+        //次を読み込むボタン
+        NSLog(@"Load next");
+        [self loadArticles:currentPage];
+        return;
+    }
+    if (indexPath.row % 2 == 0) {
+        //記事への遷移
+        DetailViewController *detail = [[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil];
+        [detail setArticle:[self.articleList objectAtIndex:indexPath.section]];
+        [detail setTopPage:false];
+        detail.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:detail animated:YES];
+    } else {
+        //フィードトップへの遷移
+        DetailViewController *detail = [[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil];
+        [detail setArticle:[self.articleList objectAtIndex:indexPath.section]];
+        [detail setTopPage:true];
+        detail.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:detail animated:YES];
+    }
 }
 
 - (void)buildView:(NSMutableArray *)articles
 {
-    self.articleList = articles;
+    //self.articleList = articles;
+    if (articles.count == 0) {
+        hasNext = false;
+    }
+    [self.articleList addObjectsFromArray:articles];
     [SVProgressHUD dismiss];
     [self.tableView reloadData];
+    
+    currentPage++;
+}
+
+- (void)loadArticles:(int) page
+{
+    ArticleDataManager *manager = [ArticleDataManager sharedInstance];
+    NSMutableArray *tids = [[NSMutableArray alloc] init];
+    [tids addObject:@"2709"];
+    [tids addObject:@"2716"];
+    [tids addObject:@"2732"];
+    [tids addObject:@"2738"];
+    [tids addObject:@"853"];
+    //[manager getArticles:tids];
+    [manager updateList:self Tids:tids Page:page];
+    
+    [SVProgressHUD show];
+}
+
+- (void)refresh:(id)selector
+{
+    [self loadArticles:1];
 }
 
 @end

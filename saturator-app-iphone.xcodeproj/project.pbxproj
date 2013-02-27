@@ -77,6 +77,8 @@
 		7869FFEA1698023900E11631 /* saturator_app_iphoneTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7869FFE91698023900E11631 /* saturator_app_iphoneTests.m */; };
 		789A14BA16DA04D700FB0776 /* MainListViewCellWithoutImageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 789A14B816DA04D700FB0776 /* MainListViewCellWithoutImageController.m */; };
 		789A14BB16DA04D700FB0776 /* MainListViewCellWithoutImageController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 789A14B916DA04D700FB0776 /* MainListViewCellWithoutImageController.xib */; };
+		789A14BF16DA62F100FB0776 /* MainListViewFooterCellController.m in Sources */ = {isa = PBXBuildFile; fileRef = 789A14BD16DA62F100FB0776 /* MainListViewFooterCellController.m */; };
+		789A14C016DA62F100FB0776 /* MainListViewFooterCellController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 789A14BE16DA62F100FB0776 /* MainListViewFooterCellController.xib */; };
 		78AA61C616A5A22F00A1CAC4 /* ArticleDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 78AA61C516A5A22F00A1CAC4 /* ArticleDataManager.m */; };
 		78AA61CA16A7370E00A1CAC4 /* ArticleDataManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 78AA61C916A7370E00A1CAC4 /* ArticleDataManagerTests.m */; };
 		78B70A7316CA8E2800AB7A28 /* JMImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 78B70A7016CA8E2800AB7A28 /* JMImageCache.m */; };
@@ -188,6 +190,9 @@
 		789A14B716DA04D700FB0776 /* MainListViewCellWithoutImageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainListViewCellWithoutImageController.h; sourceTree = "<group>"; };
 		789A14B816DA04D700FB0776 /* MainListViewCellWithoutImageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainListViewCellWithoutImageController.m; sourceTree = "<group>"; };
 		789A14B916DA04D700FB0776 /* MainListViewCellWithoutImageController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainListViewCellWithoutImageController.xib; sourceTree = "<group>"; };
+		789A14BC16DA62F100FB0776 /* MainListViewFooterCellController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainListViewFooterCellController.h; sourceTree = "<group>"; };
+		789A14BD16DA62F100FB0776 /* MainListViewFooterCellController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainListViewFooterCellController.m; sourceTree = "<group>"; };
+		789A14BE16DA62F100FB0776 /* MainListViewFooterCellController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainListViewFooterCellController.xib; sourceTree = "<group>"; };
 		78AA61C416A5A22F00A1CAC4 /* ArticleDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleDataManager.h; sourceTree = "<group>"; };
 		78AA61C516A5A22F00A1CAC4 /* ArticleDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleDataManager.m; sourceTree = "<group>"; };
 		78AA61C816A7370E00A1CAC4 /* ArticleDataManagerTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleDataManagerTests.h; sourceTree = "<group>"; };
@@ -381,6 +386,9 @@
 				789A14B716DA04D700FB0776 /* MainListViewCellWithoutImageController.h */,
 				789A14B816DA04D700FB0776 /* MainListViewCellWithoutImageController.m */,
 				789A14B916DA04D700FB0776 /* MainListViewCellWithoutImageController.xib */,
+				789A14BC16DA62F100FB0776 /* MainListViewFooterCellController.h */,
+				789A14BD16DA62F100FB0776 /* MainListViewFooterCellController.m */,
+				789A14BE16DA62F100FB0776 /* MainListViewFooterCellController.xib */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -538,6 +546,7 @@
 				781D6E7C16C8E95D0003BD09 /* SVProgressHUD.bundle in Resources */,
 				78B70A7816CBDD5500AB7A28 /* placeholder.png in Resources */,
 				789A14BB16DA04D700FB0776 /* MainListViewCellWithoutImageController.xib in Resources */,
+				789A14C016DA62F100FB0776 /* MainListViewFooterCellController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -607,6 +616,7 @@
 				78B70A7316CA8E2800AB7A28 /* JMImageCache.m in Sources */,
 				78B70A7516CA8E2800AB7A28 /* UIImageView+JMImageCache.m in Sources */,
 				789A14BA16DA04D700FB0776 /* MainListViewCellWithoutImageController.m in Sources */,
+				789A14BF16DA62F100FB0776 /* MainListViewFooterCellController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

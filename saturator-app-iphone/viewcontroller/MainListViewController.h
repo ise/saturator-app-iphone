@@ -10,6 +10,11 @@
 #import <QuartzCore/QuartzCore.h>
 #import "ArticleDataManager.h"
 #define RGB(r, g, b) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1]
+#ifdef DEBUG
+#define LINE() NSLog(@"%d",__LINE__)
+#else
+#define LINE() ;
+#endif
 
 @interface MainListViewController : UITableViewController <ArticleDataManagerDelegate>
 

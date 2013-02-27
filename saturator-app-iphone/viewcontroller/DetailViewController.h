@@ -12,4 +12,5 @@
 @interface DetailViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UIWebView *webView;
 - (void)setArticle:(Article *)a;
+- (void)setTopPage:(BOOL)top;
 @end

@@ -26,6 +26,7 @@
     self.favoriteListViewController = [[FavoriteListViewController alloc] init];
     self.configViewController = [[ConfigViewController alloc] init];
     UINavigationController *mainNavi = [[UINavigationController alloc] initWithRootViewController:self.mainListViewController];
+    //mainNavi.navigationBarHidden = YES;
     mainNavi.navigationBar.tintColor = [UIColor blackColor];
     UINavigationController *animeNavi = [[UINavigationController alloc] initWithRootViewController:self.animeListViewController];
     animeNavi.navigationBar.tintColor = [UIColor blackColor];

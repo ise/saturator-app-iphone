@@ -12,6 +12,7 @@
 
 @synthesize webView = _webView;
 Article *article;
+bool isTop = false;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -27,12 +28,23 @@ Article *article;
     article = a;
 }
 
+- (void)setTopPage:(BOOL)top
+{
+    isTop = top;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     ((UITabBarController *)self.parentViewController.parentViewController).tabBar.hidden = YES;
-    NSLog(@"Request to %@", article.url);
-    NSURL *url = [NSURL URLWithString:article.url];
+    NSURL *url;
+    if (isTop) {
+        NSLog(@"Request to %@", article.feedUrl);
+        url = [NSURL URLWithString:article.feedUrl];
+    } else {
+        NSLog(@"Request to %@", article.url);
+        url = [NSURL URLWithString:article.url];
+    }
     NSURLRequest *req = [NSURLRequest requestWithURL:url];
     [self.webView loadRequest:req];
 }
