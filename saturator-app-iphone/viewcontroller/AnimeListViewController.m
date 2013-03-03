@@ -8,6 +8,7 @@
 
 #import "AnimeListViewController.h"
 #import "Anime.h"
+#import "SVProgressHUD.h"
 
 @implementation AnimeListViewController
 
@@ -29,16 +30,9 @@
     [super viewDidLoad];
     [super setEditing:YES animated:YES];
     AnimeDataManager *manager = [AnimeDataManager sharedInstance];
-    NSMutableArray *fav = [[NSMutableArray alloc] init];
-    [fav addObject:@"2709"];
-    [fav addObject:@"2716"];
-    [fav addObject:@"2732"];
-    [fav addObject:@"2738"];
-    [fav addObject:@"2861"];
-    [fav addObject:@"853"];
-    [manager setFavorites:fav];
     self.favorites = [manager getFavorites];
     [manager updateList:self];
+    [SVProgressHUD show];
 }
 
 - (void)didReceiveMemoryWarning
@@ -113,12 +107,23 @@
     NSLog(@"%@", a.title);
 }
 
+- (void)buildErrorView
+{
+    //UIAlertView *alert = [[UIAlertView alloc] init];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"エラー" message:@"データを取得できませんでした" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"確認", nil];
+    [SVProgressHUD dismiss];
+    [alert show];
+}
+
 - (void)buildView:(NSMutableArray *)animes
 {
     self.animeList = animes;
+    [SVProgressHUD dismiss];
     [self.tableView reloadData];
     NSLog(@"buildView");
     NSLog(@"size=%d", self.animeList.count);
 }
+
+
 
 @end

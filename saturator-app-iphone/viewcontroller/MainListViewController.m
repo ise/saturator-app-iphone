@@ -120,7 +120,6 @@ BOOL isInit = YES;
     if (indexPath.row % 2 == 0) {
         if ([article.image isEqualToString:@""]){ 
             //画像が無い場合
-            NSLog(@"Without image = %@", article.title);
             static NSString *CellIdentifier = @"MainListViewCellWithoutImage";
             cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (cell == nil) {
@@ -212,7 +211,6 @@ BOOL isInit = YES;
 {
     if (indexPath.section >= self.articleList.count) {
         //次を読み込むボタン
-        NSLog(@"Load next");
         [self loadArticles:currentPage];
         return;
     }
@@ -243,19 +241,31 @@ BOOL isInit = YES;
 
 - (void)buildView:(NSMutableArray *)articles
 {
-    //self.articleList = articles;
-    if (articles.count == 0) {
-        hasNext = NO;
-    }
     if (isInit) {
+        //初期化
         [self.articleList removeAllObjects];
+        currentPage = 1;
         isInit = NO;
+        hasNext = YES;
     }
     [self.articleList addObjectsFromArray:articles];
     [SVProgressHUD dismiss];
+    if (articles.count == 0) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"これ以前の記事が見つかりませんでした" delegate:self cancelButtonTitle:nil otherButtonTitles:@"確認", nil];
+        [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(performDismiss:) userInfo:alert repeats:NO];
+        [alert show];
+        hasNext = NO;
+        
+    }
     [self.tableView reloadData];
     
     currentPage++;
+}
+
+- (void)performDismiss:(NSTimer *)theTimer
+{
+    UIAlertView *alertView = [theTimer userInfo];
+    [alertView dismissWithClickedButtonIndex:0 animated:NO];
 }
 
 - (void)loadArticles:(int) page

@@ -16,5 +16,6 @@
 @property (strong, nonatomic) NSString *ended;
 @property (readwrite) int startedTime;
 @property (readwrite) int endedTime;
-- (id)initWithDict:(NSDictionary*)dic;
+- (id)initWithAPIDict:(NSDictionary*)dic;
+- (id)initWithDBDict:(NSDictionary*)dic;
 @end

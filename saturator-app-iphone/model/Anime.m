@@ -16,15 +16,24 @@
 @synthesize startedTime;
 @synthesize endedTime;
 
-- (id)initWithDict:(NSDictionary *)dic
+- (id)initWithAPIDict:(NSDictionary *)dic
 {
     self = [super init];
     self.tid = [dic objectForKey:@"tid"];
+    self.title = [dic objectForKey:@"title"];
+    self.started = [dic objectForKey:@"start_dt"];
+    self.ended = [dic objectForKey:@"end_dt"];
+    return self;
+}
+
+- (id)initWithDBDict:(NSDictionary *)dic
+{
+    self = [super init];
+    self.tid = [[dic objectForKey:@"tid"] stringValue];
     self.title = [dic objectForKey:@"title"];
     self.started = [dic objectForKey:@"started"];
     self.ended = [dic objectForKey:@"ended"];
     return self;
 }
-
 
 @end

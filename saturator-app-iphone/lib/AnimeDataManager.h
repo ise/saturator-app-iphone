@@ -12,6 +12,7 @@
 
 @protocol AnimeDataManagerDelegate <NSObject>
 - (void)buildView:(NSMutableArray *)animes;
+- (void)buildErrorView;
 @end
 
 @interface AnimeDataManager : DataManager

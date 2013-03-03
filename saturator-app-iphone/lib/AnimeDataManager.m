@@ -71,25 +71,46 @@ static AnimeDataManager *_sharedInstance;
          NSLog(@"StatusCode=%d",res.statusCode);
          if (error) {
              NSLog(@"error: %@", [error localizedDescription]);
+             [view buildErrorView];
              return;
          }
          
+         //APIからデータ取得
          if (data) {
+             //DBに保存
              NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
              SBJsonParser *parser = [[SBJsonParser alloc] init];
              NSArray *resultList = [parser objectWithString:result];
-             NSMutableArray *animes = [[NSMutableArray alloc] init];
+             NSMutableArray *list = [[NSMutableArray alloc] init];
              for (NSDictionary *dic in resultList) {
-                 Anime *a = [[Anime alloc] initWithDict:dic];
-                 [animes addObject:a];
+                 Anime *a = [[Anime alloc] initWithAPIDict:dic];
+                 [list addObject:a];
              }
-             [self _saveAnimes:animes];
-             [view buildView:animes];
+             [self _saveAnimes:list];
          }
+         
+         //DBからデータ取得
+         NSMutableArray *animes = [self _loadAnimes];
+         [view buildView:animes];
      }];
 }
 
-//記事をDBに保存する
+//タイトルをDBから取得する
+- (NSMutableArray *)_loadAnimes
+{
+    NSMutableArray *animes = [NSMutableArray array];
+    NSString *sql = @"select * from anime order by tid desc";
+    [database open];
+    FMResultSet *results = [database executeQuery:sql];
+    while ([results next]) {
+        Anime *a = [[Anime alloc] initWithDBDict:[results resultDictionary]];
+        [animes addObject:a];
+    }
+    [database close];
+    return animes;
+}
+
+//タイトルをDBに保存する
 - (void)_saveAnimes:(NSMutableArray *)animes
 {
     NSString *sql = @"insert into anime (tid,title,image,started,ended) VALUES (?,?,?,?,?)";
@@ -108,7 +129,7 @@ static AnimeDataManager *_sharedInstance;
 //お気に入り一覧を取得
 - (NSMutableArray *)getFavorites
 {
-    NSMutableArray *favorites = [[NSMutableArray alloc] init];
+    NSMutableArray *favorites = [NSMutableArray array];
     NSString *sql = @"select * from favorite";
     [database open];
     FMResultSet *results = [database executeQuery:sql];
