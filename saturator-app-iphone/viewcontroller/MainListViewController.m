@@ -30,9 +30,8 @@
 
 @synthesize articleList = _articleList;
 
-int currentPage = 1;
-BOOL hasNext = YES;
-BOOL isInit = YES;
+int currentPage;
+BOOL hasNext;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -43,23 +42,18 @@ BOOL isInit = YES;
         self.articleList = [[NSMutableArray alloc] init];
         self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg.png"]];
         //self.tableView.allowsSelection = NO;
+        
+        
+        [self _initStatus];
     }
-    
     return self;
 }
 
-- (Article*)_getArticle:(int)index
+- (void)_initStatus
 {
-    Article *a1 = [Article alloc];
-    a1.title = [NSString stringWithFormat:@"【たまこまーけっと】2013年アニメ業界予測！「まどか☆マギカ」から続く、オリジナルアニメヒットの“流れ”を守れるか %d", index];
-    a1.url = @"http://yaraon.blog109.fc2.com/blog-entry-13803.html";
-    a1.description = @"";
-    a1.date = @"2時間前";
-    a1.image = @"http://blog-imgs-51.fc2.com/y/a/r/yaraon/hwchannel_20130104_2238804_0-enlarges.jpg";
-    a1.feedIcon = @"http://yaraon.blog109.fc2.com/favicon.ico";
-    a1.feedName = @"やらおん!";
-    a1.feedUrl = @"http://yaraon.blog109.fc2.com/";
-    return a1;
+    currentPage = 1;
+    hasNext = YES;
+    [self.articleList removeAllObjects];
 }
 
 - (void)viewDidLoad
@@ -241,18 +235,11 @@ BOOL isInit = YES;
 
 - (void)buildView:(NSMutableArray *)articles
 {
-    if (isInit) {
-        //初期化
-        [self.articleList removeAllObjects];
-        currentPage = 1;
-        isInit = NO;
-        hasNext = YES;
-    }
     [self.articleList addObjectsFromArray:articles];
     [SVProgressHUD dismiss];
     if (articles.count == 0) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"これ以前の記事が見つかりませんでした" delegate:self cancelButtonTitle:nil otherButtonTitles:@"確認", nil];
-        [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(performDismiss:) userInfo:alert repeats:NO];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"記事が見つかりませんでした" delegate:self cancelButtonTitle:nil otherButtonTitles:@"確認", nil];
+        [NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(performDismiss:) userInfo:alert repeats:NO];
         [alert show];
         hasNext = NO;
         
@@ -279,7 +266,7 @@ BOOL isInit = YES;
 
 - (void)refresh:(id)selector
 {
-    isInit = YES;
+    [self _initStatus];
     [self loadArticles:1];
 }
 
