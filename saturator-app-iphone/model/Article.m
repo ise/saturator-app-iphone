@@ -7,6 +7,7 @@
 //
 
 #import "Article.h"
+#import "FMDatabase.h"
 
 @implementation Article
 @synthesize title = _title;
@@ -20,7 +21,7 @@
 @synthesize feedUrl = _feedUrl;
 
 
-- (id)initWithDict:(NSDictionary *)dic
+- (id)initWithAPIDict:(NSDictionary *)dic
 {
     self = [super init];
     self.title = [dic objectForKey:@"title"];
@@ -32,6 +33,23 @@
     self.feedName = [dic objectForKey:@"feed_title"];
     self.feedUrl = [dic objectForKey:@"feed_link"];
     self.feedIcon = [NSString stringWithFormat:@"http://favicon.qfor.info/f/%@", self.feedUrl];
+    self.tids = [dic objectForKey:@"tid"];
+    return self;
+}
+
+- (id)initWithDBDict:(NSDictionary *)dic
+{
+    self = [super init];
+    self.title = [dic objectForKey:@"title"];
+    self.url = [dic objectForKey:@"url"];
+    self.description = [dic objectForKey:@"description"];
+    self.image = [dic objectForKey:@"image"];
+    self.unixtime = [[dic objectForKey:@"unixtime"] intValue];
+    self.date = [self _displayDate:self.unixtime];
+    self.feedName = [dic objectForKey:@"feedName"];
+    self.feedUrl = [dic objectForKey:@"feedUrl"];
+    self.feedIcon = [NSString stringWithFormat:@"http://favicon.qfor.info/f/%@", self.feedUrl];
+    self.tids = [[dic objectForKey:@"tids"] componentsSeparatedByString:@","];
     return self;
 }
 

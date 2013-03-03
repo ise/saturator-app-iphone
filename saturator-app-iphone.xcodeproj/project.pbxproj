@@ -314,9 +314,9 @@
 			children = (
 				7869FFF31698038B00E11631 /* resource */,
 				7869FFF51698038B00E11631 /* lib */,
+				786900031698038B00E11631 /* model */,
 				7869FFF61698038B00E11631 /* view */,
 				7869FFFF1698038B00E11631 /* viewcontroller */,
-				786900031698038B00E11631 /* model */,
 				7869FFCD1698023900E11631 /* AppDelegate.h */,
 				7869FFCE1698023900E11631 /* AppDelegate.m */,
 				7869FFC51698023800E11631 /* Supporting Files */,

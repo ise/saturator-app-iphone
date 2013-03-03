@@ -18,5 +18,7 @@
 @property (strong, nonatomic) NSString *feedName;
 @property (strong, nonatomic) NSString *feedIcon;
 @property (strong, nonatomic) NSString *feedUrl;
-- (id)initWithDict:(NSDictionary*)dic;
+@property (strong, nonatomic) NSArray *tids;
+- (id)initWithAPIDict:(NSDictionary *)dic;
+- (id)initWithDBDict:(NSDictionary *)dic;
 @end
