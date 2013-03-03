@@ -79,6 +79,9 @@
 		789A14BB16DA04D700FB0776 /* MainListViewCellWithoutImageController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 789A14B916DA04D700FB0776 /* MainListViewCellWithoutImageController.xib */; };
 		789A14BF16DA62F100FB0776 /* MainListViewFooterCellController.m in Sources */ = {isa = PBXBuildFile; fileRef = 789A14BD16DA62F100FB0776 /* MainListViewFooterCellController.m */; };
 		789A14C016DA62F100FB0776 /* MainListViewFooterCellController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 789A14BE16DA62F100FB0776 /* MainListViewFooterCellController.xib */; };
+		789A14C316DE5A2E00FB0776 /* AnimeDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 789A14C216DE5A2E00FB0776 /* AnimeDataManager.m */; };
+		789A14C616DE5C8000FB0776 /* Anime.m in Sources */ = {isa = PBXBuildFile; fileRef = 789A14C516DE5C8000FB0776 /* Anime.m */; };
+		789A14C916DF905700FB0776 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 789A14C816DF905700FB0776 /* DataManager.m */; };
 		78AA61C616A5A22F00A1CAC4 /* ArticleDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 78AA61C516A5A22F00A1CAC4 /* ArticleDataManager.m */; };
 		78AA61CA16A7370E00A1CAC4 /* ArticleDataManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 78AA61C916A7370E00A1CAC4 /* ArticleDataManagerTests.m */; };
 		78B70A7316CA8E2800AB7A28 /* JMImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 78B70A7016CA8E2800AB7A28 /* JMImageCache.m */; };
@@ -193,6 +196,12 @@
 		789A14BC16DA62F100FB0776 /* MainListViewFooterCellController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainListViewFooterCellController.h; sourceTree = "<group>"; };
 		789A14BD16DA62F100FB0776 /* MainListViewFooterCellController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainListViewFooterCellController.m; sourceTree = "<group>"; };
 		789A14BE16DA62F100FB0776 /* MainListViewFooterCellController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainListViewFooterCellController.xib; sourceTree = "<group>"; };
+		789A14C116DE5A2E00FB0776 /* AnimeDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimeDataManager.h; sourceTree = "<group>"; };
+		789A14C216DE5A2E00FB0776 /* AnimeDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimeDataManager.m; sourceTree = "<group>"; };
+		789A14C416DE5C8000FB0776 /* Anime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Anime.h; sourceTree = "<group>"; };
+		789A14C516DE5C8000FB0776 /* Anime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Anime.m; sourceTree = "<group>"; };
+		789A14C716DF905700FB0776 /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataManager.h; path = "saturator-app-iphone/lib/DataManager.h"; sourceTree = SOURCE_ROOT; };
+		789A14C816DF905700FB0776 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataManager.m; path = "saturator-app-iphone/lib/DataManager.m"; sourceTree = SOURCE_ROOT; };
 		78AA61C416A5A22F00A1CAC4 /* ArticleDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleDataManager.h; sourceTree = "<group>"; };
 		78AA61C516A5A22F00A1CAC4 /* ArticleDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleDataManager.m; sourceTree = "<group>"; };
 		78AA61C816A7370E00A1CAC4 /* ArticleDataManagerTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleDataManagerTests.h; sourceTree = "<group>"; };
@@ -245,6 +254,8 @@
 			children = (
 				786900041698038B00E11631 /* Article.h */,
 				786900051698038B00E11631 /* Article.m */,
+				789A14C416DE5C8000FB0776 /* Anime.h */,
+				789A14C516DE5C8000FB0776 /* Anime.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -366,8 +377,12 @@
 				781D6E7816C8E9420003BD09 /* SVProgressHUD */,
 				78AA61CB16A7401500A1CAC4 /* sbjson */,
 				7869003A169C5F8A00E11631 /* fmdb */,
+				789A14C716DF905700FB0776 /* DataManager.h */,
+				789A14C816DF905700FB0776 /* DataManager.m */,
 				78AA61C416A5A22F00A1CAC4 /* ArticleDataManager.h */,
 				78AA61C516A5A22F00A1CAC4 /* ArticleDataManager.m */,
+				789A14C116DE5A2E00FB0776 /* AnimeDataManager.h */,
+				789A14C216DE5A2E00FB0776 /* AnimeDataManager.m */,
 			);
 			path = lib;
 			sourceTree = "<group>";
@@ -617,6 +632,9 @@
 				78B70A7516CA8E2800AB7A28 /* UIImageView+JMImageCache.m in Sources */,
 				789A14BA16DA04D700FB0776 /* MainListViewCellWithoutImageController.m in Sources */,
 				789A14BF16DA62F100FB0776 /* MainListViewFooterCellController.m in Sources */,
+				789A14C316DE5A2E00FB0776 /* AnimeDataManager.m in Sources */,
+				789A14C616DE5C8000FB0776 /* Anime.m in Sources */,
+				789A14C916DF905700FB0776 /* DataManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

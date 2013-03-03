@@ -52,15 +52,6 @@ static ArticleDataManager *_sharedInstance;
     return self;
 }
 
-- (NSString *)urlencode:(NSString *)string
-{
-    return (__bridge NSString *)CFURLCreateStringByAddingPercentEscapes(NULL,
-                                                               (CFStringRef)string,
-                                                               NULL,
-                                                               (CFStringRef)@"!*'();:@&=+$,/?%#[]",
-                                                               kCFStringEncodingUTF8);
-}
-
 //記事リストの更新
 - (void)updateList:(id<ArticleDataManagerDelegate>) view Tids:(NSMutableArray *)tids Page:(int) page
 {
@@ -84,6 +75,7 @@ static ArticleDataManager *_sharedInstance;
          NSLog(@"StatusCode=%d",res.statusCode);
          if (error) {
              NSLog(@"error: %@", [error localizedDescription]);
+             [view buildErrorView];
              return;
          }
          

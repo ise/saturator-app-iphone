@@ -15,6 +15,8 @@
 #import "Article.h"
 #import "BaseListViewCell.h"
 #import "ArticleDataManager.h"
+#import "AnimeDataManager.h"
+
 #import "SVProgressHUD.h"
 
 /*
@@ -29,7 +31,8 @@
 @synthesize articleList = _articleList;
 
 int currentPage = 1;
-bool hasNext = true;
+BOOL hasNext = YES;
+BOOL isInit = YES;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -230,11 +233,23 @@ bool hasNext = true;
     }
 }
 
+- (void)buildErrorView
+{
+    //UIAlertView *alert = [[UIAlertView alloc] init];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"エラー" message:@"データを取得できませんでした" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"確認", nil];
+    [SVProgressHUD dismiss];
+    [alert show];
+}
+
 - (void)buildView:(NSMutableArray *)articles
 {
     //self.articleList = articles;
     if (articles.count == 0) {
-        hasNext = false;
+        hasNext = NO;
+    }
+    if (isInit) {
+        [self.articleList removeAllObjects];
+        isInit = NO;
     }
     [self.articleList addObjectsFromArray:articles];
     [SVProgressHUD dismiss];
@@ -246,13 +261,7 @@ bool hasNext = true;
 - (void)loadArticles:(int) page
 {
     ArticleDataManager *manager = [ArticleDataManager sharedInstance];
-    NSMutableArray *tids = [[NSMutableArray alloc] init];
-    [tids addObject:@"2709"];
-    [tids addObject:@"2716"];
-    [tids addObject:@"2732"];
-    [tids addObject:@"2738"];
-    [tids addObject:@"853"];
-    //[manager getArticles:tids];
+    NSMutableArray *tids = [[AnimeDataManager sharedInstance] getFavorites];
     [manager updateList:self Tids:tids Page:page];
     
     [SVProgressHUD show];
@@ -260,6 +269,7 @@ bool hasNext = true;
 
 - (void)refresh:(id)selector
 {
+    isInit = YES;
     [self loadArticles:1];
 }
 

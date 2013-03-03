@@ -8,12 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import "FMDatabase.h"
+#import "DataManager.h"
 
 @protocol ArticleDataManagerDelegate <NSObject>
 - (void)buildView:(NSMutableArray *)articles;
+- (void)buildErrorView;
 @end
 
-@interface ArticleDataManager : NSObject
+@interface ArticleDataManager : DataManager
 @property (strong, nonatomic) FMDatabase *database;
 + (id)sharedInstance;
 - (void)updateList:(id<ArticleDataManagerDelegate>) view Tids:(NSMutableArray *)tids Page:(int) page;

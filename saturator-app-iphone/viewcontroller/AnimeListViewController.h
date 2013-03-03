@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AnimeDataManager.h"
 
-@interface AnimeListViewController : UIViewController
-
+@interface AnimeListViewController : UITableViewController <AnimeDataManagerDelegate>
+@property (strong, nonatomic) NSMutableArray *animeList;
+@property (strong, nonatomic) NSMutableArray *favorites;
 @end
