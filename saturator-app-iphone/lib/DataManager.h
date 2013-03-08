@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "BaseConfig.h"
 
 @interface DataManager : NSObject
 - (NSString *)urlencode:(NSString *)string;

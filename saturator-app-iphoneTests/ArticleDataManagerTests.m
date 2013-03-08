@@ -36,7 +36,6 @@
     NSMutableArray *tids = [[NSMutableArray alloc] init];
     [tids addObject:@"853"];
     [tids addObject:@"2762"];
-    [adm getArticles:tids];
     STAssertTrue(true, @"記事取得失敗");
 }
 

@@ -119,9 +119,12 @@
 {
     self.animeList = animes;
     [SVProgressHUD dismiss];
+    if (animes.count == 0) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"タイトルが取得できませんでした" delegate:self cancelButtonTitle:nil otherButtonTitles:@"確認", nil];
+        [NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(performDismiss:) userInfo:alert repeats:NO];
+        [alert show];
+    }
     [self.tableView reloadData];
-    NSLog(@"buildView");
-    NSLog(@"size=%d", self.animeList.count);
 }
 
 

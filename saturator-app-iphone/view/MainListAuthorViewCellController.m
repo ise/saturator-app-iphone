@@ -13,8 +13,6 @@
 - (void)setArticle:(Article *)article
 {
     self.feedName.text = article.feedName;
-    //NSData *d2 = [[NSData alloc] initWithContentsOfURL:[[NSURL alloc] initWithString:article.feedIcon]];
-    //self.iconImage.image = [[UIImage alloc] initWithData:d2];
     [self.iconImage setImageWithURL:[NSURL URLWithString:article.feedIcon] placeholder:[UIImage imageNamed:@"placeholder.png"]];
     self.displayDate.text = article.date;
 }

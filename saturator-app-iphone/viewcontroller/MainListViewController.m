@@ -64,7 +64,13 @@ BOOL hasNext;
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    NSLog(@"viewDidAppear");
     ((UITabBarController *)self.parentViewController.parentViewController).tabBar.hidden = NO;
+    AnimeDataManager *m = [AnimeDataManager sharedInstance];
+    if (m.updatedFavorite) {
+        [self refresh:nil];
+        m.updatedFavorite = NO;
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -137,7 +143,7 @@ BOOL hasNext;
             cell = (MainListAuthorViewCell *)controller.view;
         }
     }
-    [cell setArticle:article];
+    [cell setArticle:article delegate:self];
     return cell;
 }
 
@@ -151,9 +157,9 @@ BOOL hasNext;
         Article *article = [self.articleList objectAtIndex:indexPath.section];
         if ([article.image isEqualToString:@""]) {
             //画像なし
-            return 100;
+            return 110;
         }
-        return 260;
+        return 278;
     } else {
         return 60;
     }
@@ -203,6 +209,7 @@ BOOL hasNext;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"didSelect %d", indexPath.section);
     if (indexPath.section >= self.articleList.count) {
         //次を読み込むボタン
         [self loadArticles:currentPage];
@@ -249,16 +256,38 @@ BOOL hasNext;
     currentPage++;
 }
 
+- (void)updateArticleStatus:(Article *)article
+{
+    NSLog(@"updateArticleStatus");
+    for (int i=0; i<self.articleList.count; i++) {
+        Article *a = [self.articleList objectAtIndex:i];
+        if ([a.url isEqual:article.url]) {
+            NSLog(@"found %@", a.url);
+            [self.articleList replaceObjectAtIndex:i withObject:article];
+            break;
+        }
+    }
+}
+
+//アラートを時限式で閉じる
 - (void)performDismiss:(NSTimer *)theTimer
 {
     UIAlertView *alertView = [theTimer userInfo];
     [alertView dismissWithClickedButtonIndex:0 animated:NO];
 }
 
-- (void)loadArticles:(int) page
+- (void)loadArticles:(int)page
 {
+    NSLog(@"loadArticles page=%d", page);
     ArticleDataManager *manager = [ArticleDataManager sharedInstance];
     NSMutableArray *tids = [[AnimeDataManager sharedInstance] getFavorites];
+    
+    
+    if (tids.count == 0) {
+        [tids addObject:@"2825"];
+    }
+    
+    
     [manager updateList:self Tids:tids Page:page];
     
     [SVProgressHUD show];

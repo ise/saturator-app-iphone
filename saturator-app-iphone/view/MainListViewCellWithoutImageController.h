@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "Article.h"
-#import "BaseListViewCell.h"
+#import "MainListViewCellController.h"
 
-@interface MainListViewCellWithoutImage : BaseListViewCell
+@interface MainListViewCellWithoutImage : MainListViewCell
 @property (strong, nonatomic) IBOutlet UILabel *title;
+@property (strong, nonatomic) IBOutlet UIImageView *defaultFavImage;
+@property (strong, nonatomic) IBOutlet UIImageView *activeFavImage;
 @end
 
 @interface MainListViewCellWithoutImageController : UIViewController

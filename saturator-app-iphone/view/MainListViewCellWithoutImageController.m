@@ -7,19 +7,15 @@
 //
 
 #import "MainListViewCellWithoutImageController.h"
+#import "ArticleDataManager.h"
 
 @implementation MainListViewCellWithoutImage
-- (void)setArticle:(Article *)article
+- (void)setArticle:(Article *)article delegate:(id<ArticleDataManagerDelegate>)v
 {
+    [super setArticle:article delegate:v];
     self.title.text = article.title;
 }
 @end
-
-/*
-@interface MainListViewCellWithoutImageController ()
-
-@end
-*/
 
 @implementation MainListViewCellWithoutImageController
 

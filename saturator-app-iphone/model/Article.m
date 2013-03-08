@@ -10,16 +10,16 @@
 #import "FMDatabase.h"
 
 @implementation Article
-@synthesize title = _title;
-@synthesize url = _url;
-@synthesize description = _description;
-@synthesize image = _image;
-@synthesize date = _date;
-@synthesize unixtime = _unixtime;
-@synthesize feedName = _feedName;
-@synthesize feedIcon = _feedIcon;
-@synthesize feedUrl = _feedUrl;
-
+@synthesize title;
+@synthesize url;
+@synthesize description;
+@synthesize image;
+@synthesize date;
+@synthesize unixtime;
+@synthesize feedName;
+@synthesize feedIcon;
+@synthesize feedUrl;
+@synthesize clipped;
 
 - (id)initWithAPIDict:(NSDictionary *)dic
 {
@@ -49,6 +49,14 @@
     self.feedName = [dic objectForKey:@"feedName"];
     self.feedUrl = [dic objectForKey:@"feedUrl"];
     self.feedIcon = [NSString stringWithFormat:@"http://favicon.qfor.info/f/%@", self.feedUrl];
+    
+    self.clipped = 0;
+    NSNumber *tmp = [dic objectForKey:@"clipped"];
+    if (![tmp isEqual:[NSNull null]]) {
+        self.clipped = [tmp intValue];
+    }
+
+    
     self.tids = [[dic objectForKey:@"tids"] componentsSeparatedByString:@","];
     return self;
 }
@@ -79,5 +87,32 @@
     return disp;
      */
 }
+
+
+/*
+- (CGFloat)heightForContents
+{
+    CGFloat padding = 0.0;
+    return [self heightForTitle] + [self heightForImage] + padding;
+}
+
+- (CGFloat)heightForTitle
+{
+    CGFloat padding = 5.0;
+    CGSize s = [self.title sizeWithFont:[UIFont fontWithName:@"Arial" size:16.0]];
+    int line = (s.width / 260) + 1;
+    return line * (s.height + 1.0) + padding;
+}
+
+- (CGFloat)heightForImage
+{
+    if ([self.image isEqualToString:@""]) {
+        return 0.0;
+    }
+    CGFloat padding = 10.0;
+    return 170.0 + padding;
+}
+*/
+
 
 @end

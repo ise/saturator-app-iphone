@@ -13,6 +13,7 @@
 @implementation AnimeDataManager
 
 @synthesize database;
+@synthesize updatedFavorite;
 
 static AnimeDataManager *_sharedInstance;
 
@@ -49,13 +50,15 @@ static AnimeDataManager *_sharedInstance;
     [database executeUpdate:favSql];
     [database close];
     
+    self.updatedFavorite = NO;
+    
     return self;
 }
 
 //アニメリストの更新
 - (void)updateList:(id<AnimeDataManagerDelegate>) view
 {
-    NSString *urlStr = @"http://localhost:9000/v1/anime";
+    NSString *urlStr = [NSString stringWithFormat: @"http://%@/v1/anime", [BaseConfig API_HOST]];
     NSURL *url = [[NSURL alloc] initWithString:urlStr];
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:30.0];
@@ -156,6 +159,8 @@ static AnimeDataManager *_sharedInstance;
     }
     [database commit];
     [database close];
+    
+    self.updatedFavorite = YES;
 }
 
 @end

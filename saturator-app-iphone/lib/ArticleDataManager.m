@@ -7,14 +7,12 @@
 //
 
 #import "ArticleDataManager.h"
-#import "Article.h"
 #import "SBJson.h"
 
 @implementation ArticleDataManager
 
 @synthesize database;
 
-NSString *HOST = @"localhost:9000";
 int results = 20;
 static ArticleDataManager *_sharedInstance;
 
@@ -44,7 +42,8 @@ static ArticleDataManager *_sharedInstance;
                         "unixtime integer,"
                         "feedName text,"
                         "feedIcon text,"
-                        "feedUrl text"
+                        "feedUrl text,"
+                        "clipped integer"
                     ");";
     
     NSString *relationSql = @"CREATE TABLE IF NOT EXISTS article_anime ("
@@ -52,6 +51,7 @@ static ArticleDataManager *_sharedInstance;
                                 "tid integer,"
                                 "primary key (url, tid)"
                             ");";
+    
     [database open];
     [database executeUpdate:sql];
     [database executeUpdate:relationSql];
@@ -64,7 +64,7 @@ static ArticleDataManager *_sharedInstance;
 - (void)updateList:(id<ArticleDataManagerDelegate>) view Tids:(NSMutableArray *)tids Page:(int) page
 {
     int start = (page - 1) * results;
-    NSString *urlStr = [NSString stringWithFormat: @"http://%@/v1/article", HOST];
+    NSString *urlStr = [NSString stringWithFormat: @"http://%@/v1/article", [BaseConfig API_HOST]];
     urlStr = [NSString stringWithFormat:@"%@?start=%d&results=%d", urlStr, start, results];
     NSURL *url = [[NSURL alloc] initWithString:urlStr];
     NSString *param = [NSString stringWithFormat:@"[%@]", [tids componentsJoinedByString:@","]];
@@ -93,9 +93,17 @@ static ArticleDataManager *_sharedInstance;
              //データをDBに保存
              NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
              SBJsonParser *parser = [[SBJsonParser alloc] init];
-             NSArray *resultList = [parser objectWithString:result];
+             NSObject *resultList = [parser objectWithString:result];
+             if ([resultList isKindOfClass:[NSDictionary class]]) {
+                 NSDictionary *dic = (NSDictionary *)resultList;
+                 NSLog(@"status is %@", [dic objectForKey:@"status"]);
+                 [view buildErrorView];
+                 return;
+             }
+             
+             NSArray *array = (NSArray *)resultList;
              NSMutableArray *list = [NSMutableArray array];
-             for (NSDictionary *dic in resultList) {
+             for (NSDictionary *dic in array) {
                  Article *a = [[Article alloc] initWithAPIDict:dic];
                  [list addObject:a];
              }
@@ -103,15 +111,23 @@ static ArticleDataManager *_sharedInstance;
          }
          //DBからデータを取得し、表示処理を呼び出す
          NSMutableArray *articles = [self _loadArticles:tids start: start results: results];
-         [view buildView:articles];
          
-         //TODO:データが無い場合の処理
+         /*
+         if (articles.count == 0) {
+             NSLog(@"articles is empty");
+             [view buildErrorView];
+             return;
+         }
+          */
+         
+         [view buildView:articles];
      }];
 }
 
 //記事をDBに保存する
 - (void)_saveArticles:(NSMutableArray *)articles
 {
+    NSLog(@"_saveArticles");
     NSString *sql = @"insert into article (url,title,description,image,date,unixtime,feedName,feedIcon,feedUrl) values (?,?,?,?,?,?,?,?,?)";
     NSString *relationSql = @"insert into article_anime (url,tid) values (?,?)";
     [database open];
@@ -141,7 +157,7 @@ static ArticleDataManager *_sharedInstance;
     }
     
     //お気に入り登録されたタイトルの記事のみ新着順で取得
-    NSString *sql = [NSString stringWithFormat:@"select a.url,a.title,a.description,a.image,a.date,a.unixtime,a.feedName,a.feedIcon,a.feedUrl,group_concat(aa.tid) as tids from article a join article_anime aa on a.url=aa.url where tid in (%@) group by a.url order by unixtime desc limit %d,%d", [prepares componentsJoinedByString:@","], start, results];
+    NSString *sql = [NSString stringWithFormat:@"select a.url,a.title,a.description,a.image,a.date,a.unixtime,a.feedName,a.feedIcon,a.feedUrl,a.clipped,group_concat(aa.tid) as tids from article a join article_anime aa on a.url=aa.url where tid in (%@) group by a.url order by unixtime desc limit %d,%d", [prepares componentsJoinedByString:@","], start, results];
     NSLog(@"_loadArticles sql=%@", sql);
     [database open];
     FMResultSet *result = [database executeQuery:sql withArgumentsInArray:tids];
@@ -151,6 +167,31 @@ static ArticleDataManager *_sharedInstance;
     }
     [database close];
     return articles;
+}
+
+//クリップ（あとで読む）を保存
+- (int)addClip:(NSString *)url
+{
+    int now = (int)[[NSDate date] timeIntervalSince1970];
+    NSString *sql = @"update article set clipped=? where url=?";
+    [database open];
+    [database beginTransaction];
+    [database executeUpdate: sql, [NSString stringWithFormat:@"%d", now], url];
+    [database commit];
+    [database close];
+    return now;
+}
+
+//クリップ（あとで読む）を削除
+- (int)removeClip:(NSString *)url
+{
+    NSString *sql = @"update article set clipped=null where url=?";
+    [database open];
+    [database beginTransaction];
+    [database executeUpdate: sql, url];
+    [database commit];
+    [database close];
+    return 0;
 }
 
 @end

@@ -18,6 +18,7 @@
 @property (strong, nonatomic) NSString *feedName;
 @property (strong, nonatomic) NSString *feedIcon;
 @property (strong, nonatomic) NSString *feedUrl;
+@property (readwrite) int clipped;
 @property (strong, nonatomic) NSArray *tids;
 - (id)initWithAPIDict:(NSDictionary *)dic;
 - (id)initWithDBDict:(NSDictionary *)dic;

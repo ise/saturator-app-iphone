@@ -7,24 +7,61 @@
 //
 
 #import "MainListViewCellController.h"
+#import "ArticleDataManager.h"
 #import "JMImageCache.h"
 
 @implementation MainListViewCell
-- (void)setArticle:(Article *)article
+- (void)setArticle:(Article *)article delegate:(id<ArticleDataManagerDelegate>)v
 {
+    [super setArticle:article delegate:v];
     self.title.text = article.title;
-    //NSData *d = [[NSData alloc] initWithContentsOfURL:[[NSURL alloc] initWithString:article.image]];
     [self.headImage setImageWithURL:[NSURL URLWithString:article.image] placeholder:[UIImage imageNamed:@"placeholder.png"]];
-    //self.headImage.image = [[UIImage alloc] initWithData:d];
-    //self.headImage.image = [[JMImageCache sharedCache] imageForURL:[NSURL URLWithString:article.image] delegate:self];
+
+    if (article.clipped != 0) {
+        //クリップ状態
+        NSLog(@"%@ has clipped status", article.url);
+        [self _clippedStatus];
+    } else {
+        //未クリップ状態
+        [self _unclippedStatus];
+    }
 }
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    UITouch *touch = [[event allTouches] anyObject];
+    ArticleDataManager *m = [ArticleDataManager sharedInstance];
+    if (touch.view.tag == self.defaultFavImage.tag) {
+        //クリップ登録
+        [self _clippedStatus];
+        self.article.clipped = [m addClip:self.article.url];
+        NSLog(@"%@ is clipped", self.article.url);
+        [self.listView updateArticleStatus:self.article];
+    } else if (touch.view.tag == self.activeFavImage.tag) {
+        //クリップ削除
+        [self _unclippedStatus];
+        self.article.clipped = [m removeClip:self.article.url];
+        NSLog(@"%@ is unclipped", self.article.url);
+        [self.listView updateArticleStatus:self.article];
+    }else {
+        [super touchesBegan:touches withEvent:event];
+    }
+}
+
+- (void)_clippedStatus
+{
+    self.defaultFavImage.hidden = YES;
+    self.activeFavImage.hidden = NO;
+}
+
+- (void)_unclippedStatus
+{
+    self.defaultFavImage.hidden = NO;
+    self.activeFavImage.hidden = YES;
+}
+
 @end
 
-/*
-@interface MainListViewCellController ()
-
-@end
-*/
 
 @implementation MainListViewCellController
 

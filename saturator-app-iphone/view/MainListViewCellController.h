@@ -12,6 +12,8 @@
 #import "BaseListViewCell.h"
 
 @interface MainListViewCell : BaseListViewCell
+@property (strong, nonatomic) IBOutlet UIImageView *activeFavImage;
+@property (strong, nonatomic) IBOutlet UIImageView *defaultFavImage;
 @property (strong, nonatomic) IBOutlet UIImageView *headImage;
 @property (strong, nonatomic) IBOutlet UILabel *title;
 @end

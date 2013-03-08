@@ -17,6 +17,7 @@
 
 @interface AnimeDataManager : DataManager
 @property (strong, nonatomic) FMDatabase *database;
+@property (readwrite) BOOL updatedFavorite;
 + (id)sharedInstance;
 - (void)updateList:(id<AnimeDataManagerDelegate>) view;
 - (NSMutableArray *)getFavorites;

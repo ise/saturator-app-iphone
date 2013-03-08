@@ -7,8 +7,14 @@
 //
 
 #import "BaseListViewCell.h"
+#import "ArticleDataManager.h"
 
 @implementation BaseListViewCell
+
+@synthesize article;
+@synthesize listView;
+@synthesize defaultFavImage;
+@synthesize activeFavImage;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -26,9 +32,10 @@
     // Configure the view for the selected state
 }
 
-- (void)setArticle:(Article *)article
+- (void)setArticle:(Article *)a delegate:(id<ArticleDataManagerDelegate>)v
 {
-    NSLog(@"implement setArticle method");
+    self.listView = v;
+    self.article = a;
 }
 
 @end
