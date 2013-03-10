@@ -38,6 +38,9 @@
 		78372F0C16C7AAD500E1ED37 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 78372EF416C7AAD500E1ED37 /* SBJsonWriter.m */; };
 		783CAAF416E6365700C432F7 /* lovedsgn.png in Resources */ = {isa = PBXBuildFile; fileRef = 783CAAF316E6365700C432F7 /* lovedsgn.png */; };
 		783CAAF616E63BBD00C432F7 /* unfav.png in Resources */ = {isa = PBXBuildFile; fileRef = 783CAAF516E63BBD00C432F7 /* unfav.png */; };
+		783CAAFE16EC65BC00C432F7 /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 783CAAFD16EC65BB00C432F7 /* HeaderView.m */; };
+		783CAB0016EC65FA00C432F7 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 783CAAFF16EC65FA00C432F7 /* arrow.png */; };
+		783CAB0216EC806400C432F7 /* bg2.png in Resources */ = {isa = PBXBuildFile; fileRef = 783CAB0116EC806300C432F7 /* bg2.png */; };
 		786900061698038B00E11631 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 7869FFF41698038B00E11631 /* bg.png */; };
 		786900071698038B00E11631 /* BaseListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7869FFF81698038B00E11631 /* BaseListViewCell.m */; };
 		786900081698038B00E11631 /* MainListAuthorViewCellController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7869FFFA1698038B00E11631 /* MainListAuthorViewCellController.m */; };
@@ -137,6 +140,10 @@
 		78372EF416C7AAD500E1ED37 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
 		783CAAF316E6365700C432F7 /* lovedsgn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lovedsgn.png; sourceTree = "<group>"; };
 		783CAAF516E63BBD00C432F7 /* unfav.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unfav.png; sourceTree = "<group>"; };
+		783CAAFC16EC65BB00C432F7 /* HeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderView.h; sourceTree = "<group>"; };
+		783CAAFD16EC65BB00C432F7 /* HeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderView.m; sourceTree = "<group>"; };
+		783CAAFF16EC65FA00C432F7 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
+		783CAB0116EC806300C432F7 /* bg2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bg2.png; path = ../bg2.png; sourceTree = "<group>"; };
 		786900001698038B00E11631 /* MainListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainListViewController.h; sourceTree = "<group>"; };
 		786900011698038B00E11631 /* MainListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainListViewController.m; sourceTree = "<group>"; };
 		786900021698038B00E11631 /* MainListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainListViewController.xib; sourceTree = "<group>"; };
@@ -371,6 +378,8 @@
 		7869FFF31698038B00E11631 /* resource */ = {
 			isa = PBXGroup;
 			children = (
+				783CAB0116EC806300C432F7 /* bg2.png */,
+				783CAAFF16EC65FA00C432F7 /* arrow.png */,
 				783CAAF516E63BBD00C432F7 /* unfav.png */,
 				783CAAF316E6365700C432F7 /* lovedsgn.png */,
 				78B70A7716CBDD5500AB7A28 /* placeholder.png */,
@@ -401,6 +410,8 @@
 		7869FFF61698038B00E11631 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				783CAAFC16EC65BB00C432F7 /* HeaderView.h */,
+				783CAAFD16EC65BB00C432F7 /* HeaderView.m */,
 				7869FFF71698038B00E11631 /* BaseListViewCell.h */,
 				7869FFF81698038B00E11631 /* BaseListViewCell.m */,
 				7869FFF91698038B00E11631 /* MainListAuthorViewCellController.h */,
@@ -575,6 +586,8 @@
 				789A14C016DA62F100FB0776 /* MainListViewFooterCellController.xib in Resources */,
 				783CAAF416E6365700C432F7 /* lovedsgn.png in Resources */,
 				783CAAF616E63BBD00C432F7 /* unfav.png in Resources */,
+				783CAB0016EC65FA00C432F7 /* arrow.png in Resources */,
+				783CAB0216EC806400C432F7 /* bg2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -649,6 +662,7 @@
 				789A14C616DE5C8000FB0776 /* Anime.m in Sources */,
 				789A14C916DF905700FB0776 /* DataManager.m in Sources */,
 				786A91D716E37E36006D56B3 /* BaseConfig.m in Sources */,
+				783CAAFE16EC65BC00C432F7 /* HeaderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

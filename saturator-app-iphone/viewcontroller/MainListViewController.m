@@ -19,28 +19,39 @@
 
 #import "SVProgressHUD.h"
 
-/*
-@interface MainListViewController ()
-
-@end
-*/
-
-
 @implementation MainListViewController
 
-@synthesize articleList = _articleList;
+@synthesize headerView;
+@synthesize articleList;
 
 int currentPage;
 BOOL hasNext;
+BOOL isRefresh = NO;
+
+- (void)_setHeaderViewHidden:(BOOL)hidden animated:(BOOL)animated
+{
+    CGFloat topOffset = 0.0;
+    if (hidden) {
+        topOffset = -self.headerView.frame.size.height;
+    }
+    if (animated) {
+        [UIView animateWithDuration:0.2
+                         animations:^{
+                             self.tableView.contentInset = UIEdgeInsetsMake(topOffset, 0, 0, 0);
+                         }];
+    } else {
+        self.tableView.contentInset = UIEdgeInsetsMake(topOffset, 0, 0, 0);
+    }
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
-        UIBarButtonItem *reloadButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh:)];
-        self.navigationItem.rightBarButtonItem = reloadButton;
+        //UIBarButtonItem *reloadButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh:)];
+        //self.navigationItem.rightBarButtonItem = reloadButton;
         self.articleList = [[NSMutableArray alloc] init];
-        self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg.png"]];
+        self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg2.png"]];
         //self.tableView.allowsSelection = NO;
         
         
@@ -59,18 +70,28 @@ BOOL hasNext;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self _setHeaderViewHidden:YES animated:NO];
+    self.tableView.tableHeaderView = self.headerView;
     [self loadArticles:1];
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
-    NSLog(@"viewDidAppear");
+    NSLog(@"viewWillAppear");
+    //navigationbar非表示に
+    self.navigationController.navigationBarHidden = YES;
+    //tabhbarは表示
     ((UITabBarController *)self.parentViewController.parentViewController).tabBar.hidden = NO;
     AnimeDataManager *m = [AnimeDataManager sharedInstance];
     if (m.updatedFavorite) {
         [self refresh:nil];
         m.updatedFavorite = NO;
     }
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    NSLog(@"viewDidAppear");
 }
 
 - (void)didReceiveMemoryWarning
@@ -165,47 +186,49 @@ BOOL hasNext;
     }
 }
 
+#define PULLDOWN_MARGIN -15.0f
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+    if (self.headerView.state == HeaderViewStateStopping) {
+        //更新中
+        return;
+    }
+    
+    CGFloat threshold = self.headerView.frame.size.height;
+    
+    if (PULLDOWN_MARGIN <= scrollView.contentOffset.y &&
+        scrollView.contentOffset.y < threshold) {
+        //引き下げ中だが更新はしない状態
+        self.headerView.state = HeaderViewStatePullingDown;
+    } else if (scrollView.contentOffset.y < PULLDOWN_MARGIN) {
+        //引き下げ中で更新を行う状態
+        self.headerView.state = HeaderViewStateOveredThreshold;
+    } else {
+        //引き下げてない状態
+        self.headerView.state = HeaderViewStateHidden;
+    }
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+//リストを引き下げて更新する
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+    //    if (self.tableView.contentOffset.y < PULLDOWN_MARGIN) {
+    if (self.headerView.state == HeaderViewStateOveredThreshold) {
+        self.headerView.state = HeaderViewStateStopping;
+        [self _setHeaderViewHidden:NO animated:YES];
+        
+        isRefresh = YES;
+        [self refresh:nil];
+    }
 }
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
+- (void)_taskFinished
 {
+    self.headerView.state = HeaderViewStateHidden;
+    [self _setHeaderViewHidden:YES animated:YES];
 }
-*/
 
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-#pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -236,6 +259,10 @@ BOOL hasNext;
 {
     //UIAlertView *alert = [[UIAlertView alloc] init];
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"エラー" message:@"データを取得できませんでした" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"確認", nil];
+    if (isRefresh) {
+        isRefresh = NO;
+        [self _taskFinished];
+    }
     [SVProgressHUD dismiss];
     [alert show];
 }
@@ -243,6 +270,10 @@ BOOL hasNext;
 - (void)buildView:(NSMutableArray *)articles
 {
     [self.articleList addObjectsFromArray:articles];
+    if (isRefresh) {
+        isRefresh = NO;
+        [self _taskFinished];
+    }
     [SVProgressHUD dismiss];
     if (articles.count == 0) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"記事が見つかりませんでした" delegate:self cancelButtonTitle:nil otherButtonTitles:@"確認", nil];

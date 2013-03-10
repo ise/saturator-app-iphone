@@ -36,6 +36,9 @@ bool isTop = false;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    //navigationbarを表示
+    self.navigationController.navigationBarHidden = NO;
+    //tabbarは非表示
     ((UITabBarController *)self.parentViewController.parentViewController).tabBar.hidden = YES;
     NSURL *url;
     if (isTop) {
