@@ -13,7 +13,7 @@
 @synthesize tabBarController = _tabBarController;
 @synthesize mainListViewController = _mainListViewController;
 @synthesize animeListViewController = _animeListViewController;
-@synthesize favoriteListViewController = _favoriteListViewController;
+@synthesize clipListViewController = _clipListViewController;
 @synthesize configViewController = _configViewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -23,14 +23,14 @@
     
     self.mainListViewController = [[MainListViewController alloc] init];
     self.animeListViewController = [[AnimeListViewController alloc] init];
-    self.favoriteListViewController = [[FavoriteListViewController alloc] init];
+    self.clipListViewController = [[ClipListViewController alloc] init];
     self.configViewController = [[ConfigViewController alloc] init];
     UINavigationController *mainNavi = [[UINavigationController alloc] initWithRootViewController:self.mainListViewController];
     //mainNavi.navigationBarHidden = YES;
     mainNavi.navigationBar.tintColor = [UIColor blackColor];
     UINavigationController *animeNavi = [[UINavigationController alloc] initWithRootViewController:self.animeListViewController];
     animeNavi.navigationBar.tintColor = [UIColor blackColor];
-    UINavigationController *favNavi = [[UINavigationController alloc] initWithRootViewController:self.favoriteListViewController];
+    UINavigationController *favNavi = [[UINavigationController alloc] initWithRootViewController:self.clipListViewController];
     favNavi.navigationBar.tintColor = [UIColor blackColor];
     
     //TODO:tabbarのデザイン（アイコン？）修正

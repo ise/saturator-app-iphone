@@ -25,7 +25,6 @@
 @synthesize articleList;
 
 int currentPage;
-BOOL hasNext;
 BOOL isRefresh = NO;
 
 - (void)_setHeaderViewHidden:(BOOL)hidden animated:(BOOL)animated
@@ -44,16 +43,24 @@ BOOL isRefresh = NO;
     }
 }
 
+- (id)init
+{
+    self = [super initWithNibName:@"MainListViewController" bundle:nil];
+    if (self) {
+        self.articleList = [[NSMutableArray alloc] init];
+        self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg2.png"]];
+        
+        [self _initStatus];
+    }
+    return self;
+}
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
-        //UIBarButtonItem *reloadButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh:)];
-        //self.navigationItem.rightBarButtonItem = reloadButton;
         self.articleList = [[NSMutableArray alloc] init];
         self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg2.png"]];
-        //self.tableView.allowsSelection = NO;
-        
         
         [self _initStatus];
     }
@@ -63,7 +70,7 @@ BOOL isRefresh = NO;
 - (void)_initStatus
 {
     currentPage = 1;
-    hasNext = YES;
+    self.hasNext = YES;
     [self.articleList removeAllObjects];
 }
 
@@ -108,7 +115,7 @@ BOOL isRefresh = NO;
     if (count == 0) {
         return 0;
     }
-    if (hasNext) {
+    if (self.hasNext) {
         return count + 1;
     }
     return count;
@@ -279,7 +286,7 @@ BOOL isRefresh = NO;
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"記事が見つかりませんでした" delegate:self cancelButtonTitle:nil otherButtonTitles:@"確認", nil];
         [NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(performDismiss:) userInfo:alert repeats:NO];
         [alert show];
-        hasNext = NO;
+        self.hasNext = NO;
         
     }
     [self.tableView reloadData];

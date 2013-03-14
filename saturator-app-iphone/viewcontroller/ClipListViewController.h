@@ -1,5 +1,5 @@
 //
-//  FavoriteListViewController.h
+//  ClipListViewController.h
 //  saturator-app-iphone
 //
 //  Created by Masaaki Takeuchi on 2013/01/05.
@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MainListViewController.h"
 
-@interface FavoriteListViewController : UIViewController
+@interface ClipListViewController : MainListViewController
 
 @end

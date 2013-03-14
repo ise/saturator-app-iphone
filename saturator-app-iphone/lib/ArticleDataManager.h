@@ -21,6 +21,7 @@
 @property (strong, nonatomic) FMDatabase *database;
 + (id)sharedInstance;
 - (void)updateList:(id<ArticleDataManagerDelegate>) view Tids:(NSMutableArray *)tids Page:(int) page;
+- (void)loadClips:(id<ArticleDataManagerDelegate>) view;
 - (int)addClip:(NSString *)url;
 - (int)removeClip:(NSString *)url;
 @end

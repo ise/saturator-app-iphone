@@ -124,6 +124,25 @@ static ArticleDataManager *_sharedInstance;
      }];
 }
 
+//クリップ記事の非同期読み込み
+- (void)loadClips:(id<ArticleDataManagerDelegate>)view
+{
+    NSLog(@"loadClips");
+    NSMutableArray *articles = [NSMutableArray array];
+    
+    //クリップされた記事のみクリップ日時の降順で取得
+    NSString *sql = [NSString stringWithFormat:@"select a.url,a.title,a.description,a.image,a.date,a.unixtime,a.feedName,a.feedIcon,a.feedUrl,a.clipped,group_concat(aa.tid) as tids from article a join article_anime aa on a.url=aa.url where a.clipped is not null group by a.url order by a.clipped desc"];
+    [database open];
+    FMResultSet *result = [database executeQuery:sql];
+    while ([result next]) {
+        Article *a = [[Article alloc] initWithDBDict:[result resultDictionary]];
+        [articles addObject:a];
+    }
+    [database close];
+    
+    [view buildView:articles];
+}
+
 //記事をDBに保存する
 - (void)_saveArticles:(NSMutableArray *)articles
 {

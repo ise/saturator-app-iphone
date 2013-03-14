@@ -22,6 +22,8 @@
 
 @property (strong, nonatomic) NSMutableArray *articleList;
 @property (nonatomic, retain) IBOutlet HeaderView* headerView;
+@property (readwrite) BOOL hasNext;
 
+- (id)init;
 - (void)buildView:(NSMutableArray *)articles;
 @end
