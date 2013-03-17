@@ -22,6 +22,8 @@
 @implementation MainListViewController
 
 @synthesize headerView;
+@synthesize emptyView;
+@synthesize footerView;
 @synthesize articleList;
 
 int currentPage;
@@ -41,6 +43,21 @@ BOOL isRefresh = NO;
     } else {
         self.tableView.contentInset = UIEdgeInsetsMake(topOffset, 0, 0, 0);
     }
+}
+
+- (void)_initEmptyView
+{
+    CGFloat marginX = self.view.frame.size.width - self.emptyView.frame.size.width;
+    CGFloat marginY = self.view.frame.size.height - self.emptyView.frame.size.height;
+    NSLog(@"Y=%f", marginY / 2.0f);
+    self.emptyView.frame = CGRectMake(marginX / 2.0f, marginY / 2.0f, self.emptyView.frame.size.width, self.emptyView.frame.size.height);
+    self.emptyView.message.text = @"記事がありません\nリストを下方向に引き下げると更新できます";
+}
+
+- (void)_initFooterView
+{
+    self.footerView.message.text = @"Load next posts ...";
+    [self.footerView setListView:self];
 }
 
 - (id)init
@@ -70,8 +87,8 @@ BOOL isRefresh = NO;
 - (void)_initStatus
 {
     currentPage = 1;
-    self.hasNext = YES;
     [self.articleList removeAllObjects];
+    self.emptyView.hidden = YES;
 }
 
 - (void)viewDidLoad
@@ -79,6 +96,11 @@ BOOL isRefresh = NO;
     [super viewDidLoad];
     [self _setHeaderViewHidden:YES animated:NO];
     self.tableView.tableHeaderView = self.headerView;
+    [self _initEmptyView];
+    [self.view addSubview:self.emptyView];
+    [self _initFooterView];
+    self.tableView.tableFooterView = self.footerView;
+    self.tableView.tableFooterView.hidden = YES;
     [self loadArticles:1];
 }
 
@@ -115,35 +137,17 @@ BOOL isRefresh = NO;
     if (count == 0) {
         return 0;
     }
-    if (self.hasNext) {
-        return count + 1;
-    }
     return count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section >= self.articleList.count) {
-        //次を読み込むボタン
-        return 1;
-    }
     return 2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     BaseListViewCell *cell;
-    if (indexPath.section >= self.articleList.count) {
-        //次を読み込むボタン
-        static NSString *CellIdentifier = @"MainListViewFooterCell";
-        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        if (cell == nil) {
-            MainListViewFooterCellController *controller = [[MainListViewFooterCellController alloc] initWithNibName:@"MainListViewFooterCellController" bundle:nil];
-            cell = (MainListViewFooterCell *)controller.view;
-        }
-        return cell;
-    }
-    
     Article *article = [self.articleList objectAtIndex:indexPath.section];
     if (indexPath.row % 2 == 0) {
         if ([article.image isEqualToString:@""]){ 
@@ -177,10 +181,6 @@ BOOL isRefresh = NO;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section >= self.articleList.count) {
-        //次を読み込むボタン
-        return 50;
-    }
     if (indexPath.row % 2 == 0) {
         Article *article = [self.articleList objectAtIndex:indexPath.section];
         if ([article.image isEqualToString:@""]) {
@@ -239,12 +239,6 @@ BOOL isRefresh = NO;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"didSelect %d", indexPath.section);
-    if (indexPath.section >= self.articleList.count) {
-        //次を読み込むボタン
-        [self loadArticles:currentPage];
-        return;
-    }
     if (indexPath.row % 2 == 0) {
         //記事への遷移
         DetailViewController *detail = [[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil];
@@ -272,6 +266,7 @@ BOOL isRefresh = NO;
     }
     [SVProgressHUD dismiss];
     [alert show];
+    self.emptyView.hidden = NO;
 }
 
 - (void)buildView:(NSMutableArray *)articles
@@ -286,8 +281,10 @@ BOOL isRefresh = NO;
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"記事が見つかりませんでした" delegate:self cancelButtonTitle:nil otherButtonTitles:@"確認", nil];
         [NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(performDismiss:) userInfo:alert repeats:NO];
         [alert show];
+        self.tableView.tableFooterView.hidden = YES;
         self.hasNext = NO;
-        
+    } else {
+        self.tableView.tableFooterView.hidden = NO;
     }
     [self.tableView reloadData];
     
@@ -335,6 +332,11 @@ BOOL isRefresh = NO;
 {
     [self _initStatus];
     [self loadArticles:1];
+}
+
+- (void)loadNextPosts
+{
+    [self loadArticles:currentPage];
 }
 
 @end

@@ -15,6 +15,7 @@
 - (void)buildView:(NSMutableArray *)articles;
 - (void)buildErrorView;
 - (void)updateArticleStatus:(Article *)article;
+- (void)loadNextPosts;
 @end
 
 @interface ArticleDataManager : DataManager
