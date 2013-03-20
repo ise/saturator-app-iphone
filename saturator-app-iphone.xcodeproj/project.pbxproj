@@ -85,6 +85,8 @@
 		7872E2AC16F5EFFD002C908F /* ConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7872E2AA16F5EFFD002C908F /* ConfigViewController.m */; };
 		7872E2AD16F5EFFD002C908F /* ConfigViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7872E2AB16F5EFFD002C908F /* ConfigViewController.xib */; };
 		7872E2B016F93133002C908F /* ConfigDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7872E2AF16F93133002C908F /* ConfigDataManager.m */; };
+		7872E2B416F9B038002C908F /* RecommendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7872E2B216F9B037002C908F /* RecommendViewController.m */; };
+		7872E2B516F9B038002C908F /* RecommendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7872E2B316F9B038002C908F /* RecommendViewController.xib */; };
 		789A14BA16DA04D700FB0776 /* MainListViewCellWithoutImageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 789A14B816DA04D700FB0776 /* MainListViewCellWithoutImageController.m */; };
 		789A14BB16DA04D700FB0776 /* MainListViewCellWithoutImageController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 789A14B916DA04D700FB0776 /* MainListViewCellWithoutImageController.xib */; };
 		789A14BF16DA62F100FB0776 /* MainListViewFooterCellController.m in Sources */ = {isa = PBXBuildFile; fileRef = 789A14BD16DA62F100FB0776 /* MainListViewFooterCellController.m */; };
@@ -215,6 +217,9 @@
 		7872E2AB16F5EFFD002C908F /* ConfigViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConfigViewController.xib; sourceTree = "<group>"; };
 		7872E2AE16F93133002C908F /* ConfigDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigDataManager.h; sourceTree = "<group>"; };
 		7872E2AF16F93133002C908F /* ConfigDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigDataManager.m; sourceTree = "<group>"; };
+		7872E2B116F9B037002C908F /* RecommendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendViewController.h; sourceTree = "<group>"; };
+		7872E2B216F9B037002C908F /* RecommendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendViewController.m; sourceTree = "<group>"; };
+		7872E2B316F9B038002C908F /* RecommendViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecommendViewController.xib; sourceTree = "<group>"; };
 		789A14B716DA04D700FB0776 /* MainListViewCellWithoutImageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainListViewCellWithoutImageController.h; sourceTree = "<group>"; };
 		789A14B816DA04D700FB0776 /* MainListViewCellWithoutImageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainListViewCellWithoutImageController.m; sourceTree = "<group>"; };
 		789A14B916DA04D700FB0776 /* MainListViewCellWithoutImageController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainListViewCellWithoutImageController.xib; sourceTree = "<group>"; };
@@ -466,6 +471,9 @@
 				7872E2A916F5EFFD002C908F /* ConfigViewController.h */,
 				7872E2AA16F5EFFD002C908F /* ConfigViewController.m */,
 				7872E2AB16F5EFFD002C908F /* ConfigViewController.xib */,
+				7872E2B116F9B037002C908F /* RecommendViewController.h */,
+				7872E2B216F9B037002C908F /* RecommendViewController.m */,
+				7872E2B316F9B038002C908F /* RecommendViewController.xib */,
 			);
 			path = viewcontroller;
 			sourceTree = "<group>";
@@ -607,6 +615,7 @@
 				783CAB0416EC87C300C432F7 /* fav.png in Resources */,
 				783CAB0616EC892A00C432F7 /* unfav2.png in Resources */,
 				7872E2AD16F5EFFD002C908F /* ConfigViewController.xib in Resources */,
+				7872E2B516F9B038002C908F /* RecommendViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -685,6 +694,7 @@
 				7872E2A816F5CC31002C908F /* FooterView.m in Sources */,
 				7872E2AC16F5EFFD002C908F /* ConfigViewController.m in Sources */,
 				7872E2B016F93133002C908F /* ConfigDataManager.m in Sources */,
+				7872E2B416F9B038002C908F /* RecommendViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

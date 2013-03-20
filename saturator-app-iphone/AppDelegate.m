@@ -10,11 +10,12 @@
 
 @implementation AppDelegate
 
-@synthesize tabBarController = _tabBarController;
-@synthesize mainListViewController = _mainListViewController;
-@synthesize animeListViewController = _animeListViewController;
-@synthesize clipListViewController = _clipListViewController;
-@synthesize configViewController = _configViewController;
+@synthesize tabBarController;
+@synthesize mainListViewController;
+@synthesize animeListViewController;
+@synthesize clipListViewController;
+@synthesize recommendViewController;
+@synthesize configViewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -24,6 +25,7 @@
     self.mainListViewController = [[MainListViewController alloc] init];
     self.animeListViewController = [[AnimeListViewController alloc] init];
     self.clipListViewController = [[ClipListViewController alloc] init];
+    self.recommendViewController = [[RecommendViewController alloc] init];
     self.configViewController = [[ConfigViewController alloc] init];
     UINavigationController *mainNavi = [[UINavigationController alloc] initWithRootViewController:self.mainListViewController];
     //mainNavi.navigationBarHidden = YES;
@@ -35,7 +37,7 @@
     
     //TODO:tabbarのデザイン（アイコン？）修正
     self.tabBarController = [[UITabBarController alloc] initWithNibName:nil bundle:nil];
-    NSArray *controllers = [[NSArray alloc] initWithObjects:mainNavi,animeNavi,favNavi,self.configViewController,nil];
+    NSArray *controllers = [[NSArray alloc] initWithObjects:mainNavi,animeNavi,favNavi,self.recommendViewController,self.configViewController,nil];
     [self.tabBarController setViewControllers:controllers];
     
     for (UITabBarItem *item in self.tabBarController.tabBar.items) {

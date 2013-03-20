@@ -10,6 +10,7 @@
 #import "MainListViewController.h"
 #import "AnimeListViewController.h"
 #import "ClipListViewController.h"
+#import "RecommendViewController.h"
 #import "ConfigViewController.h"
 
 
@@ -21,6 +22,7 @@
 @property (strong, nonatomic) MainListViewController *mainListViewController;
 @property (strong, nonatomic) AnimeListViewController *animeListViewController;
 @property (strong, nonatomic) ClipListViewController *clipListViewController;
+@property (strong, nonatomic) RecommendViewController *recommendViewController;
 @property (strong, nonatomic) ConfigViewController *configViewController;
 
 @end
