@@ -103,8 +103,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    /*
     Anime *a = [self.animeList objectAtIndex:indexPath.row];
     NSLog(@"%@", a.title);
+     */
 }
 
 - (void)buildErrorView

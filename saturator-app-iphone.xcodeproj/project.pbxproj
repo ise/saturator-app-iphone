@@ -58,8 +58,6 @@
 		786900171698508200E11631 /* AnimeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 786900151698508200E11631 /* AnimeListViewController.m */; };
 		786900181698508200E11631 /* AnimeListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 786900161698508200E11631 /* AnimeListViewController.xib */; };
 		7869001C1698608F00E11631 /* ClipListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7869001A1698608F00E11631 /* ClipListViewController.m */; };
-		78690021169860AF00E11631 /* ConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7869001F169860AF00E11631 /* ConfigViewController.m */; };
-		78690022169860AF00E11631 /* ConfigViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78690020169860AF00E11631 /* ConfigViewController.xib */; };
 		78690038169B110B00E11631 /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = 78690036169B110B00E11631 /* star.png */; };
 		78690039169B110B00E11631 /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = 78690037169B110B00E11631 /* home.png */; };
 		7869004D169C61C800E11631 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7869004C169C61C800E11631 /* libsqlite3.0.dylib */; };
@@ -84,6 +82,9 @@
 		7869FFEA1698023900E11631 /* saturator_app_iphoneTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7869FFE91698023900E11631 /* saturator_app_iphoneTests.m */; };
 		786A91D716E37E36006D56B3 /* BaseConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 786A91D616E37E35006D56B3 /* BaseConfig.m */; };
 		7872E2A816F5CC31002C908F /* FooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7872E2A716F5CC31002C908F /* FooterView.m */; };
+		7872E2AC16F5EFFD002C908F /* ConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7872E2AA16F5EFFD002C908F /* ConfigViewController.m */; };
+		7872E2AD16F5EFFD002C908F /* ConfigViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7872E2AB16F5EFFD002C908F /* ConfigViewController.xib */; };
+		7872E2B016F93133002C908F /* ConfigDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7872E2AF16F93133002C908F /* ConfigDataManager.m */; };
 		789A14BA16DA04D700FB0776 /* MainListViewCellWithoutImageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 789A14B816DA04D700FB0776 /* MainListViewCellWithoutImageController.m */; };
 		789A14BB16DA04D700FB0776 /* MainListViewCellWithoutImageController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 789A14B916DA04D700FB0776 /* MainListViewCellWithoutImageController.xib */; };
 		789A14BF16DA62F100FB0776 /* MainListViewFooterCellController.m in Sources */ = {isa = PBXBuildFile; fileRef = 789A14BD16DA62F100FB0776 /* MainListViewFooterCellController.m */; };
@@ -164,9 +165,6 @@
 		786900161698508200E11631 /* AnimeListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnimeListViewController.xib; sourceTree = "<group>"; };
 		786900191698608F00E11631 /* ClipListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClipListViewController.h; sourceTree = "<group>"; };
 		7869001A1698608F00E11631 /* ClipListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClipListViewController.m; sourceTree = "<group>"; };
-		7869001E169860AF00E11631 /* ConfigViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigViewController.h; sourceTree = "<group>"; };
-		7869001F169860AF00E11631 /* ConfigViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigViewController.m; sourceTree = "<group>"; };
-		78690020169860AF00E11631 /* ConfigViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConfigViewController.xib; sourceTree = "<group>"; };
 		78690036169B110B00E11631 /* star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star.png; sourceTree = "<group>"; };
 		78690037169B110B00E11631 /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.png; sourceTree = "<group>"; };
 		7869004C169C61C800E11631 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
@@ -212,6 +210,11 @@
 		786A91D616E37E35006D56B3 /* BaseConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseConfig.m; sourceTree = "<group>"; };
 		7872E2A616F5CC31002C908F /* FooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FooterView.h; sourceTree = "<group>"; };
 		7872E2A716F5CC31002C908F /* FooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FooterView.m; sourceTree = "<group>"; };
+		7872E2A916F5EFFD002C908F /* ConfigViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigViewController.h; sourceTree = "<group>"; };
+		7872E2AA16F5EFFD002C908F /* ConfigViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigViewController.m; sourceTree = "<group>"; };
+		7872E2AB16F5EFFD002C908F /* ConfigViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConfigViewController.xib; sourceTree = "<group>"; };
+		7872E2AE16F93133002C908F /* ConfigDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigDataManager.h; sourceTree = "<group>"; };
+		7872E2AF16F93133002C908F /* ConfigDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigDataManager.m; sourceTree = "<group>"; };
 		789A14B716DA04D700FB0776 /* MainListViewCellWithoutImageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainListViewCellWithoutImageController.h; sourceTree = "<group>"; };
 		789A14B816DA04D700FB0776 /* MainListViewCellWithoutImageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainListViewCellWithoutImageController.m; sourceTree = "<group>"; };
 		789A14B916DA04D700FB0776 /* MainListViewCellWithoutImageController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainListViewCellWithoutImageController.xib; sourceTree = "<group>"; };
@@ -413,6 +416,8 @@
 				78AA61C516A5A22F00A1CAC4 /* ArticleDataManager.m */,
 				789A14C116DE5A2E00FB0776 /* AnimeDataManager.h */,
 				789A14C216DE5A2E00FB0776 /* AnimeDataManager.m */,
+				7872E2AE16F93133002C908F /* ConfigDataManager.h */,
+				7872E2AF16F93133002C908F /* ConfigDataManager.m */,
 			);
 			path = lib;
 			sourceTree = "<group>";
@@ -458,9 +463,9 @@
 				786900161698508200E11631 /* AnimeListViewController.xib */,
 				786900191698608F00E11631 /* ClipListViewController.h */,
 				7869001A1698608F00E11631 /* ClipListViewController.m */,
-				7869001E169860AF00E11631 /* ConfigViewController.h */,
-				7869001F169860AF00E11631 /* ConfigViewController.m */,
-				78690020169860AF00E11631 /* ConfigViewController.xib */,
+				7872E2A916F5EFFD002C908F /* ConfigViewController.h */,
+				7872E2AA16F5EFFD002C908F /* ConfigViewController.m */,
+				7872E2AB16F5EFFD002C908F /* ConfigViewController.xib */,
 			);
 			path = viewcontroller;
 			sourceTree = "<group>";
@@ -589,7 +594,6 @@
 				7869000D1698038B00E11631 /* MainListViewController.xib in Resources */,
 				78690013169805B000E11631 /* DetailViewController.xib in Resources */,
 				786900181698508200E11631 /* AnimeListViewController.xib in Resources */,
-				78690022169860AF00E11631 /* ConfigViewController.xib in Resources */,
 				78690038169B110B00E11631 /* star.png in Resources */,
 				78690039169B110B00E11631 /* home.png in Resources */,
 				781D6E7C16C8E95D0003BD09 /* SVProgressHUD.bundle in Resources */,
@@ -602,6 +606,7 @@
 				783CAB0216EC806400C432F7 /* bg2.png in Resources */,
 				783CAB0416EC87C300C432F7 /* fav.png in Resources */,
 				783CAB0616EC892A00C432F7 /* unfav2.png in Resources */,
+				7872E2AD16F5EFFD002C908F /* ConfigViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -648,7 +653,6 @@
 				78690012169805B000E11631 /* DetailViewController.m in Sources */,
 				786900171698508200E11631 /* AnimeListViewController.m in Sources */,
 				7869001C1698608F00E11631 /* ClipListViewController.m in Sources */,
-				78690021169860AF00E11631 /* ConfigViewController.m in Sources */,
 				78690058169C623800E11631 /* FMDatabase.m in Sources */,
 				78690059169C623800E11631 /* FMDatabaseAdditions.m in Sources */,
 				7869005A169C623800E11631 /* FMDatabasePool.m in Sources */,
@@ -679,6 +683,8 @@
 				783CAAFE16EC65BC00C432F7 /* HeaderView.m in Sources */,
 				783CAB0916F3E5F500C432F7 /* EmptyView.m in Sources */,
 				7872E2A816F5CC31002C908F /* FooterView.m in Sources */,
+				7872E2AC16F5EFFD002C908F /* ConfigViewController.m in Sources */,
+				7872E2B016F93133002C908F /* ConfigDataManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -16,6 +16,7 @@
 #import "BaseListViewCell.h"
 #import "ArticleDataManager.h"
 #import "AnimeDataManager.h"
+#import "ConfigDataManager.h"
 
 #import "SVProgressHUD.h"
 
@@ -28,6 +29,7 @@
 
 int currentPage;
 BOOL isRefresh = NO;
+int itemType = MainListItemTypeAll;
 
 - (void)_setHeaderViewHidden:(BOOL)hidden animated:(BOOL)animated
 {
@@ -94,6 +96,15 @@ BOOL isRefresh = NO;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    ConfigDataManager *m = [ConfigDataManager sharedInstance];
+    itemType = [m getMainListItemType];
+    
+    //リスト表示項目変更時の通知を設定
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(updateItemType) name:@"UpdateItemType" object:nil];
+    
+    //各viewの設定
     [self _setHeaderViewHidden:YES animated:NO];
     self.tableView.tableHeaderView = self.headerView;
     [self _initEmptyView];
@@ -101,6 +112,9 @@ BOOL isRefresh = NO;
     [self _initFooterView];
     self.tableView.tableFooterView = self.footerView;
     self.tableView.tableFooterView.hidden = YES;
+    
+    
+    //記事の読み込みを開始
     [self loadArticles:1];
 }
 
@@ -150,7 +164,7 @@ BOOL isRefresh = NO;
     BaseListViewCell *cell;
     Article *article = [self.articleList objectAtIndex:indexPath.section];
     if (indexPath.row % 2 == 0) {
-        if ([article.image isEqualToString:@""]){ 
+        if ([article.image isEqualToString:@""] || itemType == MainListItemTypeTitle){
             //画像が無い場合
             static NSString *CellIdentifier = @"MainListViewCellWithoutImage";
             cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -183,7 +197,7 @@ BOOL isRefresh = NO;
 {
     if (indexPath.row % 2 == 0) {
         Article *article = [self.articleList objectAtIndex:indexPath.section];
-        if ([article.image isEqualToString:@""]) {
+        if ([article.image isEqualToString:@""] || itemType == MainListItemTypeTitle) {
             //画像なし
             return 110;
         }
@@ -337,6 +351,13 @@ BOOL isRefresh = NO;
 - (void)loadNextPosts
 {
     [self loadArticles:currentPage];
+}
+
+- (void)updateItemType
+{
+    ConfigDataManager *m = [ConfigDataManager sharedInstance];
+    itemType = [m getMainListItemType];
+    [self.tableView reloadData];
 }
 
 @end
