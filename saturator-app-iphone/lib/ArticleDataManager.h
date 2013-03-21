@@ -25,4 +25,5 @@
 - (void)loadClips:(id<ArticleDataManagerDelegate>) view;
 - (int)addClip:(NSString *)url;
 - (int)removeClip:(NSString *)url;
+- (BOOL)isClipped:(NSString *)url;
 @end

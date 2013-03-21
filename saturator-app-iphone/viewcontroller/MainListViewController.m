@@ -103,6 +103,8 @@ int itemType = MainListItemTypeAll;
     //リスト表示項目変更時の通知を設定
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self selector:@selector(updateItemType) name:@"UpdateItemType" object:nil];
+    //クリップ通知設定
+    [nc addObserver:self selector:@selector(updateClipStatus:) name:@"UpdateClipStatus" object:nil];
     
     //各viewの設定
     [self _setHeaderViewHidden:YES animated:NO];
@@ -130,6 +132,7 @@ int itemType = MainListItemTypeAll;
         [self refresh:nil];
         m.updatedFavorite = NO;
     }
+    [self.tableView reloadData];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -357,6 +360,24 @@ int itemType = MainListItemTypeAll;
 {
     ConfigDataManager *m = [ConfigDataManager sharedInstance];
     itemType = [m getMainListItemType];
+    [self.tableView reloadData];
+}
+
+- (void)updateClipStatus:(NSNotification *)notification
+{
+    NSLog(@"updateClipStatus");
+    NSDictionary *dic = [notification userInfo];
+    NSString *url = [dic objectForKey:@"url"];
+    NSNumber *clipped = [dic objectForKey:@"clipped"];
+    NSLog(@"clipped=%d", [clipped intValue]);
+    
+    for (int i=0; i<self.articleList.count; i++) {
+        Article *a = [self.articleList objectAtIndex:i];
+        if ([a.url isEqualToString:url]) {
+            a.clipped = [clipped intValue];
+        }
+        [self.articleList replaceObjectAtIndex:i withObject:a];
+    }
     [self.tableView reloadData];
 }
 

@@ -213,4 +213,19 @@ static ArticleDataManager *_sharedInstance;
     return 0;
 }
 
+- (BOOL)isClipped:(NSString *)url
+{
+    //お気に入り登録されたタイトルの記事のみ新着順で取得
+    NSString *sql = @"select url from article where clipped is not null and url = ?";
+    [database open];
+    FMResultSet *result = [database executeQuery:sql, url];
+    BOOL exist = NO;
+    while ([result next]) {
+        exist = YES;
+        break;
+    }
+    [database close];
+    return exist;
+}
+
 @end
