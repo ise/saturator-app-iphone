@@ -29,6 +29,7 @@
 {
     [super viewDidLoad];
     [super setEditing:YES animated:YES];
+    self.navigationController.navigationBarHidden = YES;
     AnimeDataManager *manager = [AnimeDataManager sharedInstance];
     self.favorites = [manager getFavorites];
     [manager updateList:self];

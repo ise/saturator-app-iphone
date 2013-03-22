@@ -43,7 +43,7 @@
     int i = 0;
     NSArray *tabs = [NSArray arrayWithObjects:
                        [NSArray arrayWithObjects:@"home", @"home.png", nil],
-                       [NSArray arrayWithObjects:@"list", @"list.png", nil],
+                       [NSArray arrayWithObjects:@"anime", @"list.png", nil],
                        [NSArray arrayWithObjects:@"bookmark", @"bookmark.png", nil],
                        [NSArray arrayWithObjects:@"recommend", @"recommend.png", nil],
                        [NSArray arrayWithObjects:@"config", @"config.png", nil],
