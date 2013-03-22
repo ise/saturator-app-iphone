@@ -36,13 +36,19 @@
         [self _clippedStatus];
         self.article.clipped = [m addClip:self.article.url];
         NSLog(@"%@ is clipped", self.article.url);
-        [self.listView updateArticleStatus:self.article];
+        //[self.listView updateArticleStatus:self.article];
+        NSDictionary *dic = [NSDictionary dictionaryWithObject:self.article forKey:@"article"];
+        NSNotification *n = [NSNotification notificationWithName:@"UpdateArticleStatus" object:self userInfo:dic];
+        [[NSNotificationCenter defaultCenter] postNotification:n];
     } else if (touch.view.tag == self.activeFavImage.tag) {
         //クリップ削除
         [self _unclippedStatus];
         self.article.clipped = [m removeClip:self.article.url];
         NSLog(@"%@ is unclipped", self.article.url);
-        [self.listView updateArticleStatus:self.article];
+        //[self.listView updateArticleStatus:self.article];
+        NSDictionary *dic = [NSDictionary dictionaryWithObject:self.article forKey:@"article"];
+        NSNotification *n = [NSNotification notificationWithName:@"UpdateArticleStatus" object:self userInfo:dic];
+        [[NSNotificationCenter defaultCenter] postNotification:n];
     }else {
         [super touchesBegan:touches withEvent:event];
     }

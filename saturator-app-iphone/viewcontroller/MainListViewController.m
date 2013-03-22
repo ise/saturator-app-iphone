@@ -105,6 +105,7 @@ int itemType = MainListItemTypeAll;
     [nc addObserver:self selector:@selector(updateItemType) name:@"UpdateItemType" object:nil];
     //クリップ通知設定
     [nc addObserver:self selector:@selector(updateClipStatus:) name:@"UpdateClipStatus" object:nil];
+    [nc addObserver:self selector:@selector(updateArticleStatus:) name:@"UpdateArticleStatus" object:nil];
     
     //各viewの設定
     [self _setHeaderViewHidden:YES animated:NO];
@@ -308,19 +309,6 @@ int itemType = MainListItemTypeAll;
     currentPage++;
 }
 
-- (void)updateArticleStatus:(Article *)article
-{
-    NSLog(@"updateArticleStatus");
-    for (int i=0; i<self.articleList.count; i++) {
-        Article *a = [self.articleList objectAtIndex:i];
-        if ([a.url isEqual:article.url]) {
-            NSLog(@"found %@", a.url);
-            [self.articleList replaceObjectAtIndex:i withObject:article];
-            break;
-        }
-    }
-}
-
 //アラートを時限式で閉じる
 - (void)performDismiss:(NSTimer *)theTimer
 {
@@ -379,6 +367,22 @@ int itemType = MainListItemTypeAll;
         [self.articleList replaceObjectAtIndex:i withObject:a];
     }
     [self.tableView reloadData];
+}
+
+- (void)updateArticleStatus:(NSNotification *)notification
+{
+    NSLog(@"updateArticleStatus");
+    NSDictionary *dic = [notification userInfo];
+    Article *article = [dic objectForKey:@"article"];
+    
+    for (int i=0; i<self.articleList.count; i++) {
+        Article *a = [self.articleList objectAtIndex:i];
+        if ([a.url isEqual:article.url]) {
+            NSLog(@"found %@", a.url);
+            [self.articleList replaceObjectAtIndex:i withObject:article];
+            break;
+        }
+    }
 }
 
 @end

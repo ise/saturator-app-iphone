@@ -40,18 +40,28 @@
     NSArray *controllers = [[NSArray alloc] initWithObjects:mainNavi,animeNavi,favNavi,self.recommendViewController,self.configViewController,nil];
     [self.tabBarController setViewControllers:controllers];
     
+    int i = 0;
+    NSArray *tabs = [NSArray arrayWithObjects:
+                       [NSArray arrayWithObjects:@"home", @"home.png", nil],
+                       [NSArray arrayWithObjects:@"list", @"list.png", nil],
+                       [NSArray arrayWithObjects:@"bookmark", @"bookmark.png", nil],
+                       [NSArray arrayWithObjects:@"recommend", @"recommend.png", nil],
+                       [NSArray arrayWithObjects:@"config", @"config.png", nil],
+                       nil];
     for (UITabBarItem *item in self.tabBarController.tabBar.items) {
-        //UITabBarItem *item = [self.tabBarController.tabBar.items objectAtIndex:0];
-        UIImage *selectedImage = [UIImage imageNamed:@"home.png"];
-        UIImage *unselectedImage = [UIImage imageNamed:@"home.png"];
-        //タブバー選択・非選択時の画像を設定
+        //タブのラベル設定
+        NSArray *val = [tabs objectAtIndex:i];
+        [item setTitle:[val objectAtIndex:0]];
+        NSString *icon = [val objectAtIndex:1];
+        UIImage *selectedImage = [UIImage imageNamed:icon];
+        UIImage *unselectedImage = [UIImage imageNamed:icon];
+        //タブの画像を設定
         [item setFinishedSelectedImage:selectedImage withFinishedUnselectedImage:unselectedImage];
-        //タブバーの文字色を設定(選択前)
+        //タブの文字色を設定(選択前)
         [item setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1.0], UITextAttributeTextColor,nil] forState:UIControlStateNormal];
-        //タブバーの文字色を設定(選択中)
+        //タブの文字色を設定(選択中)
         [item setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:0.99 green:0.0 blue:0.789 alpha:1.0], UITextAttributeTextColor,nil] forState:UIControlStateSelected];
-        //[item setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], UITextAttributeTextColor,nil] forState:UIControlStateSelected];
-        [item setTitle:@"HOME"];
+        i++;
     }
     
     [self.window addSubview:self.tabBarController.view];
