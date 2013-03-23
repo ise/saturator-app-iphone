@@ -17,13 +17,13 @@
     self.title.text = article.title;
     [self.headImage setImageWithURL:[NSURL URLWithString:article.image] placeholder:[UIImage imageNamed:@"placeholder.png"]];
 
-    if (article.clipped != 0) {
-        //クリップ状態
-        NSLog(@"%@ has clipped status", article.url);
-        [self _clippedStatus];
+    if (article.bookmarked != 0) {
+        //ブックマーク状態
+        NSLog(@"%@ has bookmarked status", article.url);
+        [self _bookmarkedStatus];
     } else {
-        //未クリップ状態
-        [self _unclippedStatus];
+        //未ブックマーク状態
+        [self _unbookmarkedStatus];
     }
 }
 
@@ -32,19 +32,19 @@
     UITouch *touch = [[event allTouches] anyObject];
     ArticleDataManager *m = [ArticleDataManager sharedInstance];
     if (touch.view.tag == self.defaultFavImage.tag) {
-        //クリップ登録
-        [self _clippedStatus];
-        self.article.clipped = [m addClip:self.article.url];
-        NSLog(@"%@ is clipped", self.article.url);
+        //ブックマーク登録
+        [self _bookmarkedStatus];
+        self.article.bookmarked = [m addBookmark:self.article.url];
+        NSLog(@"%@ is bookmarked", self.article.url);
         //[self.listView updateArticleStatus:self.article];
         NSDictionary *dic = [NSDictionary dictionaryWithObject:self.article forKey:@"article"];
         NSNotification *n = [NSNotification notificationWithName:@"UpdateArticleStatus" object:self userInfo:dic];
         [[NSNotificationCenter defaultCenter] postNotification:n];
     } else if (touch.view.tag == self.activeFavImage.tag) {
-        //クリップ削除
-        [self _unclippedStatus];
-        self.article.clipped = [m removeClip:self.article.url];
-        NSLog(@"%@ is unclipped", self.article.url);
+        //ブックマーク削除
+        [self _unbookmarkedStatus];
+        self.article.bookmarked = [m removeBookmark:self.article.url];
+        NSLog(@"%@ is unbookmarked", self.article.url);
         //[self.listView updateArticleStatus:self.article];
         NSDictionary *dic = [NSDictionary dictionaryWithObject:self.article forKey:@"article"];
         NSNotification *n = [NSNotification notificationWithName:@"UpdateArticleStatus" object:self userInfo:dic];
@@ -54,13 +54,13 @@
     }
 }
 
-- (void)_clippedStatus
+- (void)_bookmarkedStatus
 {
     self.defaultFavImage.hidden = YES;
     self.activeFavImage.hidden = NO;
 }
 
-- (void)_unclippedStatus
+- (void)_unbookmarkedStatus
 {
     self.defaultFavImage.hidden = NO;
     self.activeFavImage.hidden = YES;

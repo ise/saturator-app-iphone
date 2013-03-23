@@ -43,7 +43,7 @@ static ArticleDataManager *_sharedInstance;
                         "feedName text,"
                         "feedIcon text,"
                         "feedUrl text,"
-                        "clipped integer"
+                        "bookmarked integer"
                     ");";
     
     NSString *relationSql = @"CREATE TABLE IF NOT EXISTS article_anime ("
@@ -124,14 +124,14 @@ static ArticleDataManager *_sharedInstance;
      }];
 }
 
-//クリップ記事の非同期読み込み
-- (void)loadClips:(id<ArticleDataManagerDelegate>)view
+//ブックマーク記事の非同期読み込み
+- (void)loadBookmarks:(id<ArticleDataManagerDelegate>)view
 {
-    NSLog(@"loadClips");
+    NSLog(@"loadBookmarks");
     NSMutableArray *articles = [NSMutableArray array];
     
-    //クリップされた記事のみクリップ日時の降順で取得
-    NSString *sql = [NSString stringWithFormat:@"select a.url,a.title,a.description,a.image,a.date,a.unixtime,a.feedName,a.feedIcon,a.feedUrl,a.clipped,group_concat(aa.tid) as tids from article a join article_anime aa on a.url=aa.url where a.clipped is not null group by a.url order by a.clipped desc"];
+    //ブックマークされた記事のみブックマーク日時の降順で取得
+    NSString *sql = [NSString stringWithFormat:@"select a.url,a.title,a.description,a.image,a.date,a.unixtime,a.feedName,a.feedIcon,a.feedUrl,a.bookmarked,group_concat(aa.tid) as tids from article a join article_anime aa on a.url=aa.url where a.bookmarked is not null group by a.url order by a.bookmarked desc"];
     [database open];
     FMResultSet *result = [database executeQuery:sql];
     while ([result next]) {
@@ -176,7 +176,7 @@ static ArticleDataManager *_sharedInstance;
     }
     
     //お気に入り登録されたタイトルの記事のみ新着順で取得
-    NSString *sql = [NSString stringWithFormat:@"select a.url,a.title,a.description,a.image,a.date,a.unixtime,a.feedName,a.feedIcon,a.feedUrl,a.clipped,group_concat(aa.tid) as tids from article a join article_anime aa on a.url=aa.url where tid in (%@) group by a.url order by unixtime desc limit %d,%d", [prepares componentsJoinedByString:@","], start, results];
+    NSString *sql = [NSString stringWithFormat:@"select a.url,a.title,a.description,a.image,a.date,a.unixtime,a.feedName,a.feedIcon,a.feedUrl,a.bookmarked,group_concat(aa.tid) as tids from article a join article_anime aa on a.url=aa.url where tid in (%@) group by a.url order by unixtime desc limit %d,%d", [prepares componentsJoinedByString:@","], start, results];
     NSLog(@"_loadArticles sql=%@", sql);
     [database open];
     FMResultSet *result = [database executeQuery:sql withArgumentsInArray:tids];
@@ -188,11 +188,11 @@ static ArticleDataManager *_sharedInstance;
     return articles;
 }
 
-//クリップ（あとで読む）を保存
-- (int)addClip:(NSString *)url
+//ブックマーク（あとで読む）を保存
+- (int)addBookmark:(NSString *)url
 {
     int now = (int)[[NSDate date] timeIntervalSince1970];
-    NSString *sql = @"update article set clipped=? where url=?";
+    NSString *sql = @"update article set bookmarked=? where url=?";
     [database open];
     [database beginTransaction];
     [database executeUpdate: sql, [NSString stringWithFormat:@"%d", now], url];
@@ -201,10 +201,10 @@ static ArticleDataManager *_sharedInstance;
     return now;
 }
 
-//クリップ（あとで読む）を削除
-- (int)removeClip:(NSString *)url
+//ブックマーク（あとで読む）を削除
+- (int)removeBookmark:(NSString *)url
 {
-    NSString *sql = @"update article set clipped=null where url=?";
+    NSString *sql = @"update article set bookmarked=null where url=?";
     [database open];
     [database beginTransaction];
     [database executeUpdate: sql, url];
@@ -213,10 +213,10 @@ static ArticleDataManager *_sharedInstance;
     return 0;
 }
 
-- (BOOL)isClipped:(NSString *)url
+- (BOOL)isBookmarked:(NSString *)url
 {
     //お気に入り登録されたタイトルの記事のみ新着順で取得
-    NSString *sql = @"select url from article where clipped is not null and url = ?";
+    NSString *sql = @"select url from article where bookmarked is not null and url = ?";
     [database open];
     FMResultSet *result = [database executeQuery:sql, url];
     BOOL exist = NO;

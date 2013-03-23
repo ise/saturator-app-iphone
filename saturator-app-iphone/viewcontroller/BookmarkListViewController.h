@@ -1,5 +1,5 @@
 //
-//  ClipListViewController.h
+//  BookmarkListViewController.h
 //  saturator-app-iphone
 //
 //  Created by Masaaki Takeuchi on 2013/01/05.
@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "MainListViewController.h"
 
-@interface ClipListViewController : MainListViewController
+@interface BookmarkListViewController : MainListViewController
 
 @end

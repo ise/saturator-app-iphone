@@ -19,7 +19,7 @@
 @synthesize feedName;
 @synthesize feedIcon;
 @synthesize feedUrl;
-@synthesize clipped;
+@synthesize bookmarked;
 
 - (id)initWithAPIDict:(NSDictionary *)dic
 {
@@ -50,10 +50,10 @@
     self.feedUrl = [dic objectForKey:@"feedUrl"];
     self.feedIcon = [NSString stringWithFormat:@"http://favicon.qfor.info/f/%@", self.feedUrl];
     
-    self.clipped = 0;
-    NSNumber *tmp = [dic objectForKey:@"clipped"];
+    self.bookmarked = 0;
+    NSNumber *tmp = [dic objectForKey:@"bookmarked"];
     if (![tmp isEqual:[NSNull null]]) {
-        self.clipped = [tmp intValue];
+        self.bookmarked = [tmp intValue];
     }
 
     

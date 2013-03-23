@@ -13,7 +13,7 @@
 @synthesize tabBarController;
 @synthesize mainListViewController;
 @synthesize animeListViewController;
-@synthesize clipListViewController;
+@synthesize bookmarkListViewController;
 @synthesize recommendViewController;
 @synthesize configViewController;
 
@@ -24,7 +24,7 @@
     
     self.mainListViewController = [[MainListViewController alloc] init];
     self.animeListViewController = [[AnimeListViewController alloc] init];
-    self.clipListViewController = [[ClipListViewController alloc] init];
+    self.bookmarkListViewController = [[BookmarkListViewController alloc] init];
     self.recommendViewController = [[RecommendViewController alloc] init];
     self.configViewController = [[ConfigViewController alloc] init];
     UINavigationController *mainNavi = [[UINavigationController alloc] initWithRootViewController:self.mainListViewController];
@@ -32,7 +32,7 @@
     mainNavi.navigationBar.tintColor = [UIColor blackColor];
     UINavigationController *animeNavi = [[UINavigationController alloc] initWithRootViewController:self.animeListViewController];
     animeNavi.navigationBar.tintColor = [UIColor blackColor];
-    UINavigationController *favNavi = [[UINavigationController alloc] initWithRootViewController:self.clipListViewController];
+    UINavigationController *favNavi = [[UINavigationController alloc] initWithRootViewController:self.bookmarkListViewController];
     favNavi.navigationBar.tintColor = [UIColor blackColor];
     
     //TODO:tabbarのデザイン（アイコン？）修正

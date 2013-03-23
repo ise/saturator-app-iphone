@@ -103,8 +103,8 @@ int itemType = MainListItemTypeAll;
     //リスト表示項目変更時の通知を設定
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self selector:@selector(updateItemType) name:@"UpdateItemType" object:nil];
-    //クリップ通知設定
-    [nc addObserver:self selector:@selector(updateClipStatus:) name:@"UpdateClipStatus" object:nil];
+    //ブックマーク通知設定
+    [nc addObserver:self selector:@selector(updateBookmarkStatus:) name:@"UpdateBookmarkStatus" object:nil];
     [nc addObserver:self selector:@selector(updateArticleStatus:) name:@"UpdateArticleStatus" object:nil];
     
     //各viewの設定
@@ -351,18 +351,18 @@ int itemType = MainListItemTypeAll;
     [self.tableView reloadData];
 }
 
-- (void)updateClipStatus:(NSNotification *)notification
+- (void)updateBookmarkStatus:(NSNotification *)notification
 {
-    NSLog(@"updateClipStatus");
+    NSLog(@"updateBookmarkStatus");
     NSDictionary *dic = [notification userInfo];
     NSString *url = [dic objectForKey:@"url"];
-    NSNumber *clipped = [dic objectForKey:@"clipped"];
-    NSLog(@"clipped=%d", [clipped intValue]);
+    NSNumber *bookmarked = [dic objectForKey:@"bookmarked"];
+    NSLog(@"bookmarked=%d", [bookmarked intValue]);
     
     for (int i=0; i<self.articleList.count; i++) {
         Article *a = [self.articleList objectAtIndex:i];
         if ([a.url isEqualToString:url]) {
-            a.clipped = [clipped intValue];
+            a.bookmarked = [bookmarked intValue];
         }
         [self.articleList replaceObjectAtIndex:i withObject:a];
     }

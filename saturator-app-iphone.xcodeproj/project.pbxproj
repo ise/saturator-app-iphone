@@ -54,7 +54,7 @@
 		78690013169805B000E11631 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78690011169805B000E11631 /* DetailViewController.xib */; };
 		786900171698508200E11631 /* AnimeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 786900151698508200E11631 /* AnimeListViewController.m */; };
 		786900181698508200E11631 /* AnimeListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 786900161698508200E11631 /* AnimeListViewController.xib */; };
-		7869001C1698608F00E11631 /* ClipListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7869001A1698608F00E11631 /* ClipListViewController.m */; };
+		7869001C1698608F00E11631 /* BookmarkListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7869001A1698608F00E11631 /* BookmarkListViewController.m */; };
 		7869004D169C61C800E11631 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7869004C169C61C800E11631 /* libsqlite3.0.dylib */; };
 		78690058169C623800E11631 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 7869004F169C623800E11631 /* FMDatabase.m */; };
 		78690059169C623800E11631 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 78690051169C623800E11631 /* FMDatabaseAdditions.m */; };
@@ -178,8 +178,8 @@
 		786900141698508200E11631 /* AnimeListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimeListViewController.h; sourceTree = "<group>"; };
 		786900151698508200E11631 /* AnimeListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimeListViewController.m; sourceTree = "<group>"; };
 		786900161698508200E11631 /* AnimeListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnimeListViewController.xib; sourceTree = "<group>"; };
-		786900191698608F00E11631 /* ClipListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClipListViewController.h; sourceTree = "<group>"; };
-		7869001A1698608F00E11631 /* ClipListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClipListViewController.m; sourceTree = "<group>"; };
+		786900191698608F00E11631 /* BookmarkListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookmarkListViewController.h; sourceTree = "<group>"; };
+		7869001A1698608F00E11631 /* BookmarkListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookmarkListViewController.m; sourceTree = "<group>"; };
 		7869004C169C61C800E11631 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		7869004E169C623800E11631 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
 		7869004F169C623800E11631 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
@@ -511,8 +511,8 @@
 				786900141698508200E11631 /* AnimeListViewController.h */,
 				786900151698508200E11631 /* AnimeListViewController.m */,
 				786900161698508200E11631 /* AnimeListViewController.xib */,
-				786900191698608F00E11631 /* ClipListViewController.h */,
-				7869001A1698608F00E11631 /* ClipListViewController.m */,
+				786900191698608F00E11631 /* BookmarkListViewController.h */,
+				7869001A1698608F00E11631 /* BookmarkListViewController.m */,
 				7872E2A916F5EFFD002C908F /* ConfigViewController.h */,
 				7872E2AA16F5EFFD002C908F /* ConfigViewController.m */,
 				7872E2AB16F5EFFD002C908F /* ConfigViewController.xib */,
@@ -721,7 +721,7 @@
 				7869000E1698038B00E11631 /* Article.m in Sources */,
 				78690012169805B000E11631 /* DetailViewController.m in Sources */,
 				786900171698508200E11631 /* AnimeListViewController.m in Sources */,
-				7869001C1698608F00E11631 /* ClipListViewController.m in Sources */,
+				7869001C1698608F00E11631 /* BookmarkListViewController.m in Sources */,
 				78690058169C623800E11631 /* FMDatabase.m in Sources */,
 				78690059169C623800E11631 /* FMDatabaseAdditions.m in Sources */,
 				7869005A169C623800E11631 /* FMDatabasePool.m in Sources */,

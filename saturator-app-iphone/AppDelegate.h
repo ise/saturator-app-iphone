@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MainListViewController.h"
 #import "AnimeListViewController.h"
-#import "ClipListViewController.h"
+#import "BookmarkListViewController.h"
 #import "RecommendViewController.h"
 #import "ConfigViewController.h"
 
@@ -21,7 +21,7 @@
 @property (strong, nonatomic) UITabBarController *tabBarController;
 @property (strong, nonatomic) MainListViewController *mainListViewController;
 @property (strong, nonatomic) AnimeListViewController *animeListViewController;
-@property (strong, nonatomic) ClipListViewController *clipListViewController;
+@property (strong, nonatomic) BookmarkListViewController *bookmarkListViewController;
 @property (strong, nonatomic) RecommendViewController *recommendViewController;
 @property (strong, nonatomic) ConfigViewController *configViewController;
 
