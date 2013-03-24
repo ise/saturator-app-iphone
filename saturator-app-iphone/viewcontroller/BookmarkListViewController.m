@@ -12,6 +12,13 @@
 
 @implementation BookmarkListViewController
 
+- (void)_setHeaderViewHidden:(BOOL)hidden animated:(BOOL)animated
+{
+    CGFloat topOffset = 0.0;
+    topOffset = -self.headerView.frame.size.height;
+    self.tableView.contentInset = UIEdgeInsetsMake(topOffset, 0, 0, 0);
+}
+
 - (void)_initEmptyView
 {
     NSLog(@"_initEmptyView");
@@ -23,6 +30,8 @@
 
 - (void)viewDidLoad
 {
+    [self _setHeaderViewHidden:YES animated:NO];
+    self.tableView.tableHeaderView = self.headerView;
     [self _initEmptyView];
     NSLog(@"origin.y=%f", self.view.superview.bounds.origin.y);
     [self.view addSubview:self.emptyView];
@@ -57,6 +66,16 @@
 }
 
 - (void)_taskFinished
+{
+}
+
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+}
+
+//リストを引き下げて更新する
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
 }
 

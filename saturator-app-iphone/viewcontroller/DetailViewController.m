@@ -40,8 +40,7 @@ bool isTop = false;
     [super viewDidLoad];
     //navigationbarを表示
     self.navigationController.navigationBarHidden = NO;
-    [self _setBookmarkButton];
-
+    
     //tabbarは非表示
     ((UITabBarController *)self.parentViewController.parentViewController).tabBar.hidden = YES;
     NSURL *url;
@@ -53,6 +52,7 @@ bool isTop = false;
         NSLog(@"Request to %@", article.url);
         url = [NSURL URLWithString:article.url];
         self.navigationItem.title = article.title;
+        [self _setBookmarkButton];
     }
     NSURLRequest *req = [NSURLRequest requestWithURL:url];
     [self.webView loadRequest:req];
