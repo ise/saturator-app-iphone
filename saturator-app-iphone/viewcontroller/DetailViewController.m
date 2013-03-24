@@ -8,6 +8,7 @@
 
 #import "DetailViewController.h"
 #import "ArticleDataManager.h"
+#import "SVProgressHUD.h"
 
 @implementation DetailViewController
 
@@ -61,6 +62,16 @@ bool isTop = false;
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)webViewDidStartLoad:(UIWebView *)webView
+{
+    [SVProgressHUD show];
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    [SVProgressHUD dismiss];
 }
 
 - (void)_setBookmarkButton

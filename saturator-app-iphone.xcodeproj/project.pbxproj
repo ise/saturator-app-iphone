@@ -12,6 +12,12 @@
 		781D6E7E16C8E95D0003BD09 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 781D6E7B16C8E95D0003BD09 /* SVProgressHUD.m */; };
 		781D6E7F16C8E95D0003BD09 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 781D6E7B16C8E95D0003BD09 /* SVProgressHUD.m */; };
 		781D6E8116C8EA5E0003BD09 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 781D6E8016C8EA5E0003BD09 /* QuartzCore.framework */; };
+		782D568B16FE91F200C58044 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 782D568816FE91F200C58044 /* back.png */; };
+		782D568C16FE91F200C58044 /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 782D568916FE91F200C58044 /* refresh.png */; };
+		782D568D16FE91F200C58044 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 782D568A16FE91F200C58044 /* play.png */; };
+		782D569116FE920900C58044 /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 782D568E16FE920900C58044 /* back@2x.png */; };
+		782D569216FE920900C58044 /* refresh@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 782D568F16FE920900C58044 /* refresh@2x.png */; };
+		782D569316FE920900C58044 /* play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 782D569016FE920900C58044 /* play@2x.png */; };
 		78372EF516C7AAD500E1ED37 /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 78372EDD16C7AAD500E1ED37 /* NSObject+SBJson.m */; };
 		78372EF616C7AAD500E1ED37 /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 78372EDD16C7AAD500E1ED37 /* NSObject+SBJson.m */; };
 		78372EF716C7AAD500E1ED37 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 78372EE016C7AAD500E1ED37 /* SBJsonParser.m */; };
@@ -130,6 +136,12 @@
 		781D6E7A16C8E95D0003BD09 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
 		781D6E7B16C8E95D0003BD09 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		781D6E8016C8EA5E0003BD09 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		782D568816FE91F200C58044 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
+		782D568916FE91F200C58044 /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
+		782D568A16FE91F200C58044 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
+		782D568E16FE920900C58044 /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@2x.png"; sourceTree = "<group>"; };
+		782D568F16FE920900C58044 /* refresh@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "refresh@2x.png"; sourceTree = "<group>"; };
+		782D569016FE920900C58044 /* play@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play@2x.png"; sourceTree = "<group>"; };
 		78372EDC16C7AAD500E1ED37 /* NSObject+SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJson.h"; sourceTree = "<group>"; };
 		78372EDD16C7AAD500E1ED37 /* NSObject+SBJson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJson.m"; sourceTree = "<group>"; };
 		78372EDE16C7AAD500E1ED37 /* SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson.h; sourceTree = "<group>"; };
@@ -533,6 +545,12 @@
 		78DED7B016FE08B6003FF1A6 /* resource */ = {
 			isa = PBXGroup;
 			children = (
+				782D568E16FE920900C58044 /* back@2x.png */,
+				782D568F16FE920900C58044 /* refresh@2x.png */,
+				782D569016FE920900C58044 /* play@2x.png */,
+				782D568816FE91F200C58044 /* back.png */,
+				782D568916FE91F200C58044 /* refresh.png */,
+				782D568A16FE91F200C58044 /* play.png */,
 				78DED7E116FE09DB003FF1A6 /* Icon-72.png */,
 				78DED7BA16FE08D0003FF1A6 /* Icon-Small-50.png */,
 				78DED7BB16FE08D0003FF1A6 /* Icon-Small.png */,
@@ -663,6 +681,12 @@
 				78DED7E016FE09B8003FF1A6 /* Icon@2x.png in Resources */,
 				78DED7E216FE09DB003FF1A6 /* Icon-72.png in Resources */,
 				78DED7E416FE0CE1003FF1A6 /* bg2.png in Resources */,
+				782D568B16FE91F200C58044 /* back.png in Resources */,
+				782D568C16FE91F200C58044 /* refresh.png in Resources */,
+				782D568D16FE91F200C58044 /* play.png in Resources */,
+				782D569116FE920900C58044 /* back@2x.png in Resources */,
+				782D569216FE920900C58044 /* refresh@2x.png in Resources */,
+				782D569316FE920900C58044 /* play@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

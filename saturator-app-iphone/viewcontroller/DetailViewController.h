@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Article.h"
 
-@interface DetailViewController : UIViewController
+@interface DetailViewController : UIViewController <UIWebViewDelegate>
 @property (strong, nonatomic) IBOutlet UIWebView *webView;
 - (void)setArticle:(Article *)a;
 - (void)setTopPage:(BOOL)top;
