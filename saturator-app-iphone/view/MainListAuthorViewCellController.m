@@ -13,7 +13,7 @@
 - (void)setArticle:(Article *)article
 {
     self.feedName.text = article.feedName;
-    [self.iconImage setImageWithURL:[NSURL URLWithString:article.feedIcon] placeholder:[UIImage imageNamed:@"placeholder.png"]];
+    //[self.iconImage setImageWithURL:[NSURL URLWithString:article.feedIcon] placeholder:[UIImage imageNamed:@"placeholder.png"]];
     self.displayDate.text = article.date;
 }
 @end
