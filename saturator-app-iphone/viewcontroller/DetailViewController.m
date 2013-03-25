@@ -55,6 +55,7 @@ bool isTop = false;
         [self _setBookmarkButton];
     }
     NSURLRequest *req = [NSURLRequest requestWithURL:url];
+    self.webView.scalesPageToFit = YES;
     [self.webView loadRequest:req];
 }
 
