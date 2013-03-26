@@ -101,6 +101,17 @@ static ArticleDataManager *_sharedInstance;
                  return;
              }
              
+             //データをクリア
+             if (page == 1) {
+                 NSLog(@"clear database");
+                 NSString *delSql = @"delete from article";
+                 NSString *delRelSql = @"delete from article_anime";
+                 [database open];
+                 [database executeUpdate:delSql];
+                 [database executeUpdate:delRelSql];
+                 [database close];
+             }
+             
              NSArray *array = (NSArray *)resultList;
              NSMutableArray *list = [NSMutableArray array];
              for (NSDictionary *dic in array) {
