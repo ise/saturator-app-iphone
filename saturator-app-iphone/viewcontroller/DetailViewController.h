@@ -8,8 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "Article.h"
+#import "GestureWindow.h"
 
-@interface DetailViewController : UIViewController <UIWebViewDelegate>
+#define GESTURE_LENGTH  5
+#define BLUR_LENGTH     5
+#define PINCH_DELTA     100
+
+@interface DetailViewController : UIViewController <UIWebViewDelegate,GestureWindowDelegate>
 @property (strong, nonatomic) IBOutlet UIWebView *webView;
 - (void)setArticle:(Article *)a;
 - (void)setTopPage:(BOOL)top;

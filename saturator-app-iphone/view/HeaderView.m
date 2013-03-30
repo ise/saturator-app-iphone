@@ -48,7 +48,6 @@
 
 - (void)setState:(HeaderViewState)state
 {
-    NSLog(@"setState=%d", state);
     switch (state) {
         case HeaderViewStateHidden:
             [self.activityIndicatorView stopAnimating];
