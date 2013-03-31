@@ -26,7 +26,6 @@
 - (id)init
 {
     self = [super init];
-    NSLog(@"ConfigControllerView init");
     self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg2.png"]];
     return self;
 }
@@ -67,7 +66,6 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    NSLog(@"%d", self.configs.count);
     return self.configs.count;
 }
 
@@ -102,7 +100,6 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    NSLog(@"%d", section);
     return [self.headers objectAtIndex:section];
 }
 
@@ -135,7 +132,6 @@
     ConfigDataManager *m = [ConfigDataManager sharedInstance];
     [m setMainListItemType:indexPath.row];
     //[ConfigDataManager setMainListItemType:indexPath.row];
-    NSLog(@"section:%d row:%d", indexPath.section, indexPath.row);
     [self.tableView reloadData];
     
     //TODO:メインリストの方に表示設定が変わったことを通知？

@@ -19,7 +19,6 @@
 
     if (article.bookmarked != 0) {
         //ブックマーク状態
-        NSLog(@"%@ has bookmarked status", article.url);
         [self _bookmarkedStatus];
     } else {
         //未ブックマーク状態
@@ -35,7 +34,6 @@
         //ブックマーク登録
         [self _bookmarkedStatus];
         self.article.bookmarked = [m addBookmark:self.article.url];
-        NSLog(@"%@ is bookmarked", self.article.url);
         //[self.listView updateArticleStatus:self.article];
         NSDictionary *dic = [NSDictionary dictionaryWithObject:self.article forKey:@"article"];
         NSNotification *n = [NSNotification notificationWithName:@"UpdateArticleStatus" object:self userInfo:dic];
@@ -44,7 +42,6 @@
         //ブックマーク削除
         [self _unbookmarkedStatus];
         self.article.bookmarked = [m removeBookmark:self.article.url];
-        NSLog(@"%@ is unbookmarked", self.article.url);
         //[self.listView updateArticleStatus:self.article];
         NSDictionary *dic = [NSDictionary dictionaryWithObject:self.article forKey:@"article"];
         NSNotification *n = [NSNotification notificationWithName:@"UpdateArticleStatus" object:self userInfo:dic];

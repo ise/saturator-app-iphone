@@ -17,6 +17,7 @@
 #import "ArticleDataManager.h"
 #import "AnimeDataManager.h"
 #import "ConfigDataManager.h"
+#import "InitialAnimeListViewController.h"
 
 #import "SVProgressHUD.h"
 
@@ -51,7 +52,6 @@ int itemType = MainListItemTypeAll;
 {
     CGFloat marginX = self.view.frame.size.width - self.emptyView.frame.size.width;
     CGFloat marginY = self.view.frame.size.height - self.emptyView.frame.size.height;
-    NSLog(@"Y=%f", marginY / 2.0f);
     self.emptyView.frame = CGRectMake(marginX / 2.0f, marginY / 2.0f, self.emptyView.frame.size.width, self.emptyView.frame.size.height);
     self.emptyView.message.text = @"記事がありません\nリストを下方向に引き下げると更新できます";
 }
@@ -118,7 +118,10 @@ int itemType = MainListItemTypeAll;
     
     
     //記事の読み込みを開始
-    [self loadArticles:1];
+    NSMutableArray *tids = [[AnimeDataManager sharedInstance] getFavorites];
+    if (tids.count > 0) {
+        [self loadArticles:1];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -139,6 +142,12 @@ int itemType = MainListItemTypeAll;
 - (void)viewDidAppear:(BOOL)animated
 {
     NSLog(@"viewDidAppear");
+    NSMutableArray *tids = [[AnimeDataManager sharedInstance] getFavorites];
+    if (tids.count <= 0) {
+        InitialAnimeListViewController *initViewController = [[InitialAnimeListViewController alloc] init];
+        UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:initViewController];
+        [self presentViewController:nc animated:NO completion:^{NSLog(@"presentViewController");}];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -165,6 +174,11 @@ int itemType = MainListItemTypeAll;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (self.articleList.count == 0) {
+        return nil;
+    }
+    
+    
     BaseListViewCell *cell;
     Article *article = [self.articleList objectAtIndex:indexPath.section];
     if (indexPath.row % 2 == 0) {
@@ -357,7 +371,6 @@ int itemType = MainListItemTypeAll;
     NSDictionary *dic = [notification userInfo];
     NSString *url = [dic objectForKey:@"url"];
     NSNumber *bookmarked = [dic objectForKey:@"bookmarked"];
-    NSLog(@"bookmarked=%d", [bookmarked intValue]);
     
     for (int i=0; i<self.articleList.count; i++) {
         Article *a = [self.articleList objectAtIndex:i];
@@ -378,7 +391,6 @@ int itemType = MainListItemTypeAll;
     for (int i=0; i<self.articleList.count; i++) {
         Article *a = [self.articleList objectAtIndex:i];
         if ([a.url isEqual:article.url]) {
-            NSLog(@"found %@", a.url);
             [self.articleList replaceObjectAtIndex:i withObject:article];
             break;
         }

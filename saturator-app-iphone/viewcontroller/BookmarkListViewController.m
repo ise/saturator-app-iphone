@@ -21,7 +21,6 @@
 
 - (void)_initEmptyView
 {
-    NSLog(@"_initEmptyView");
     CGFloat marginX = self.view.frame.size.width - self.emptyView.frame.size.width;
     CGFloat marginY = self.view.frame.size.height - self.emptyView.frame.size.height;
     self.emptyView.frame = CGRectMake(marginX / 2.0f, marginY / 2.0f, self.emptyView.frame.size.width, self.emptyView.frame.size.height);
@@ -33,7 +32,6 @@
     [self _setHeaderViewHidden:YES animated:NO];
     self.tableView.tableHeaderView = self.headerView;
     [self _initEmptyView];
-    NSLog(@"origin.y=%f", self.view.superview.bounds.origin.y);
     [self.view addSubview:self.emptyView];
 }
 
@@ -45,7 +43,6 @@
 
 - (void)loadArticles:(int)page
 {
-    NSLog(@"loadArticles page=%d", page);
     ArticleDataManager *manager = [ArticleDataManager sharedInstance];
     self.emptyView.hidden = YES;
     [manager loadBookmarks:self];

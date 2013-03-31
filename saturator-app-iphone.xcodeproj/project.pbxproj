@@ -85,6 +85,8 @@
 		7872E2B416F9B038002C908F /* RecommendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7872E2B216F9B037002C908F /* RecommendViewController.m */; };
 		7872E2B516F9B038002C908F /* RecommendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7872E2B316F9B038002C908F /* RecommendViewController.xib */; };
 		787F6EDD1704920E003D0EAC /* GestureWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 787F6EDC1704920E003D0EAC /* GestureWindow.m */; };
+		787F6EE11706BB26003D0EAC /* InitialAnimeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 787F6EDF1706BB26003D0EAC /* InitialAnimeListViewController.m */; };
+		787F6EE21706BB26003D0EAC /* InitialAnimeListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 787F6EE01706BB26003D0EAC /* InitialAnimeListViewController.xib */; };
 		789A14BA16DA04D700FB0776 /* MainListViewCellWithoutImageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 789A14B816DA04D700FB0776 /* MainListViewCellWithoutImageController.m */; };
 		789A14BB16DA04D700FB0776 /* MainListViewCellWithoutImageController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 789A14B916DA04D700FB0776 /* MainListViewCellWithoutImageController.xib */; };
 		789A14BF16DA62F100FB0776 /* MainListViewFooterCellController.m in Sources */ = {isa = PBXBuildFile; fileRef = 789A14BD16DA62F100FB0776 /* MainListViewFooterCellController.m */; };
@@ -237,6 +239,9 @@
 		7872E2B316F9B038002C908F /* RecommendViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecommendViewController.xib; sourceTree = "<group>"; };
 		787F6EDB1704920E003D0EAC /* GestureWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GestureWindow.h; sourceTree = "<group>"; };
 		787F6EDC1704920E003D0EAC /* GestureWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GestureWindow.m; sourceTree = "<group>"; };
+		787F6EDE1706BB25003D0EAC /* InitialAnimeListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitialAnimeListViewController.h; sourceTree = "<group>"; };
+		787F6EDF1706BB26003D0EAC /* InitialAnimeListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InitialAnimeListViewController.m; sourceTree = "<group>"; };
+		787F6EE01706BB26003D0EAC /* InitialAnimeListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InitialAnimeListViewController.xib; sourceTree = "<group>"; };
 		789A14B716DA04D700FB0776 /* MainListViewCellWithoutImageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainListViewCellWithoutImageController.h; sourceTree = "<group>"; };
 		789A14B816DA04D700FB0776 /* MainListViewCellWithoutImageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainListViewCellWithoutImageController.m; sourceTree = "<group>"; };
 		789A14B916DA04D700FB0776 /* MainListViewCellWithoutImageController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainListViewCellWithoutImageController.xib; sourceTree = "<group>"; };
@@ -500,6 +505,9 @@
 				7872E2B116F9B037002C908F /* RecommendViewController.h */,
 				7872E2B216F9B037002C908F /* RecommendViewController.m */,
 				7872E2B316F9B038002C908F /* RecommendViewController.xib */,
+				787F6EDE1706BB25003D0EAC /* InitialAnimeListViewController.h */,
+				787F6EDF1706BB26003D0EAC /* InitialAnimeListViewController.m */,
+				787F6EE01706BB26003D0EAC /* InitialAnimeListViewController.xib */,
 			);
 			path = viewcontroller;
 			sourceTree = "<group>";
@@ -692,6 +700,7 @@
 				782D569116FE920900C58044 /* back@2x.png in Resources */,
 				782D569216FE920900C58044 /* refresh@2x.png in Resources */,
 				782D569316FE920900C58044 /* play@2x.png in Resources */,
+				787F6EE21706BB26003D0EAC /* InitialAnimeListViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -771,6 +780,7 @@
 				7872E2B016F93133002C908F /* ConfigDataManager.m in Sources */,
 				7872E2B416F9B038002C908F /* RecommendViewController.m in Sources */,
 				787F6EDD1704920E003D0EAC /* GestureWindow.m in Sources */,
+				787F6EE11706BB26003D0EAC /* InitialAnimeListViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

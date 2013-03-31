@@ -116,7 +116,6 @@ CGFloat initY;
 - (void)_removeBookmark {
     ArticleDataManager *m = [ArticleDataManager sharedInstance];
     int res = [m removeBookmark:article.url];
-    NSLog(@"res=%d", res);
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     [dic setObject:article.url forKey:@"url"];
     [dic setObject:[NSNumber numberWithInt:res] forKey:@"bookmarked"];
@@ -146,36 +145,19 @@ CGFloat initY;
 
 - (void) touchesMovedWeb:(NSSet *)touches withEvent:(UIEvent *)event {
     //スワイプ動作を検出する
-    NSLog(@"touchesMovedWeb");
     NSArray *twoTouches = [touches allObjects];
     UITouch *first = [twoTouches objectAtIndex:0];
     CGFloat x = [first locationInView:self.view].x - initX;
     CGFloat y = [first locationInView:self.view].y - initY;
     
-    NSLog(@"x=%f, y=%f", x, y);
     if (x > GESTURE_LENGTH && y < BLUR_LENGTH) {
         [self.navigationController popViewControllerAnimated:YES];
     }
 }
 
 - (void) touchesEndedWeb:(NSSet *)touches withEvent:(UIEvent *)event {
-    NSLog(@"touchesEndedWeb %d", touchPoints.count);
-    /*
-    if (touchPoints.count<=0) {
-        return;
-    }
+
     
-    NSArray *twoTouches = [touches allObjects];
-    UITouch *first = [twoTouches objectAtIndex:0];
-    CGFloat x = [first locationInView:self.view].x;
-    CGFloat y = [first locationInView:self.view].y;
-    
-    NSLog(@"x=%f, y=%f", x, y);
-    if (x - initX > GESTURE_LENGTH && y - initY > BLUR_LENGTH) {
-        [self.navigationController popViewControllerAnimated:YES];
-    }
-    [touchPoints removeAllObjects];
-     */
 }
 
 @end

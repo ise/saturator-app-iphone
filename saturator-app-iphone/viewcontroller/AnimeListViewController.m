@@ -70,6 +70,11 @@
 }
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.animeList.count == 0) {
+        return nil;
+    }
+    
+    
     Anime *a = [self.animeList objectAtIndex:indexPath.section];
     if ([self.favorites containsObject:a.tid]) {
         return UITableViewCellEditingStyleDelete;
@@ -90,10 +95,8 @@
     Anime *a = [self.animeList objectAtIndex:indexPath.section];
     if (editingStyle == UITableViewCellEditingStyleInsert) {
         [self.favorites addObject:a.tid];
-        NSLog(@"add %@", a.tid);
     } else if (editingStyle == UITableViewCellEditingStyleDelete) {
         [self.favorites removeObject:a.tid];
-        NSLog(@"remove %@", a.tid);
     }
     AnimeDataManager *m = [AnimeDataManager sharedInstance];
     [m setFavorites:self.favorites];
@@ -104,10 +107,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    /*
-    Anime *a = [self.animeList objectAtIndex:indexPath.row];
-    NSLog(@"%@", a.title);
-     */
 }
 
 - (void)buildErrorView
