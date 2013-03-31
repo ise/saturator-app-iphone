@@ -124,27 +124,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //ConfigDataManagerを追加?
-    //UserDefaults or DBに保存
-    //NSMutableArray *conf = [self.configs objectAtIndex:indexPath.section];
-    //NSString *title = [conf objectAtIndex:indexPath.row];
-    
     ConfigDataManager *m = [ConfigDataManager sharedInstance];
     [m setMainListItemType:indexPath.row];
-    //[ConfigDataManager setMainListItemType:indexPath.row];
     [self.tableView reloadData];
     
-    //TODO:メインリストの方に表示設定が変わったことを通知？
     NSNotification *n = [NSNotification notificationWithName:@"UpdateItemType" object:self];
     [[NSNotificationCenter defaultCenter] postNotification:n];
-    
-    /*
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
-        cell.accessoryType = UITableViewCellAccessoryNone;
-	} else {
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-	}*/
 }
 
 @end
