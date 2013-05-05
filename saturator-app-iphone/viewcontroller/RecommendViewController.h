@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RecommendViewController : UIViewController
-
+@interface RecommendViewController : UIViewController <UIWebViewDelegate>
+@property (strong, nonatomic) IBOutlet UIWebView *webView;
 @end
