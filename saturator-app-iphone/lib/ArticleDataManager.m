@@ -63,6 +63,7 @@ static ArticleDataManager *_sharedInstance;
 //記事リストの更新
 - (void)updateList:(id<ArticleDataManagerDelegate>) view Tids:(NSMutableArray *)tids Page:(int) page
 {
+    NSLog(@"updateList");
     int start = (page - 1) * results;
     NSString *urlStr = [NSString stringWithFormat: @"http://%@/v1/article", [BaseConfig API_HOST]];
     urlStr = [NSString stringWithFormat:@"%@?start=%d&results=%d", urlStr, start, results];
@@ -122,7 +123,7 @@ static ArticleDataManager *_sharedInstance;
          }
          //DBからデータを取得し、表示処理を呼び出す
          NSMutableArray *articles = [self _loadArticles:tids start: start results: results];
-         
+         NSLog(@"loadArticles");
          /*
          if (articles.count == 0) {
              NSLog(@"articles is empty");

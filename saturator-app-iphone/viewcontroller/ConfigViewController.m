@@ -8,6 +8,7 @@
 
 #import "ConfigViewController.h"
 #import "ConfigDataManager.h"
+#import "StaticFileViewController.h"
 
 @implementation ConfigViewController
 
@@ -38,12 +39,20 @@
     
     //リストの表示要素設定
     [self.headers addObject:@"リストの表示要素"];
+    [self.headers addObject:@"その他"];
     //TODO: MainListItemTypeと対応付け or 設定外出し
     NSMutableArray *cellConfig = [NSMutableArray array];
     [cellConfig addObject:@"タイトルと画像"];
     [cellConfig addObject:@"タイトルのみ"];
     //[cellConfig addObject:@"タイトルとモザイク画像"];
     [self.configs addObject:cellConfig];
+    
+    //ヘルプ、ライセンス
+    NSMutableArray *cellHelp = [NSMutableArray array];
+    [cellHelp addObject:@"ヘルプ"];
+    [cellHelp addObject:@"ライセンス"];
+    [self.configs addObject:cellHelp];
+    
     
     //dummy
     /*
@@ -54,6 +63,14 @@
     [dummyConfig addObject:@"dummy3"];
     [self.configs addObject:dummyConfig];
      */
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    //navigationbar非表示に
+    self.navigationController.navigationBarHidden = YES;
+    //tabbarは表示
+    ((UITabBarController *)self.parentViewController.parentViewController).tabBar.hidden = NO;
 }
 
 - (void)didReceiveMemoryWarning
@@ -124,12 +141,19 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ConfigDataManager *m = [ConfigDataManager sharedInstance];
-    [m setMainListItemType:indexPath.row];
-    [self.tableView reloadData];
-    
-    NSNotification *n = [NSNotification notificationWithName:@"UpdateItemType" object:self];
-    [[NSNotificationCenter defaultCenter] postNotification:n];
+    if (indexPath.section == 0) {
+        ConfigDataManager *m = [ConfigDataManager sharedInstance];
+        [m setMainListItemType:indexPath.row];
+        [self.tableView reloadData];
+        NSNotification *n = [NSNotification notificationWithName:@"UpdateItemType" object:self];
+        [[NSNotificationCenter defaultCenter] postNotification:n];
+    } else if (indexPath.section == 1) {
+        NSLog(@"run static file view controller");
+        StaticFileViewController *staticFile = [[StaticFileViewController alloc] initWithNibName:@"StaticFileViewController" bundle:nil];
+        staticFile.hidesBottomBarWhenPushed = YES;
+        [staticFile setType:indexPath.row];
+        [self.navigationController pushViewController:staticFile animated:YES];
+    }
 }
 
 @end

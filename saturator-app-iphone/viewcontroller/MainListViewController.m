@@ -89,8 +89,9 @@ int itemType = MainListItemTypeAll;
 - (void)_initStatus
 {
     currentPage = 1;
-    [self.articleList removeAllObjects];
+    //[self.articleList removeAllObjects];
     self.emptyView.hidden = YES;
+    //self.tableView.tableFooterView.hidden = YES;
 }
 
 - (void)viewDidLoad
@@ -129,7 +130,7 @@ int itemType = MainListItemTypeAll;
     NSLog(@"viewWillAppear");
     //navigationbar非表示に
     self.navigationController.navigationBarHidden = YES;
-    //tabhbarは表示
+    //tabbarは表示
     ((UITabBarController *)self.parentViewController.parentViewController).tabBar.hidden = NO;
     AnimeDataManager *m = [AnimeDataManager sharedInstance];
     if (m.updatedFavorite) {
@@ -174,12 +175,10 @@ int itemType = MainListItemTypeAll;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.articleList.count == 0) {
-        return nil;
-    }
-    
-    
     BaseListViewCell *cell;
+    
+    NSLog(@"tableView articleList.count=%d", self.articleList.count);
+    
     Article *article = [self.articleList objectAtIndex:indexPath.section];
     if (indexPath.row % 2 == 0) {
         if ([article.image isEqualToString:@""] || itemType == MainListItemTypeTitle){
@@ -303,11 +302,12 @@ int itemType = MainListItemTypeAll;
 
 - (void)buildView:(NSMutableArray *)articles
 {
-    [self.articleList addObjectsFromArray:articles];
     if (isRefresh) {
         isRefresh = NO;
         [self _taskFinished];
+        [self.articleList removeAllObjects];
     }
+    [self.articleList addObjectsFromArray:articles];
     [SVProgressHUD dismiss];
     if (articles.count == 0) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"記事が見つかりませんでした" delegate:self cancelButtonTitle:nil otherButtonTitles:@"確認", nil];
@@ -350,6 +350,7 @@ int itemType = MainListItemTypeAll;
 - (void)refresh:(id)selector
 {
     [self _initStatus];
+    [self.tableView reloadData];
     [self loadArticles:1];
 }
 

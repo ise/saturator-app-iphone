@@ -151,7 +151,7 @@ CGFloat initY;
     CGFloat y = [first locationInView:self.view].y - initY;
     
     if (x > GESTURE_LENGTH && y < BLUR_LENGTH) {
-        [self.navigationController popViewControllerAnimated:YES];
+        //[self.navigationController popViewControllerAnimated:YES];
     }
 }
 

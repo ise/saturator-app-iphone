@@ -44,6 +44,11 @@
 		78372F0C16C7AAD500E1ED37 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 78372EF416C7AAD500E1ED37 /* SBJsonWriter.m */; };
 		783CAAFE16EC65BC00C432F7 /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 783CAAFD16EC65BB00C432F7 /* HeaderView.m */; };
 		783CAB0916F3E5F500C432F7 /* EmptyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 783CAB0816F3E5F500C432F7 /* EmptyView.m */; };
+		7850A63517367D6B00D91C1F /* unfav3.png in Resources */ = {isa = PBXBuildFile; fileRef = 7850A63417367D6B00D91C1F /* unfav3.png */; };
+		7850A6391736864B00D91C1F /* StaticFileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7850A6371736864B00D91C1F /* StaticFileViewController.m */; };
+		7850A63A1736864B00D91C1F /* StaticFileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7850A6381736864B00D91C1F /* StaticFileViewController.xib */; };
+		7850A63C1736874D00D91C1F /* help.html in Resources */ = {isa = PBXBuildFile; fileRef = 7850A63B1736874D00D91C1F /* help.html */; };
+		7850A63E1736876600D91C1F /* license.html in Resources */ = {isa = PBXBuildFile; fileRef = 7850A63D1736876600D91C1F /* license.html */; };
 		786900071698038B00E11631 /* BaseListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7869FFF81698038B00E11631 /* BaseListViewCell.m */; };
 		786900081698038B00E11631 /* MainListAuthorViewCellController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7869FFFA1698038B00E11631 /* MainListAuthorViewCellController.m */; };
 		786900091698038B00E11631 /* MainListAuthorViewCellController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7869FFFB1698038B00E11631 /* MainListAuthorViewCellController.xib */; };
@@ -174,6 +179,12 @@
 		783CAAFD16EC65BB00C432F7 /* HeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderView.m; sourceTree = "<group>"; };
 		783CAB0716F3E5F500C432F7 /* EmptyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmptyView.h; sourceTree = "<group>"; };
 		783CAB0816F3E5F500C432F7 /* EmptyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmptyView.m; sourceTree = "<group>"; };
+		7850A63417367D6B00D91C1F /* unfav3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unfav3.png; sourceTree = "<group>"; };
+		7850A6361736864A00D91C1F /* StaticFileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaticFileViewController.h; sourceTree = "<group>"; };
+		7850A6371736864B00D91C1F /* StaticFileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaticFileViewController.m; sourceTree = "<group>"; };
+		7850A6381736864B00D91C1F /* StaticFileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StaticFileViewController.xib; sourceTree = "<group>"; };
+		7850A63B1736874D00D91C1F /* help.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = help.html; sourceTree = "<group>"; };
+		7850A63D1736876600D91C1F /* license.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = license.html; sourceTree = "<group>"; };
 		786900001698038B00E11631 /* MainListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainListViewController.h; sourceTree = "<group>"; };
 		786900011698038B00E11631 /* MainListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainListViewController.m; sourceTree = "<group>"; };
 		786900021698038B00E11631 /* MainListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainListViewController.xib; sourceTree = "<group>"; };
@@ -508,6 +519,9 @@
 				787F6EDE1706BB25003D0EAC /* InitialAnimeListViewController.h */,
 				787F6EDF1706BB26003D0EAC /* InitialAnimeListViewController.m */,
 				787F6EE01706BB26003D0EAC /* InitialAnimeListViewController.xib */,
+				7850A6361736864A00D91C1F /* StaticFileViewController.h */,
+				7850A6371736864B00D91C1F /* StaticFileViewController.m */,
+				7850A6381736864B00D91C1F /* StaticFileViewController.xib */,
 			);
 			path = viewcontroller;
 			sourceTree = "<group>";
@@ -559,6 +573,7 @@
 			isa = PBXGroup;
 			children = (
 				782D568E16FE920900C58044 /* back@2x.png */,
+				7850A63417367D6B00D91C1F /* unfav3.png */,
 				782D568F16FE920900C58044 /* refresh@2x.png */,
 				782D569016FE920900C58044 /* play@2x.png */,
 				782D568816FE91F200C58044 /* back.png */,
@@ -583,6 +598,8 @@
 				78DED7B616FE08D0003FF1A6 /* fav.png */,
 				78DED7C616FE08D0003FF1A6 /* unfav2.png */,
 				78DED7B116FE08D0003FF1A6 /* arrow2.png */,
+				7850A63B1736874D00D91C1F /* help.html */,
+				7850A63D1736876600D91C1F /* license.html */,
 			);
 			path = resource;
 			sourceTree = "<group>";
@@ -701,6 +718,10 @@
 				782D569216FE920900C58044 /* refresh@2x.png in Resources */,
 				782D569316FE920900C58044 /* play@2x.png in Resources */,
 				787F6EE21706BB26003D0EAC /* InitialAnimeListViewController.xib in Resources */,
+				7850A63517367D6B00D91C1F /* unfav3.png in Resources */,
+				7850A63A1736864B00D91C1F /* StaticFileViewController.xib in Resources */,
+				7850A63C1736874D00D91C1F /* help.html in Resources */,
+				7850A63E1736876600D91C1F /* license.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -781,6 +802,7 @@
 				7872E2B416F9B038002C908F /* RecommendViewController.m in Sources */,
 				787F6EDD1704920E003D0EAC /* GestureWindow.m in Sources */,
 				787F6EE11706BB26003D0EAC /* InitialAnimeListViewController.m in Sources */,
+				7850A6391736864B00D91C1F /* StaticFileViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -894,6 +916,8 @@
 		7869FFEE1698023900E11631 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: MASAAKI TAKEUCHI";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "saturator-app-iphone/saturator-app-iphone-Prefix.pch";
 				INFOPLIST_FILE = "saturator-app-iphone/saturator-app-iphone-Info.plist";
@@ -905,10 +929,12 @@
 		7869FFEF1698023900E11631 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution: MASAAKI TAKEUCHI";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "saturator-app-iphone/saturator-app-iphone-Prefix.pch";
 				INFOPLIST_FILE = "saturator-app-iphone/saturator-app-iphone-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "671209EC-1F7E-40EC-8D06-63932D77741A";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

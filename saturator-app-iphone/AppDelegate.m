@@ -41,10 +41,12 @@
     animeNavi.navigationBar.tintColor = [UIColor blackColor];
     UINavigationController *favNavi = [[UINavigationController alloc] initWithRootViewController:self.bookmarkListViewController];
     favNavi.navigationBar.tintColor = [UIColor blackColor];
+    UINavigationController *configNavi = [[UINavigationController alloc] initWithRootViewController:self.configViewController];
+    configNavi.navigationBar.tintColor = [UIColor blackColor];
     
     //TODO:tabbarのデザイン（アイコン？）修正
     self.tabBarController = [[UITabBarController alloc] initWithNibName:nil bundle:nil];
-    NSArray *controllers = [[NSArray alloc] initWithObjects:mainNavi,animeNavi,favNavi,self.recommendViewController,self.configViewController,nil];
+    NSArray *controllers = [[NSArray alloc] initWithObjects:mainNavi,animeNavi,favNavi,self.recommendViewController,configNavi,nil];
     [self.tabBarController setViewControllers:controllers];
     
     int i = 0;
