@@ -30,8 +30,10 @@ int type;
     NSString *name;
     if (type == 0) {
         name = @"help";
+        self.navigationItem.title = @"ヘルプ";
     } else if (type == 1) {
         name = @"license";
+        self.navigationItem.title = @"ライセンス";
     }
     NSString *path = [[NSBundle mainBundle] pathForResource:name ofType:@"html"];
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:path]]];

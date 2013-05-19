@@ -105,7 +105,7 @@ static ArticleDataManager *_sharedInstance;
              //データをクリア
              if (page == 1) {
                  NSLog(@"clear database");
-                 NSString *delSql = @"delete from article";
+                 NSString *delSql = @"delete from article where bookmarked is null";
                  NSString *delRelSql = @"delete from article_anime";
                  [database open];
                  [database executeUpdate:delSql];
