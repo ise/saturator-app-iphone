@@ -12,6 +12,7 @@
 #import "HeaderView.h"
 #import "EmptyView.h"
 #import "FooterView.h"
+#import "NADView.h"
 
 #define RGB(r, g, b) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1]
 #ifdef DEBUG
@@ -23,13 +24,14 @@
 @class HeaderView;
 @class EmptyView;
 @class FooterView;
-@interface MainListViewController : UITableViewController <ArticleDataManagerDelegate>
+@interface MainListViewController : UITableViewController <ArticleDataManagerDelegate,NADViewDelegate>
 
 @property (strong, nonatomic) NSMutableArray *articleList;
 @property (nonatomic, retain) IBOutlet HeaderView* headerView;
 @property (strong, nonatomic) IBOutlet EmptyView *emptyView;
 @property (strong, nonatomic) IBOutlet FooterView *footerView;
 @property (readwrite) BOOL hasNext;
+@property (nonatomic, retain) NADView *nadView;
 
 - (id)init;
 - (void)buildView:(NSMutableArray *)articles;

@@ -92,12 +92,12 @@ CGFloat initY;
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
-    [SVProgressHUD show];
+    //[SVProgressHUD show];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    [SVProgressHUD dismiss];
+    //[SVProgressHUD dismiss];
 }
 
 - (void)_setBookmarkButton

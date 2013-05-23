@@ -89,6 +89,10 @@
 		7872E2B016F93133002C908F /* ConfigDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7872E2AF16F93133002C908F /* ConfigDataManager.m */; };
 		7872E2B416F9B038002C908F /* RecommendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7872E2B216F9B037002C908F /* RecommendViewController.m */; };
 		7872E2B516F9B038002C908F /* RecommendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7872E2B316F9B038002C908F /* RecommendViewController.xib */; };
+		787B4F2B174A76B3006C5F42 /* libNendAd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 787B4F28174A76B3006C5F42 /* libNendAd.a */; };
+		787B4F2C174A76B3006C5F42 /* NADView_readme.txt in Resources */ = {isa = PBXBuildFile; fileRef = 787B4F2A174A76B3006C5F42 /* NADView_readme.txt */; };
+		787B4F2E174A7728006C5F42 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 787B4F2D174A7728006C5F42 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		787B4F30174A7758006C5F42 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 787B4F2F174A7758006C5F42 /* Security.framework */; };
 		787F6EDD1704920E003D0EAC /* GestureWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 787F6EDC1704920E003D0EAC /* GestureWindow.m */; };
 		787F6EE11706BB26003D0EAC /* InitialAnimeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 787F6EDF1706BB26003D0EAC /* InitialAnimeListViewController.m */; };
 		787F6EE21706BB26003D0EAC /* InitialAnimeListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 787F6EE01706BB26003D0EAC /* InitialAnimeListViewController.xib */; };
@@ -248,6 +252,11 @@
 		7872E2B116F9B037002C908F /* RecommendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendViewController.h; sourceTree = "<group>"; };
 		7872E2B216F9B037002C908F /* RecommendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendViewController.m; sourceTree = "<group>"; };
 		7872E2B316F9B038002C908F /* RecommendViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecommendViewController.xib; sourceTree = "<group>"; };
+		787B4F28174A76B3006C5F42 /* libNendAd.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libNendAd.a; sourceTree = "<group>"; };
+		787B4F29174A76B3006C5F42 /* NADView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NADView.h; sourceTree = "<group>"; };
+		787B4F2A174A76B3006C5F42 /* NADView_readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NADView_readme.txt; sourceTree = "<group>"; };
+		787B4F2D174A7728006C5F42 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		787B4F2F174A7758006C5F42 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		787F6EDB1704920E003D0EAC /* GestureWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GestureWindow.h; sourceTree = "<group>"; };
 		787F6EDC1704920E003D0EAC /* GestureWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GestureWindow.m; sourceTree = "<group>"; };
 		787F6EDE1706BB25003D0EAC /* InitialAnimeListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitialAnimeListViewController.h; sourceTree = "<group>"; };
@@ -302,11 +311,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				787B4F30174A7758006C5F42 /* Security.framework in Frameworks */,
+				787B4F2E174A7728006C5F42 /* AdSupport.framework in Frameworks */,
 				781D6E8116C8EA5E0003BD09 /* QuartzCore.framework in Frameworks */,
 				7869004D169C61C800E11631 /* libsqlite3.0.dylib in Frameworks */,
 				7869FFBF1698023800E11631 /* UIKit.framework in Frameworks */,
 				7869FFC11698023800E11631 /* Foundation.framework in Frameworks */,
 				7869FFC31698023800E11631 /* CoreGraphics.framework in Frameworks */,
+				787B4F2B174A76B3006C5F42 /* libNendAd.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -364,6 +376,9 @@
 		7869FFAF1698023800E11631 = {
 			isa = PBXGroup;
 			children = (
+				787B4F2F174A7758006C5F42 /* Security.framework */,
+				787B4F2D174A7728006C5F42 /* AdSupport.framework */,
+				787B4F27174A76B3006C5F42 /* NendAd */,
 				78DED7DF16FE09B8003FF1A6 /* Icon@2x.png */,
 				78DED7DD16FE09AA003FF1A6 /* Icon.png */,
 				781D6E8016C8EA5E0003BD09 /* QuartzCore.framework */,
@@ -524,6 +539,16 @@
 				7850A6381736864B00D91C1F /* StaticFileViewController.xib */,
 			);
 			path = viewcontroller;
+			sourceTree = "<group>";
+		};
+		787B4F27174A76B3006C5F42 /* NendAd */ = {
+			isa = PBXGroup;
+			children = (
+				787B4F28174A76B3006C5F42 /* libNendAd.a */,
+				787B4F29174A76B3006C5F42 /* NADView.h */,
+				787B4F2A174A76B3006C5F42 /* NADView_readme.txt */,
+			);
+			path = NendAd;
 			sourceTree = "<group>";
 		};
 		78AA61CB16A7401500A1CAC4 /* sbjson */ = {
@@ -722,6 +747,7 @@
 				7850A63A1736864B00D91C1F /* StaticFileViewController.xib in Resources */,
 				7850A63C1736874D00D91C1F /* help.html in Resources */,
 				7850A63E1736876600D91C1F /* license.html in Resources */,
+				787B4F2C174A76B3006C5F42 /* NADView_readme.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -921,6 +947,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "saturator-app-iphone/saturator-app-iphone-Prefix.pch";
 				INFOPLIST_FILE = "saturator-app-iphone/saturator-app-iphone-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/NendAd\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -933,6 +963,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "saturator-app-iphone/saturator-app-iphone-Prefix.pch";
 				INFOPLIST_FILE = "saturator-app-iphone/saturator-app-iphone-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/NendAd\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "671209EC-1F7E-40EC-8D06-63932D77741A";
 				WRAPPER_EXTENSION = app;

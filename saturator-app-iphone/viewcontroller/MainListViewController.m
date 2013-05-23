@@ -98,6 +98,14 @@ int itemType = MainListItemTypeAll;
 {
     [super viewDidLoad];
     
+    //広告準備
+    self.nadView = [[NADView alloc] init];
+    [self.nadView setIsOutputLog:NO];
+    [self.nadView setNendID:@"574031920552c3db563238e10a6cd868595095da" spotID:@"55043"];
+    [self.nadView setDelegate:self];
+    [self.nadView load];
+    
+    
     ConfigDataManager *m = [ConfigDataManager sharedInstance];
     itemType = [m getMainListItemType];
     
@@ -128,6 +136,11 @@ int itemType = MainListItemTypeAll;
 - (void)viewWillAppear:(BOOL)animated
 {
     NSLog(@"viewWillAppear");
+    [self.nadView resume];
+    if (self.nadView.isHidden) {
+        self.nadView.hidden = NO;
+    }
+    
     //navigationbar非表示に
     self.navigationController.navigationBarHidden = YES;
     //tabbarは表示
@@ -149,6 +162,37 @@ int itemType = MainListItemTypeAll;
         UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:initViewController];
         [self presentViewController:nc animated:NO completion:^{NSLog(@"presentViewController");}];
     }
+}
+
+- (void)nadViewDidFinishLoad:(NADView *)adView
+{
+    NSLog(@"nadViewDidFinishLoad");
+    [self.nadView setFrame:CGRectMake(0.f, self.view.bounds.size.height - self.tabBarController.rotatingFooterView.bounds.size.height + 15, NAD_ADVIEW_SIZE_320x50.width, NAD_ADVIEW_SIZE_320x50.height)];
+    [self.parentViewController.view addSubview:self.nadView];
+}
+
+- (void)nadViewDidReceiveAd:(NADView *)adView
+{
+    //NSLog(@"delegate nadViewDidReceiveAd:");
+}
+
+-(void)nadViewDidFailToReceiveAd:(NADView *)adView
+{
+    //NSLog(@"delegate nadViewDidFailToLoad:");
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [self.nadView pause];
+    if (!self.nadView.isHidden) {
+        self.nadView.hidden = YES;
+    }
+}
+
+- (void)dealloc
+{
+    [self.nadView setDelegate:nil];
+    self.nadView = nil;
 }
 
 - (void)didReceiveMemoryWarning
@@ -175,10 +219,16 @@ int itemType = MainListItemTypeAll;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    //広告表示を制御
+    NSArray *visibles = [self.tableView indexPathsForVisibleRows];
+    NSIndexPath *last = [visibles objectAtIndex:visibles.count - 1];
+    if (last.section >= self.articleList.count - 1) {
+        [self.nadView setHidden:YES];
+    } else if ([self.nadView isHidden]) {
+        [self.nadView setHidden:NO];
+    }
+    
     BaseListViewCell *cell;
-    
-    NSLog(@"tableView articleList.count=%d", self.articleList.count);
-    
     Article *article = [self.articleList objectAtIndex:indexPath.section];
     if (indexPath.row % 2 == 0) {
         if ([article.image isEqualToString:@""] || itemType == MainListItemTypeTitle){
@@ -368,7 +418,7 @@ int itemType = MainListItemTypeAll;
 
 - (void)updateBookmarkStatus:(NSNotification *)notification
 {
-    NSLog(@"updateBookmarkStatus");
+    //NSLog(@"updateBookmarkStatus");
     NSDictionary *dic = [notification userInfo];
     NSString *url = [dic objectForKey:@"url"];
     NSNumber *bookmarked = [dic objectForKey:@"bookmarked"];
@@ -385,7 +435,7 @@ int itemType = MainListItemTypeAll;
 
 - (void)updateArticleStatus:(NSNotification *)notification
 {
-    NSLog(@"updateArticleStatus");
+    //NSLog(@"updateArticleStatus");
     NSDictionary *dic = [notification userInfo];
     Article *article = [dic objectForKey:@"article"];
     
