@@ -148,7 +148,6 @@
         NSNotification *n = [NSNotification notificationWithName:@"UpdateItemType" object:self];
         [[NSNotificationCenter defaultCenter] postNotification:n];
     } else if (indexPath.section == 1) {
-        NSLog(@"run static file view controller");
         StaticFileViewController *staticFile = [[StaticFileViewController alloc] initWithNibName:@"StaticFileViewController" bundle:nil];
         staticFile.hidesBottomBarWhenPushed = YES;
         [staticFile setType:indexPath.row];

@@ -135,11 +135,7 @@ int itemType = MainListItemTypeAll;
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    NSLog(@"viewWillAppear");
     [self.nadView resume];
-    if (self.nadView.isHidden) {
-        self.nadView.hidden = NO;
-    }
     
     //navigationbar非表示に
     self.navigationController.navigationBarHidden = YES;
@@ -155,30 +151,26 @@ int itemType = MainListItemTypeAll;
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    NSLog(@"viewDidAppear");
     NSMutableArray *tids = [[AnimeDataManager sharedInstance] getFavorites];
     if (tids.count <= 0) {
         InitialAnimeListViewController *initViewController = [[InitialAnimeListViewController alloc] init];
         UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:initViewController];
-        [self presentViewController:nc animated:NO completion:^{NSLog(@"presentViewController");}];
+        [self presentViewController:nc animated:NO completion:^{}];
     }
 }
 
 - (void)nadViewDidFinishLoad:(NADView *)adView
 {
-    NSLog(@"nadViewDidFinishLoad");
     [self.nadView setFrame:CGRectMake(0.f, self.view.bounds.size.height - self.tabBarController.rotatingFooterView.bounds.size.height + 15, NAD_ADVIEW_SIZE_320x50.width, NAD_ADVIEW_SIZE_320x50.height)];
     [self.parentViewController.view addSubview:self.nadView];
 }
 
 - (void)nadViewDidReceiveAd:(NADView *)adView
 {
-    //NSLog(@"delegate nadViewDidReceiveAd:");
 }
 
 -(void)nadViewDidFailToReceiveAd:(NADView *)adView
 {
-    //NSLog(@"delegate nadViewDidFailToLoad:");
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -382,7 +374,6 @@ int itemType = MainListItemTypeAll;
 
 - (void)loadArticles:(int)page
 {
-    NSLog(@"loadArticles page=%d", page);
     ArticleDataManager *manager = [ArticleDataManager sharedInstance];
     NSMutableArray *tids = [[AnimeDataManager sharedInstance] getFavorites];
     
@@ -392,7 +383,7 @@ int itemType = MainListItemTypeAll;
     }
     
     
-    [manager updateList:self Tids:tids Page:page];
+    [manager updateList:self Tids:tids Page:page Retry:3];
     
     [SVProgressHUD show];
 }
@@ -418,7 +409,6 @@ int itemType = MainListItemTypeAll;
 
 - (void)updateBookmarkStatus:(NSNotification *)notification
 {
-    //NSLog(@"updateBookmarkStatus");
     NSDictionary *dic = [notification userInfo];
     NSString *url = [dic objectForKey:@"url"];
     NSNumber *bookmarked = [dic objectForKey:@"bookmarked"];
@@ -435,7 +425,6 @@ int itemType = MainListItemTypeAll;
 
 - (void)updateArticleStatus:(NSNotification *)notification
 {
-    //NSLog(@"updateArticleStatus");
     NSDictionary *dic = [notification userInfo];
     Article *article = [dic objectForKey:@"article"];
     

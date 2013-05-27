@@ -25,8 +25,8 @@ int type;
 
 - (void)viewDidLoad
 {
-    NSLog(@"StatifFileViewController viewDidLoad");
     [super viewDidLoad];
+    self.webView.delegate = self;
     NSString *name;
     if (type == 0) {
         name = @"help";
@@ -51,6 +51,20 @@ int type;
 - (void)setType:(int)t
 {
     type = t;
+}
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    if([[[request URL] scheme] isEqual:@"mailto"]){
+        [[UIApplication sharedApplication] openURL:[request URL]];
+        return NO;
+    }
+    if (navigationType == UIWebViewNavigationTypeLinkClicked ) {
+        [[UIApplication sharedApplication] openURL: [request URL]];
+        return NO;
+    }
+    
+    return YES;
 }
 
 @end

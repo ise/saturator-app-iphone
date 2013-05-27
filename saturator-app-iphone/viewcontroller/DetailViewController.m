@@ -59,11 +59,9 @@ CGFloat initY;
     ((UITabBarController *)self.parentViewController.parentViewController).tabBar.hidden = YES;
     NSURL *url;
     if (isTop) {
-        NSLog(@"Request to %@", article.feedUrl);
         url = [NSURL URLWithString:article.feedUrl];
         self.navigationItem.title = article.feedName;
     } else {
-        NSLog(@"Request to %@", article.url);
         url = [NSURL URLWithString:article.url];
         self.navigationItem.title = article.title;
         [self _setBookmarkButton];
@@ -158,6 +156,16 @@ CGFloat initY;
 - (void) touchesEndedWeb:(NSSet *)touches withEvent:(UIEvent *)event {
 
     
+}
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    if (navigationType == UIWebViewNavigationTypeLinkClicked ) {
+        [[UIApplication sharedApplication] openURL: [request URL]];
+        return NO;
+    }
+    
+    return YES;
 }
 
 @end

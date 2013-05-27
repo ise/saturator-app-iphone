@@ -71,9 +71,9 @@ static AnimeDataManager *_sharedInstance;
                                                NSError *error)
      {
          NSHTTPURLResponse *res = (NSHTTPURLResponse *)response;
-         NSLog(@"StatusCode=%d",res.statusCode);
+         //NSLog(@"StatusCode=%d",res.statusCode);
          if (error) {
-             NSLog(@"error: %@", [error localizedDescription]);
+             //NSLog(@"error: %@", [error localizedDescription]);
              [view buildErrorView];
              return;
          }
@@ -121,7 +121,7 @@ static AnimeDataManager *_sharedInstance;
     [database beginTransaction];
     
     for (Anime *a in animes) {
-        NSLog(@"save anime title=%@", a.title);
+        //NSLog(@"save anime title=%@", a.title);
         [database executeUpdate: sql, a.tid, a.title, a.image, 0, 0];
     }
     
@@ -154,7 +154,7 @@ static AnimeDataManager *_sharedInstance;
     [database executeUpdate:@"delete from favorite"];
     [database beginTransaction];
     for (NSString *key in [favorites objectEnumerator]) {
-        NSLog(@"save favorite tid=%@", key);
+        //NSLog(@"save favorite tid=%@", key);
         [database executeUpdate: sql, key, [NSString stringWithFormat:@"%d",(int)now]];
     }
     [database commit];
