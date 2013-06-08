@@ -171,8 +171,7 @@ static AnimeDataManager *_sharedInstance;
     }
     [database commit];
     [database close];
-    
-    self.updatedFavorite = YES;
+    //self.updatedFavorite = YES;
 }
 
 @end

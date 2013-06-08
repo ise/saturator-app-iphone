@@ -38,6 +38,13 @@
     [self _loadAnimeList];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    AnimeDataManager *manager = [AnimeDataManager sharedInstance];
+    self.favorites = [manager getFavorites];
+    [self.tableView reloadData];
+}
+
 - (void)_loadAnimeList
 {
     AnimeDataManager *manager = [AnimeDataManager sharedInstance];
@@ -111,6 +118,9 @@
     AnimeDataManager *m = [AnimeDataManager sharedInstance];
     [m setFavorites:self.favorites];
     [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+    
+    NSNotification *n = [NSNotification notificationWithName:@"UpdateFavoriteTitle" object:self];
+    [[NSNotificationCenter defaultCenter] postNotification:n];
 }
 
 #pragma mark - Table view delegate

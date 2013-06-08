@@ -115,6 +115,8 @@ int itemType = MainListItemTypeAll;
     //ブックマーク通知設定
     [nc addObserver:self selector:@selector(updateBookmarkStatus:) name:@"UpdateBookmarkStatus" object:nil];
     [nc addObserver:self selector:@selector(updateArticleStatus:) name:@"UpdateArticleStatus" object:nil];
+    //お気に入り更新通知設定
+    [nc addObserver:self selector:@selector(updateFavoriteTitle:) name:@"UpdateFavoriteTitle" object:nil];
     
     //各viewの設定
     [self _setHeaderViewHidden:YES animated:NO];
@@ -143,6 +145,7 @@ int itemType = MainListItemTypeAll;
     ((UITabBarController *)self.parentViewController.parentViewController).tabBar.hidden = NO;
     AnimeDataManager *m = [AnimeDataManager sharedInstance];
     if (m.updatedFavorite) {
+        isRefresh = YES;
         [self refresh:nil];
         m.updatedFavorite = NO;
     }
@@ -443,6 +446,12 @@ int itemType = MainListItemTypeAll;
             break;
         }
     }
+}
+
+- (void)updateFavoriteTitle:(NSNotification *)notification
+{
+    AnimeDataManager *m = [AnimeDataManager sharedInstance];
+    m.updatedFavorite = YES;
 }
 
 @end
