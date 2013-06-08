@@ -153,9 +153,17 @@ int itemType = MainListItemTypeAll;
 {
     NSMutableArray *tids = [[AnimeDataManager sharedInstance] getFavorites];
     if (tids.count <= 0) {
-        InitialAnimeListViewController *initViewController = [[InitialAnimeListViewController alloc] init];
-        UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:initViewController];
-        [self presentViewController:nc animated:NO completion:^{}];
+        @try {
+            InitialAnimeListViewController *initViewController = [[InitialAnimeListViewController alloc] init];
+            UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:initViewController];
+            [self presentViewController:nc animated:NO completion:^{}];
+        }
+        @catch (NSException *exception) {
+            NSLog(@"Exception.reason=%@", exception.reason);
+        }
+        @finally {
+            
+        }
     }
 }
 

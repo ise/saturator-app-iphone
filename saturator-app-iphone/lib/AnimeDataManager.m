@@ -56,7 +56,7 @@ static AnimeDataManager *_sharedInstance;
 }
 
 //アニメリストの更新
-- (void)updateList:(id<AnimeDataManagerDelegate>) view
+- (void)updateList:(id<AnimeDataManagerDelegate>) view Retry:(int)retry
 {
     NSString *urlStr = [NSString stringWithFormat: @"http://%@/v1/anime", [BaseConfig API_HOST]];
     NSURL *url = [[NSURL alloc] initWithString:urlStr];
@@ -71,11 +71,14 @@ static AnimeDataManager *_sharedInstance;
                                                NSError *error)
      {
          NSHTTPURLResponse *res = (NSHTTPURLResponse *)response;
-         //NSLog(@"StatusCode=%d",res.statusCode);
+         NSLog(@"StatusCode=%d",res.statusCode);
          if (error) {
-             //NSLog(@"error: %@", [error localizedDescription]);
-             [view buildErrorView];
-             return;
+             if (retry > 0) {
+                 [self updateList:view Retry:retry-1];
+             } else {
+                 [view buildErrorView];
+                 return;
+             }
          }
          
          //APIからデータ取得
@@ -84,6 +87,15 @@ static AnimeDataManager *_sharedInstance;
              NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
              SBJsonParser *parser = [[SBJsonParser alloc] init];
              NSArray *resultList = [parser objectWithString:result];
+             if ([resultList isKindOfClass:[NSDictionary class]]) {
+                 if (retry > 0) {
+                     [self updateList:view Retry:retry-1];
+                 } else {
+                     [view buildErrorView];
+                     return;
+                 }
+             }
+             
              NSMutableArray *list = [[NSMutableArray alloc] init];
              for (NSDictionary *dic in resultList) {
                  Anime *a = [[Anime alloc] initWithAPIDict:dic];

@@ -30,9 +30,19 @@
     [super viewDidLoad];
     [super setEditing:YES animated:YES];
     self.navigationController.navigationBarHidden = YES;
+    
+    //リロードボタンを付ける
+    UIBarButtonItem *reload = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(_loadAnimeList)];
+    self.navigationItem.leftBarButtonItem = reload;
+    
+    [self _loadAnimeList];
+}
+
+- (void)_loadAnimeList
+{
     AnimeDataManager *manager = [AnimeDataManager sharedInstance];
     self.favorites = [manager getFavorites];
-    [manager updateList:self];
+    [manager updateList:self Retry:10];
     [SVProgressHUD show];
 }
 
@@ -129,6 +139,11 @@
     [self.tableView reloadData];
 }
 
-
+//アラートを時限式で閉じる
+- (void)performDismiss:(NSTimer *)theTimer
+{
+    UIAlertView *alertView = [theTimer userInfo];
+    [alertView dismissWithClickedButtonIndex:0 animated:NO];
+}
 
 @end

@@ -19,7 +19,7 @@
 @property (strong, nonatomic) FMDatabase *database;
 @property (readwrite) BOOL updatedFavorite;
 + (id)sharedInstance;
-- (void)updateList:(id<AnimeDataManagerDelegate>) view;
+- (void)updateList:(id<AnimeDataManagerDelegate>) view Retry:(int) retry;
 - (NSMutableArray *)getFavorites;
 - (void)setFavorites:(NSMutableArray *)favorites;
 - (void)clearAnimes;
