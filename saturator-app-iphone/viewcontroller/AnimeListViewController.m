@@ -77,6 +77,8 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     Anime *a = [self.animeList objectAtIndex:indexPath.section];
+    cell.textLabel.adjustsFontSizeToFitWidth = YES;
+    cell.textLabel.minimumScaleFactor = 0.5;
     cell.textLabel.text = a.title;
     return cell;
 }
