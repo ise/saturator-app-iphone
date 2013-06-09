@@ -172,7 +172,7 @@ int itemType = MainListItemTypeAll;
 
 - (void)nadViewDidFinishLoad:(NADView *)adView
 {
-    [self.nadView setFrame:CGRectMake(0.f, self.view.bounds.size.height - self.tabBarController.rotatingFooterView.bounds.size.height + 15, NAD_ADVIEW_SIZE_320x50.width, NAD_ADVIEW_SIZE_320x50.height)];
+    [self.nadView setFrame:CGRectMake(0.f, self.view.bounds.size.height - self.tabBarController.rotatingFooterView.bounds.size.height + 17, NAD_ADVIEW_SIZE_320x50.width, NAD_ADVIEW_SIZE_320x50.height)];
     [self.parentViewController.view addSubview:self.nadView];
 }
 
