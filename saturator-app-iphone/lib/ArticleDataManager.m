@@ -81,16 +81,17 @@ static ArticleDataManager *_sharedInstance;
                                                    NSData *data,
                                                    NSError *error)
          {
-             NSHTTPURLResponse *res = (NSHTTPURLResponse *)response;
+             BOOL isError = NO;
+             //NSHTTPURLResponse *res = (NSHTTPURLResponse *)response;
              //NSLog(@"StatusCode=%d",res.statusCode);
              if (error) {
                  if (retry > 0) {
-                     //NSLog(@"Retry ... ");
+                     //リトライ開始
+                     //リトライ処理完了後自分はreturnで抜ける
                      [self updateList:view Tids:tids Page:page Retry:retry-1];
-                 } else {
-                     //NSLog(@"error: %@", [error localizedDescription]);
-                     [view buildErrorView];
                      return;
+                 } else {
+                     isError = YES;
                  }
              }
              
@@ -100,41 +101,49 @@ static ArticleDataManager *_sharedInstance;
                  NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
                  SBJsonParser *parser = [[SBJsonParser alloc] init];
                  NSObject *resultList = [parser objectWithString:result];
+                 
                  if ([resultList isKindOfClass:[NSDictionary class]]) {
+                     //resultListが期待した型で無い場合はリトライ
                      if (retry > 0) {
-                         //NSLog(@"Retry ... ");
                          [self updateList:view Tids:tids Page:page Retry:retry-1];
-                     } else {
-                         NSDictionary *dic = (NSDictionary *)resultList;
-                         //NSLog(@"status is %@", [dic objectForKey:@"status"]);
-                         [view buildErrorView];
                          return;
+                     } else {
+                         isError = YES;
                      }
+                 } else {
+                     //resultListが期待した型である場合は保存処理へ
+                     //データをクリア
+                     if (page == 1) {
+                         //NSLog(@"clear database");
+                         NSString *delSql = @"delete from article where bookmarked is null";
+                         NSString *delRelSql = @"delete from article_anime aa join article a on a.url=aa.url where a.bookmarked is null";
+                         [database open];
+                         [database executeUpdate:delSql];
+                         [database executeUpdate:delRelSql];
+                         [database close];
+                     }
+                     
+                     NSArray *array = (NSArray *)resultList;
+                     NSMutableArray *list = [NSMutableArray array];
+                     for (NSDictionary *dic in array) {
+                         Article *a = [[Article alloc] initWithAPIDict:dic];
+                         [list addObject:a];
+                     }
+                     [self _saveArticles:list];
                  }
-                 
-                 //データをクリア
-                 if (page == 1) {
-                     //NSLog(@"clear database");
-                     NSString *delSql = @"delete from article where bookmarked is null";
-                     NSString *delRelSql = @"delete from article_anime aa join article a on a.url=aa.url where a.bookmarked is null";
-                     [database open];
-                     [database executeUpdate:delSql];
-                     [database executeUpdate:delRelSql];
-                     [database close];
-                 }
-                 
-                 NSArray *array = (NSArray *)resultList;
-                 NSMutableArray *list = [NSMutableArray array];
-                 for (NSDictionary *dic in array) {
-                     Article *a = [[Article alloc] initWithAPIDict:dic];
-                     [list addObject:a];
-                 }
-                 [self _saveArticles:list];
              }
              //DBからデータを取得し、表示処理を呼び出す
              NSMutableArray *articles = [self _loadArticles:tids start: start results: results];
              //NSLog(@"loadArticles");
-             [view buildView:articles];
+             
+             
+             //NSLog(@"isError=%d", isError);
+             //記事が取得できず、かつエラーである場合はエラー用画面を表示する
+             if (articles.count > 0 || !isError) {
+                 [view buildView:articles];
+             } else {
+                 [view buildErrorView];
+             }
          }];
     }
     @catch (NSException *exception) {
@@ -168,13 +177,21 @@ static ArticleDataManager *_sharedInstance;
 - (void)_saveArticles:(NSMutableArray *)articles
 {
     NSString *sql = @"insert into article (url,title,description,image,date,unixtime,feedName,feedIcon,feedUrl) values (?,?,?,?,?,?,?,?,?)";
-    NSString *relationSql = @"insert into article_anime (url,tid) values (?,?)";
+    NSString *updateSql = @"update article set title=?,description=?,image=?,date=?,unixtime=?,feedName=?,feedIcon=?,feedUrl=? where url=?";
+    NSString *relationSql = @"replace into article_anime (url,tid) values (?,?)";
     [database open];
     [database beginTransaction];
     for (Article *a in articles) {
         //NSLog(@"save article url=%@", a.url);
         //記事の保存
-        [database executeUpdate: sql, a.url, a.title, a.description, a.image, a.date, [NSString stringWithFormat:@"%d", a.unixtime], a.feedName, a.feedIcon, a.feedUrl];
+        FMResultSet *r = [database executeQuery:@"select url from article where url=?", a.url];
+        if (![r next]) {
+            //新規記事はinsert
+            [database executeUpdate: sql, a.url, a.title, a.description, a.image, a.date, [NSString stringWithFormat:@"%d", a.unixtime], a.feedName, a.feedIcon, a.feedUrl];
+        } else {
+            //既存記事はupdate
+            [database executeUpdate: updateSql, a.title, a.description, a.image, a.date, [NSString stringWithFormat:@"%d", a.unixtime], a.feedName, a.feedIcon, a.feedUrl, a.url];
+        }
         for (NSString *tid in a.tids) {
             //記事とタイトルのrelationを保存
             [database executeUpdate: relationSql, a.url, tid];

@@ -70,13 +70,11 @@ static AnimeDataManager *_sharedInstance;
                                                NSData *data,
                                                NSError *error)
      {
-         NSHTTPURLResponse *res = (NSHTTPURLResponse *)response;
-         NSLog(@"StatusCode=%d",res.statusCode);
+         //NSHTTPURLResponse *res = (NSHTTPURLResponse *)response;
+         //NSLog(@"StatusCode=%d",res.statusCode);
          if (error) {
              if (retry > 0) {
                  [self updateList:view Retry:retry-1];
-             } else {
-                 [view buildErrorView];
                  return;
              }
          }
@@ -90,23 +88,24 @@ static AnimeDataManager *_sharedInstance;
              if ([resultList isKindOfClass:[NSDictionary class]]) {
                  if (retry > 0) {
                      [self updateList:view Retry:retry-1];
-                 } else {
-                     [view buildErrorView];
                      return;
                  }
+             } else {
+                 NSMutableArray *list = [[NSMutableArray alloc] init];
+                 for (NSDictionary *dic in resultList) {
+                     Anime *a = [[Anime alloc] initWithAPIDict:dic];
+                     [list addObject:a];
+                 }
+                 [self _saveAnimes:list];
              }
-             
-             NSMutableArray *list = [[NSMutableArray alloc] init];
-             for (NSDictionary *dic in resultList) {
-                 Anime *a = [[Anime alloc] initWithAPIDict:dic];
-                 [list addObject:a];
-             }
-             [self _saveAnimes:list];
          }
-         
          //DBからデータ取得
          NSMutableArray *animes = [self _loadAnimes];
-         [view buildView:animes];
+         if (animes.count > 0) {
+             [view buildView:animes];
+         } else {
+             [view buildErrorView];
+         }
      }];
 }
 
