@@ -96,6 +96,7 @@
 		787F6EDD1704920E003D0EAC /* GestureWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 787F6EDC1704920E003D0EAC /* GestureWindow.m */; };
 		787F6EE11706BB26003D0EAC /* InitialAnimeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 787F6EDF1706BB26003D0EAC /* InitialAnimeListViewController.m */; };
 		787F6EE21706BB26003D0EAC /* InitialAnimeListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 787F6EE01706BB26003D0EAC /* InitialAnimeListViewController.xib */; };
+		789398B8176BBFF400B51957 /* anime.json in Resources */ = {isa = PBXBuildFile; fileRef = 789398B7176BBFF400B51957 /* anime.json */; };
 		789A14BA16DA04D700FB0776 /* MainListViewCellWithoutImageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 789A14B816DA04D700FB0776 /* MainListViewCellWithoutImageController.m */; };
 		789A14BB16DA04D700FB0776 /* MainListViewCellWithoutImageController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 789A14B916DA04D700FB0776 /* MainListViewCellWithoutImageController.xib */; };
 		789A14BF16DA62F100FB0776 /* MainListViewFooterCellController.m in Sources */ = {isa = PBXBuildFile; fileRef = 789A14BD16DA62F100FB0776 /* MainListViewFooterCellController.m */; };
@@ -262,6 +263,7 @@
 		787F6EDE1706BB25003D0EAC /* InitialAnimeListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitialAnimeListViewController.h; sourceTree = "<group>"; };
 		787F6EDF1706BB26003D0EAC /* InitialAnimeListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InitialAnimeListViewController.m; sourceTree = "<group>"; };
 		787F6EE01706BB26003D0EAC /* InitialAnimeListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InitialAnimeListViewController.xib; sourceTree = "<group>"; };
+		789398B7176BBFF400B51957 /* anime.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = anime.json; sourceTree = "<group>"; };
 		789A14B716DA04D700FB0776 /* MainListViewCellWithoutImageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainListViewCellWithoutImageController.h; sourceTree = "<group>"; };
 		789A14B816DA04D700FB0776 /* MainListViewCellWithoutImageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainListViewCellWithoutImageController.m; sourceTree = "<group>"; };
 		789A14B916DA04D700FB0776 /* MainListViewCellWithoutImageController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainListViewCellWithoutImageController.xib; sourceTree = "<group>"; };
@@ -623,6 +625,7 @@
 				78DED7C616FE08D0003FF1A6 /* unfav2.png */,
 				78DED7B616FE08D0003FF1A6 /* fav.png */,
 				78DED7B116FE08D0003FF1A6 /* arrow2.png */,
+				789398B7176BBFF400B51957 /* anime.json */,
 				7850A63B1736874D00D91C1F /* help.html */,
 				7850A63D1736876600D91C1F /* license.html */,
 			);
@@ -748,6 +751,7 @@
 				78234BB117525979008CE219 /* Default.png in Resources */,
 				78234BB217525979008CE219 /* Default@2x.png in Resources */,
 				78234BB317525979008CE219 /* Default-568h@2x.png in Resources */,
+				789398B8176BBFF400B51957 /* anime.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

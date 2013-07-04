@@ -104,7 +104,22 @@ static AnimeDataManager *_sharedInstance;
          if (animes.count > 0) {
              [view buildView:animes];
          } else {
-             [view buildErrorView];
+             //アニメ一覧をファイルから読み込む
+             //NSLog(@"load anime data from local file");
+             NSString *path = [[NSBundle mainBundle] pathForResource:@"anime" ofType:@"json"];
+             NSFileHandle *fh = [NSFileHandle fileHandleForReadingAtPath:path];
+             NSData *ad = [fh readDataToEndOfFile];
+             NSString *result = [[NSString alloc] initWithData:ad encoding:NSUTF8StringEncoding];
+             SBJsonParser *parser = [[SBJsonParser alloc] init];
+             NSArray *resultList = [parser objectWithString:result];
+             NSMutableArray *list = [[NSMutableArray alloc] init];
+             for (NSDictionary *dic in resultList) {
+                 Anime *a = [[Anime alloc] initWithAPIDict:dic];
+                 [list addObject:a];
+             }
+             [self _saveAnimes:list];
+             animes = [self _loadAnimes];
+             [view buildView:animes];
          }
      }];
 }

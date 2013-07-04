@@ -6,6 +6,7 @@
 //  Copyright (c) 2013年 Masaaki Takeuchi. All rights reserved.
 //
 
+#import "MainListViewController.h"
 #import "AnimeListViewController.h"
 #import "Anime.h"
 #import "SVProgressHUD.h"
@@ -29,7 +30,9 @@
 {
     [super viewDidLoad];
     [super setEditing:YES animated:YES];
-    self.navigationController.navigationBarHidden = YES;
+    self.tableView.allowsSelectionDuringEditing = YES;
+    //self.navigationController.navigationBarHidden = YES;
+    self.navigationItem.title = @"anime titles";
     
     //リロードボタンを付ける
     UIBarButtonItem *reload = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(_loadAnimeList)];
@@ -129,6 +132,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    Anime *a = [self.animeList objectAtIndex:indexPath.section];
+    //MainListViewController *main = [[MainListViewController alloc] initWithNibName:@"MainListViewController" bundle:nil];
+    NSLog(@"%@", a.tid);
+    //MainListViewController *main = [[MainListViewController alloc] init];
+    //[main setAnime:a];
+    MainListViewController *main = [[MainListViewController alloc] initWithAnime:a];
+    [self.navigationController pushViewController:main animated:YES];
 }
 
 - (void)buildErrorView

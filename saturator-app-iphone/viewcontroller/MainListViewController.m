@@ -13,6 +13,7 @@
 #import "MainListAuthorViewCellController.h"
 #import "DetailViewController.h"
 #import "Article.h"
+#import "Anime.h"
 #import "BaseListViewCell.h"
 #import "ArticleDataManager.h"
 #import "AnimeDataManager.h"
@@ -27,6 +28,7 @@
 @synthesize emptyView;
 @synthesize footerView;
 @synthesize articleList;
+@synthesize targetAnime;
 
 int currentPage;
 BOOL isRefresh = NO;
@@ -62,9 +64,29 @@ int itemType = MainListItemTypeAll;
     [self.footerView setListView:self];
 }
 
+- (void)setAnime:(Anime *)a
+{
+    NSLog(@"setAnime");
+    self.targetAnime = a;
+}
+
 - (id)init
 {
     self = [super initWithNibName:@"MainListViewController" bundle:nil];
+    if (self) {
+        self.articleList = [[NSMutableArray alloc] init];
+        self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg2.png"]];
+        
+        [self _initStatus];
+    }
+    return self;
+}
+
+- (id)initWithAnime:(Anime *)anime
+{
+    NSLog(@"initWithAnime");
+    self = [super initWithNibName:@"MainListViewController" bundle:nil];
+    [self setAnime:anime];
     if (self) {
         self.articleList = [[NSMutableArray alloc] init];
         self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg2.png"]];
@@ -96,6 +118,7 @@ int itemType = MainListItemTypeAll;
 
 - (void)viewDidLoad
 {
+    NSLog(@"MainListViewController.viewDidLoad");
     [super viewDidLoad];
     
     //広告準備
@@ -129,18 +152,35 @@ int itemType = MainListItemTypeAll;
     
     
     //記事の読み込みを開始
-    NSMutableArray *tids = [[AnimeDataManager sharedInstance] getFavorites];
+    NSMutableArray *tids = [self _getCurrentTids];
     if (tids.count > 0) {
         [self loadArticles:1];
     }
+}
+
+- (NSMutableArray *)_getCurrentTids
+{
+    NSMutableArray *tids = [NSMutableArray array];
+    if (self.targetAnime != nil) {
+        [tids addObject:self.targetAnime.tid];
+    } else {
+        tids = [[AnimeDataManager sharedInstance] getFavorites];
+    }
+    return tids;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [self.nadView resume];
     
-    //navigationbar非表示に
-    self.navigationController.navigationBarHidden = YES;
+    if (self.targetAnime == nil) {
+        //navigationbar非表示に
+        NSLog(@"MainListViewController navigationBarHidden");
+        self.navigationController.navigationBarHidden = YES;
+    } else {
+        self.navigationController.navigationBarHidden = NO;
+        self.navigationItem.title = self.targetAnime.title;
+    }
     //tabbarは表示
     ((UITabBarController *)self.parentViewController.parentViewController).tabBar.hidden = NO;
     AnimeDataManager *m = [AnimeDataManager sharedInstance];
@@ -154,7 +194,8 @@ int itemType = MainListItemTypeAll;
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    NSMutableArray *tids = [[AnimeDataManager sharedInstance] getFavorites];
+    NSMutableArray *tids = [self _getCurrentTids];
+    //NSMutableArray *tids = [[AnimeDataManager sharedInstance] getFavorites];
     if (tids.count <= 0) {
         @try {
             InitialAnimeListViewController *initViewController = [[InitialAnimeListViewController alloc] init];
@@ -172,7 +213,12 @@ int itemType = MainListItemTypeAll;
 
 - (void)nadViewDidFinishLoad:(NADView *)adView
 {
-    [self.nadView setFrame:CGRectMake(0.f, self.view.bounds.size.height - self.tabBarController.rotatingFooterView.bounds.size.height + 17, NAD_ADVIEW_SIZE_320x50.width, NAD_ADVIEW_SIZE_320x50.height)];
+    if (self.targetAnime == nil) {
+        [self.nadView setFrame:CGRectMake(0.f, self.view.bounds.size.height - self.tabBarController.rotatingFooterView.bounds.size.height + 18, NAD_ADVIEW_SIZE_320x50.width, NAD_ADVIEW_SIZE_320x50.height)];
+    } else {
+        [self.nadView setFrame:CGRectMake(0.f, self.view.bounds.size.height + 13, NAD_ADVIEW_SIZE_320x50.width, NAD_ADVIEW_SIZE_320x50.height)];
+    }
+
     [self.parentViewController.view addSubview:self.nadView];
 }
 
@@ -343,7 +389,7 @@ int itemType = MainListItemTypeAll;
 - (void)buildErrorView
 {
     //UIAlertView *alert = [[UIAlertView alloc] init];
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"エラー" message:@"データを取得できませんでした" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"確認", nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"エラー" message:@"データを取得できませんでした\nインターネット接続を確認してください" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"確認", nil];
     if (isRefresh) {
         isRefresh = NO;
         [self _taskFinished];
@@ -386,7 +432,8 @@ int itemType = MainListItemTypeAll;
 - (void)loadArticles:(int)page
 {
     ArticleDataManager *manager = [ArticleDataManager sharedInstance];
-    NSMutableArray *tids = [[AnimeDataManager sharedInstance] getFavorites];
+    //NSMutableArray *tids = [[AnimeDataManager sharedInstance] getFavorites];
+    NSMutableArray *tids = [self _getCurrentTids];
     
     
     if (tids.count == 0) {

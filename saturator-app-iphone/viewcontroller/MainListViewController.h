@@ -13,6 +13,7 @@
 #import "EmptyView.h"
 #import "FooterView.h"
 #import "NADView.h"
+#import "Anime.h"
 
 #define RGB(r, g, b) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1]
 #ifdef DEBUG
@@ -27,6 +28,7 @@
 @interface MainListViewController : UITableViewController <ArticleDataManagerDelegate,NADViewDelegate>
 
 @property (strong, nonatomic) NSMutableArray *articleList;
+@property (strong, nonatomic) Anime *targetAnime;
 @property (nonatomic, retain) IBOutlet HeaderView* headerView;
 @property (strong, nonatomic) IBOutlet EmptyView *emptyView;
 @property (strong, nonatomic) IBOutlet FooterView *footerView;
@@ -34,5 +36,7 @@
 @property (nonatomic, retain) NADView *nadView;
 
 - (id)init;
+- (id)initWithAnime:(Anime *)anime;
 - (void)buildView:(NSMutableArray *)articles;
+- (void)setAnime:(Anime *)anime;
 @end
