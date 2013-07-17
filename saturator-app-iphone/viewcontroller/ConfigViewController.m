@@ -51,6 +51,7 @@
     NSMutableArray *cellHelp = [NSMutableArray array];
     [cellHelp addObject:@"ヘルプ"];
     [cellHelp addObject:@"ライセンス"];
+    [cellHelp addObject:@"お問い合わせ"];
     [self.configs addObject:cellHelp];
     
     
@@ -148,10 +149,15 @@
         NSNotification *n = [NSNotification notificationWithName:@"UpdateItemType" object:self];
         [[NSNotificationCenter defaultCenter] postNotification:n];
     } else if (indexPath.section == 1) {
-        StaticFileViewController *staticFile = [[StaticFileViewController alloc] initWithNibName:@"StaticFileViewController" bundle:nil];
-        staticFile.hidesBottomBarWhenPushed = YES;
-        [staticFile setType:indexPath.row];
-        [self.navigationController pushViewController:staticFile animated:YES];
+        if (indexPath.row < 2) {
+            StaticFileViewController *staticFile = [[StaticFileViewController alloc] initWithNibName:@"StaticFileViewController" bundle:nil];
+            staticFile.hidesBottomBarWhenPushed = YES;
+            [staticFile setType:indexPath.row];
+            [self.navigationController pushViewController:staticFile animated:YES];
+        } else {
+            //お問い合わせフォーム
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://docs.google.com/forms/d/1lUHBFTt_rOlaTgoAgUCQKdCXn4QLLeR336H4Ldkir4U/viewform"]];
+        }
     }
 }
 

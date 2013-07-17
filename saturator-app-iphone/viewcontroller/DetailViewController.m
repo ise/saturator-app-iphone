@@ -14,7 +14,8 @@
 
 @synthesize webView = _webView;
 Article *article;
-bool isTop = false;
+bool isTop = NO;
+bool showLoad = YES;
 NSMutableArray* touchPoints;
 CGFloat initX;
 CGFloat initY;
@@ -42,7 +43,7 @@ CGFloat initY;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    showLoad = YES;
     touchPoints = [[NSMutableArray alloc] init];
     
     // タッチイベントをフックするUIWindow
@@ -90,12 +91,15 @@ CGFloat initY;
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
-    //[SVProgressHUD show];
+    if (showLoad) {
+        [SVProgressHUD show];
+        showLoad = NO;
+    }
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    //[SVProgressHUD dismiss];
+    [SVProgressHUD dismiss];
 }
 
 - (void)_setBookmarkButton
