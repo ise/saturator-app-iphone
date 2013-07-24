@@ -105,7 +105,6 @@ static AnimeDataManager *_sharedInstance;
              [view buildView:animes];
          } else {
              //アニメ一覧をファイルから読み込む
-             //NSLog(@"load anime data from local file");
              NSString *path = [[NSBundle mainBundle] pathForResource:@"anime" ofType:@"json"];
              NSFileHandle *fh = [NSFileHandle fileHandleForReadingAtPath:path];
              NSData *ad = [fh readDataToEndOfFile];

@@ -134,7 +134,7 @@
 {
     Anime *a = [self.animeList objectAtIndex:indexPath.section];
     //MainListViewController *main = [[MainListViewController alloc] initWithNibName:@"MainListViewController" bundle:nil];
-    NSLog(@"%@", a.tid);
+    //NSLog(@"%@", a.tid);
     //MainListViewController *main = [[MainListViewController alloc] init];
     //[main setAnime:a];
     MainListViewController *main = [[MainListViewController alloc] initWithAnime:a];
@@ -144,7 +144,7 @@
 - (void)buildErrorView
 {
     //UIAlertView *alert = [[UIAlertView alloc] init];
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"エラー" message:@"データを取得できませんでした" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"確認", nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"エラー" message:@"データを取得できませんでした\nインターネット接続を確認してください" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"確認", nil];
     [SVProgressHUD dismiss];
     [alert show];
 }
@@ -154,8 +154,8 @@
     self.animeList = animes;
     [SVProgressHUD dismiss];
     if (animes.count == 0) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"タイトルが取得できませんでした" delegate:self cancelButtonTitle:nil otherButtonTitles:@"確認", nil];
-        [NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(performDismiss:) userInfo:alert repeats:NO];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"エラー" message:@"タイトルが取得できませんでした\nインターネット接続を確認して、リロードボタンを押してください" delegate:self cancelButtonTitle:nil otherButtonTitles:@"確認", nil];
+        [NSTimer scheduledTimerWithTimeInterval:4.0f target:self selector:@selector(performDismiss:) userInfo:alert repeats:NO];
         [alert show];
     }
     [self.tableView reloadData];
