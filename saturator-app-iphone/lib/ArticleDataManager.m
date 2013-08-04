@@ -66,7 +66,7 @@ static ArticleDataManager *_sharedInstance;
     @try {
         int start = (page - 1) * results;
         NSString *urlStr = [NSString stringWithFormat: @"http://%@/v1/article", [BaseConfig API_HOST]];
-        urlStr = [NSString stringWithFormat:@"%@?start=%d&results=%d", urlStr, start, results];
+        urlStr = [NSString stringWithFormat:@"%@?start=%d&results=%d&reliability=0", urlStr, start, results];
         NSURL *url = [[NSURL alloc] initWithString:urlStr];
         NSString *param = [NSString stringWithFormat:@"[%@]", [tids componentsJoinedByString:@","]];
         
