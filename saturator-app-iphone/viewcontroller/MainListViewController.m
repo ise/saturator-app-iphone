@@ -34,22 +34,6 @@ int currentPage;
 BOOL isRefresh = NO;
 int itemType = MainListItemTypeAll;
 
-- (void)_setHeaderViewHidden:(BOOL)hidden animated:(BOOL)animated
-{
-    CGFloat topOffset = 0.0;
-    if (hidden) {
-        topOffset = -self.headerView.frame.size.height;
-    }
-    if (animated) {
-        [UIView animateWithDuration:0.2
-                         animations:^{
-                             self.tableView.contentInset = UIEdgeInsetsMake(topOffset, 0, 0, 0);
-                         }];
-    } else {
-        self.tableView.contentInset = UIEdgeInsetsMake(topOffset, 0, 0, 0);
-    }
-}
-
 - (void)_initEmptyView
 {
     CGFloat marginX = self.view.frame.size.width - self.emptyView.frame.size.width;
@@ -75,7 +59,7 @@ int itemType = MainListItemTypeAll;
     self = [super initWithNibName:@"MainListViewController" bundle:nil];
     if (self) {
         self.articleList = [[NSMutableArray alloc] init];
-        self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg2.png"]];
+        self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg3.png"]];
         
         [self _initStatus];
     }
@@ -89,7 +73,7 @@ int itemType = MainListItemTypeAll;
     [self setAnime:anime];
     if (self) {
         self.articleList = [[NSMutableArray alloc] init];
-        self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg2.png"]];
+        self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg3.png"]];
         
         [self _initStatus];
     }
@@ -101,7 +85,7 @@ int itemType = MainListItemTypeAll;
     self = [super initWithStyle:style];
     if (self) {
         self.articleList = [[NSMutableArray alloc] init];
-        self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg2.png"]];
+        self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg3.png"]];
         
         [self _initStatus];
     }
@@ -113,7 +97,7 @@ int itemType = MainListItemTypeAll;
     currentPage = 1;
     //[self.articleList removeAllObjects];
     self.emptyView.hidden = YES;
-    //self.tableView.tableFooterView.hidden = YES;
+    self.hasNext = YES;
 }
 
 - (void)viewDidLoad
@@ -142,14 +126,14 @@ int itemType = MainListItemTypeAll;
     [nc addObserver:self selector:@selector(updateFavoriteTitle:) name:@"UpdateFavoriteTitle" object:nil];
     
     //各viewの設定
-    [self _setHeaderViewHidden:YES animated:NO];
-    self.tableView.tableHeaderView = self.headerView;
     [self _initEmptyView];
     [self.view addSubview:self.emptyView];
     [self _initFooterView];
     self.tableView.tableFooterView = self.footerView;
     self.tableView.tableFooterView.hidden = YES;
-    
+    UIRefreshControl *rc = [[UIRefreshControl alloc] init];
+    [rc addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
+    self.refreshControl = rc;
     
     //記事の読み込みを開始
     NSMutableArray *tids = [self _getCurrentTids];
@@ -323,50 +307,6 @@ int itemType = MainListItemTypeAll;
     }
 }
 
-#define PULLDOWN_MARGIN -15.0f
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    if (self.headerView.state == HeaderViewStateStopping) {
-        //更新中
-        return;
-    }
-    
-    CGFloat threshold = self.headerView.frame.size.height;
-    
-    if (PULLDOWN_MARGIN <= scrollView.contentOffset.y &&
-        scrollView.contentOffset.y < threshold) {
-        //引き下げ中だが更新はしない状態
-        self.headerView.state = HeaderViewStatePullingDown;
-    } else if (scrollView.contentOffset.y < PULLDOWN_MARGIN) {
-        //引き下げ中で更新を行う状態
-        self.headerView.state = HeaderViewStateOveredThreshold;
-    } else {
-        //引き下げてない状態
-        self.headerView.state = HeaderViewStateHidden;
-    }
-}
-
-//リストを引き下げて更新する
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
-{
-    //    if (self.tableView.contentOffset.y < PULLDOWN_MARGIN) {
-    if (self.headerView.state == HeaderViewStateOveredThreshold) {
-        self.headerView.state = HeaderViewStateStopping;
-        [self _setHeaderViewHidden:NO animated:YES];
-        
-        isRefresh = YES;
-        [self refresh:nil];
-    }
-}
-
-- (void)_taskFinished
-{
-    self.headerView.state = HeaderViewStateHidden;
-    [self _setHeaderViewHidden:YES animated:YES];
-}
-
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row % 2 == 0) {
@@ -392,7 +332,6 @@ int itemType = MainListItemTypeAll;
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"エラー" message:@"データを取得できませんでした\nインターネット接続を確認してください" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"確認", nil];
     if (isRefresh) {
         isRefresh = NO;
-        [self _taskFinished];
     }
     [SVProgressHUD dismiss];
     [alert show];
@@ -403,11 +342,13 @@ int itemType = MainListItemTypeAll;
 {
     if (isRefresh) {
         isRefresh = NO;
-        [self _taskFinished];
         [self.articleList removeAllObjects];
     }
     [self.articleList addObjectsFromArray:articles];
+    
+    //読み込み完了
     [SVProgressHUD dismiss];
+    
     if (articles.count == 0) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"記事が見つかりませんでした" delegate:self cancelButtonTitle:nil otherButtonTitles:@"確認", nil];
         [NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(performDismiss:) userInfo:alert repeats:NO];
@@ -418,6 +359,7 @@ int itemType = MainListItemTypeAll;
         self.tableView.tableFooterView.hidden = NO;
     }
     [self.tableView reloadData];
+    NSLog(@"buildview");
     
     currentPage++;
 }
@@ -442,15 +384,17 @@ int itemType = MainListItemTypeAll;
     
     
     [manager updateList:self Tids:tids Page:page Retry:3];
-    
     [SVProgressHUD show];
 }
 
 - (void)refresh:(id)selector
 {
+    [self.refreshControl beginRefreshing];
+    isRefresh = YES;
     [self _initStatus];
     [self.tableView reloadData];
     [self loadArticles:1];
+    [self.refreshControl endRefreshing];
 }
 
 - (void)loadNextPosts

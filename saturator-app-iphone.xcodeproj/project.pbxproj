@@ -83,6 +83,7 @@
 		7869FFE71698023900E11631 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7869FFE51698023900E11631 /* InfoPlist.strings */; };
 		7869FFEA1698023900E11631 /* saturator_app_iphoneTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7869FFE91698023900E11631 /* saturator_app_iphoneTests.m */; };
 		786A91D716E37E36006D56B3 /* BaseConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 786A91D616E37E35006D56B3 /* BaseConfig.m */; };
+		786ACFC7180AB30F00B13C4A /* bg3.png in Resources */ = {isa = PBXBuildFile; fileRef = 786ACFC6180AB30F00B13C4A /* bg3.png */; };
 		7872E2A816F5CC31002C908F /* FooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7872E2A716F5CC31002C908F /* FooterView.m */; };
 		7872E2AC16F5EFFD002C908F /* ConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7872E2AA16F5EFFD002C908F /* ConfigViewController.m */; };
 		7872E2AD16F5EFFD002C908F /* ConfigViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7872E2AB16F5EFFD002C908F /* ConfigViewController.xib */; };
@@ -243,6 +244,7 @@
 		7869FFFE1698038B00E11631 /* MainListViewCellController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainListViewCellController.xib; sourceTree = "<group>"; };
 		786A91D516E37E35006D56B3 /* BaseConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseConfig.h; sourceTree = "<group>"; };
 		786A91D616E37E35006D56B3 /* BaseConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseConfig.m; sourceTree = "<group>"; };
+		786ACFC6180AB30F00B13C4A /* bg3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg3.png; sourceTree = "<group>"; };
 		7872E2A616F5CC31002C908F /* FooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FooterView.h; sourceTree = "<group>"; };
 		7872E2A716F5CC31002C908F /* FooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FooterView.m; sourceTree = "<group>"; };
 		7872E2A916F5EFFD002C908F /* ConfigViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigViewController.h; sourceTree = "<group>"; };
@@ -432,6 +434,7 @@
 		7869FFC51698023800E11631 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				786ACFC6180AB30F00B13C4A /* bg3.png */,
 				78234BAE17525979008CE219 /* Default.png */,
 				78234BAF17525979008CE219 /* Default@2x.png */,
 				78234BB017525979008CE219 /* Default-568h@2x.png */,
@@ -725,6 +728,7 @@
 				78DED7D016FE08D0003FF1A6 /* Icon-Small-50.png in Resources */,
 				78DED7D116FE08D0003FF1A6 /* Icon-Small.png in Resources */,
 				78DED7D216FE08D0003FF1A6 /* Icon-Small@2x.png in Resources */,
+				786ACFC7180AB30F00B13C4A /* bg3.png in Resources */,
 				78DED7D516FE08D0003FF1A6 /* iTunesArtwork in Resources */,
 				78DED7D616FE08D0003FF1A6 /* list.png in Resources */,
 				78DED7D716FE08D0003FF1A6 /* list@2x.png in Resources */,

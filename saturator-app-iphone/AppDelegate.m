@@ -67,9 +67,9 @@
         //タブの画像を設定
         [item setFinishedSelectedImage:selectedImage withFinishedUnselectedImage:unselectedImage];
         //タブの文字色を設定(選択前)
-        [item setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1.0], UITextAttributeTextColor,nil] forState:UIControlStateNormal];
+        [item setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:1.0], UITextAttributeTextColor,nil] forState:UIControlStateNormal];
         //タブの文字色を設定(選択中)
-        [item setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:0.99 green:0.0 blue:0.789 alpha:1.0], UITextAttributeTextColor,nil] forState:UIControlStateSelected];
+        [item setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:0.05 green:0.05 blue:0.05 alpha:1.0], UITextAttributeTextColor,nil] forState:UIControlStateSelected];
         i++;
     }
     

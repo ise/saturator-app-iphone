@@ -19,7 +19,7 @@
 {
     self = [super initWithStyle:style];
     if (self) {
-        self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg2.png"]];
+        self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg3.png"]];
     }
     return self;
 }
@@ -27,7 +27,7 @@
 - (id)init
 {
     self = [super init];
-    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg2.png"]];
+    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg3.png"]];
     return self;
 }
 
