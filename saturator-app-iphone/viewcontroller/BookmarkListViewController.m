@@ -12,13 +12,6 @@
 
 @implementation BookmarkListViewController
 
-- (void)_setHeaderViewHidden:(BOOL)hidden animated:(BOOL)animated
-{
-    CGFloat topOffset = 0.0;
-    topOffset = -self.headerView.frame.size.height;
-    self.tableView.contentInset = UIEdgeInsetsMake(topOffset, 0, 0, 0);
-}
-
 - (void)_initEmptyView
 {
     CGFloat marginX = self.view.frame.size.width - self.emptyView.frame.size.width;
@@ -29,8 +22,6 @@
 
 - (void)viewDidLoad
 {
-    [self _setHeaderViewHidden:YES animated:NO];
-    self.tableView.tableHeaderView = self.headerView;
     [self _initEmptyView];
     [self.view addSubview:self.emptyView];
 }

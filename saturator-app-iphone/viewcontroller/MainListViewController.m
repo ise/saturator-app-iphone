@@ -24,7 +24,6 @@
 
 @implementation MainListViewController
 
-@synthesize headerView;
 @synthesize emptyView;
 @synthesize footerView;
 @synthesize articleList;
@@ -44,13 +43,13 @@ int itemType = MainListItemTypeAll;
 
 - (void)_initFooterView
 {
-    self.footerView.message.text = @"Load next posts ...";
+    self.footerView.message.text = @"more ...";
     [self.footerView setListView:self];
 }
 
 - (void)setAnime:(Anime *)a
 {
-    NSLog(@"setAnime");
+    //NSLog(@"setAnime");
     self.targetAnime = a;
 }
 
@@ -68,7 +67,7 @@ int itemType = MainListItemTypeAll;
 
 - (id)initWithAnime:(Anime *)anime
 {
-    NSLog(@"initWithAnime");
+    //NSLog(@"initWithAnime");
     self = [super initWithNibName:@"MainListViewController" bundle:nil];
     [self setAnime:anime];
     if (self) {
@@ -102,12 +101,12 @@ int itemType = MainListItemTypeAll;
 
 - (void)viewDidLoad
 {
-    NSLog(@"MainListViewController.viewDidLoad");
+    //NSLog(@"MainListViewController.viewDidLoad");
     [super viewDidLoad];
     
     //広告準備
     self.nadView = [[NADView alloc] init];
-    [self.nadView setIsOutputLog:NO];
+    [self.nadView setIsOutputLog:YES];
     [self.nadView setNendID:@"574031920552c3db563238e10a6cd868595095da" spotID:@"55043"];
     [self.nadView setDelegate:self];
     [self.nadView load];
@@ -159,7 +158,7 @@ int itemType = MainListItemTypeAll;
     
     if (self.targetAnime == nil) {
         //navigationbar非表示に
-        NSLog(@"MainListViewController navigationBarHidden");
+        //NSLog(@"MainListViewController navigationBarHidden");
         self.navigationController.navigationBarHidden = YES;
     } else {
         self.navigationController.navigationBarHidden = NO;
@@ -187,7 +186,7 @@ int itemType = MainListItemTypeAll;
             [self presentViewController:nc animated:NO completion:^{}];
         }
         @catch (NSException *exception) {
-            NSLog(@"Exception.reason=%@", exception.reason);
+            //NSLog(@"Exception.reason=%@", exception.reason);
         }
         @finally {
             
@@ -197,10 +196,11 @@ int itemType = MainListItemTypeAll;
 
 - (void)nadViewDidFinishLoad:(NADView *)adView
 {
+    //NSLog(@"nadViewDidFnisheLoad");
     if (self.targetAnime == nil) {
-        [self.nadView setFrame:CGRectMake(0.f, self.view.bounds.size.height - self.tabBarController.rotatingFooterView.bounds.size.height + 18, NAD_ADVIEW_SIZE_320x50.width, NAD_ADVIEW_SIZE_320x50.height)];
+        [self.nadView setFrame:CGRectMake(0.f, self.view.bounds.size.height - self.tabBarController.rotatingFooterView.bounds.size.height - 51, NAD_ADVIEW_SIZE_320x50.width, NAD_ADVIEW_SIZE_320x50.height)];
     } else {
-        [self.nadView setFrame:CGRectMake(0.f, self.view.bounds.size.height + 13, NAD_ADVIEW_SIZE_320x50.width, NAD_ADVIEW_SIZE_320x50.height)];
+        [self.nadView setFrame:CGRectMake(0.f, self.view.bounds.size.height - self.tabBarController.rotatingFooterView.bounds.size.height - 51, NAD_ADVIEW_SIZE_320x50.width, NAD_ADVIEW_SIZE_320x50.height)];
     }
 
     [self.parentViewController.view addSubview:self.nadView];
@@ -359,7 +359,7 @@ int itemType = MainListItemTypeAll;
         self.tableView.tableFooterView.hidden = NO;
     }
     [self.tableView reloadData];
-    NSLog(@"buildview");
+    //NSLog(@"buildview");
     
     currentPage++;
 }

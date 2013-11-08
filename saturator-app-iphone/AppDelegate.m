@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "GestureWindow.h"
+#import "Flurry.h"
 
 @implementation AppDelegate
 
@@ -24,6 +25,8 @@
     //スプラッシュ表示時間
     sleep(1);
     
+    [Flurry setCrashReportingEnabled:YES];
+    [Flurry startSession:@"C2PZBN62WPBM5MT6KW6W"];
     
     //self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window = [[GestureWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds] ];
@@ -48,6 +51,8 @@
     self.tabBarController = [[UITabBarController alloc] initWithNibName:nil bundle:nil];
     NSArray *controllers = [[NSArray alloc] initWithObjects:mainNavi,animeNavi,favNavi,self.recommendViewController,configNavi,nil];
     [self.tabBarController setViewControllers:controllers];
+    self.tabBarController.tabBar.barTintColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0];
+    self.tabBarController.tabBar.tintColor = [UIColor colorWithRed:0.3 green:0.3 blue:0.3 alpha:1.0];
     
     int i = 0;
     NSArray *tabs = [NSArray arrayWithObjects:
@@ -63,13 +68,16 @@
         [item setTitle:[val objectAtIndex:0]];
         NSString *icon = [val objectAtIndex:1];
         UIImage *selectedImage = [UIImage imageNamed:icon];
-        UIImage *unselectedImage = [UIImage imageNamed:icon];
         //タブの画像を設定
-        [item setFinishedSelectedImage:selectedImage withFinishedUnselectedImage:unselectedImage];
+        [item setImage:selectedImage];
         //タブの文字色を設定(選択前)
-        [item setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:1.0], UITextAttributeTextColor,nil] forState:UIControlStateNormal];
+        ;
+        [item setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor colorWithRed:0.7 green:0.7 blue:0.7 alpha:1.0] } forState:UIControlStateNormal];
+        //[item setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:0.7 green:0.7 blue:0.7 alpha:1.0], UITextAttributeTextColor,nil] forState:UIControlStateNormal];
         //タブの文字色を設定(選択中)
-        [item setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:0.05 green:0.05 blue:0.05 alpha:1.0], UITextAttributeTextColor,nil] forState:UIControlStateSelected];
+        [item setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor colorWithRed:1.0 green:0.1 blue:0.9 alpha:1.0] } forState:UIControlStateSelected];
+        //[item setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:1.0 green:0.1 blue:0.9 alpha:1.0], UITextAttributeTextColor,nil] forState:UIControlStateSelected];
+        //[item setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:1.0], UITextAttributeTextColor,nil] forState:UIControlStateSelected];
         i++;
     }
     

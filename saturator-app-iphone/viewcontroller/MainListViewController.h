@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 #import "ArticleDataManager.h"
-#import "HeaderView.h"
 #import "EmptyView.h"
 #import "FooterView.h"
 #import "NADView.h"
@@ -22,14 +21,12 @@
 #define LINE() ;
 #endif
 
-@class HeaderView;
 @class EmptyView;
 @class FooterView;
 @interface MainListViewController : UITableViewController <ArticleDataManagerDelegate,NADViewDelegate>
 
 @property (strong, nonatomic) NSMutableArray *articleList;
 @property (strong, nonatomic) Anime *targetAnime;
-@property (nonatomic, retain) IBOutlet HeaderView* headerView;
 @property (strong, nonatomic) IBOutlet EmptyView *emptyView;
 @property (strong, nonatomic) IBOutlet FooterView *footerView;
 @property (readwrite) BOOL hasNext;

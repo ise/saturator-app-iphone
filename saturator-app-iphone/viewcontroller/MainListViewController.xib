@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4510" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment defaultVersion="1536" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+        <deployment defaultVersion="1792" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3746"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainListViewController">
             <connections>
                 <outlet property="emptyView" destination="104" id="109"/>
                 <outlet property="footerView" destination="116" id="124"/>
-                <outlet property="headerView" destination="14" id="58"/>
                 <outlet property="view" destination="4" id="59"/>
             </connections>
         </placeholder>
@@ -26,49 +25,6 @@
                 <outlet property="delegate" destination="-1" id="7"/>
             </connections>
         </tableView>
-        <view contentMode="scaleToFill" id="14" customClass="HeaderView">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="arrow2.png" translatesAutoresizingMaskIntoConstraints="NO" id="16">
-                    <rect key="frame" x="28" y="5" width="35" height="45"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="45" id="60"/>
-                        <constraint firstAttribute="width" constant="35" id="141"/>
-                    </constraints>
-                </imageView>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="37">
-                    <rect key="frame" x="78" y="15" width="238" height="25"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="238" id="45"/>
-                        <constraint firstAttribute="height" constant="25" id="75"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <color key="textColor" red="0.84782608699999995" green="0.84782608699999995" blue="0.84782608699999995" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <activityIndicatorView opaque="NO" contentMode="scaleToFill" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="78">
-                    <rect key="frame" x="35" y="17" width="20" height="20"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </activityIndicatorView>
-            </subviews>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-            <constraints>
-                <constraint firstAttribute="bottom" secondItem="37" secondAttribute="bottom" constant="20" symbolic="YES" id="76"/>
-                <constraint firstItem="78" firstAttribute="centerY" secondItem="37" secondAttribute="centerY" id="99"/>
-                <constraint firstItem="78" firstAttribute="centerY" secondItem="16" secondAttribute="centerY" id="100"/>
-                <constraint firstItem="37" firstAttribute="leading" secondItem="14" secondAttribute="leading" constant="78" id="126"/>
-                <constraint firstItem="16" firstAttribute="leading" secondItem="14" secondAttribute="leading" constant="28" id="151"/>
-                <constraint firstItem="16" firstAttribute="centerX" secondItem="78" secondAttribute="centerX" id="152"/>
-            </constraints>
-            <connections>
-                <outlet property="activityIndicatorView" destination="78" id="103"/>
-                <outlet property="imageView" destination="16" id="102"/>
-                <outlet property="textLabel" destination="37" id="101"/>
-            </connections>
-        </view>
         <view contentMode="scaleToFill" id="104" customClass="EmptyView">
             <rect key="frame" x="0.0" y="0.0" width="287" height="141"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -77,7 +33,6 @@
                     <rect key="frame" x="20" y="20" width="247" height="101"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="0.84782608699999995" green="0.84782608699999995" blue="0.84782608699999995" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
@@ -121,7 +76,4 @@
             </connections>
         </view>
     </objects>
-    <resources>
-        <image name="arrow2.png" width="52" height="52"/>
-    </resources>
 </document>

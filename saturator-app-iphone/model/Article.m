@@ -64,8 +64,8 @@
 - (NSString *)_displayDate:(int)timestamp
 {
     NSDate *now = [NSDate date];
-    NSDate *date = [NSDate dateWithTimeIntervalSince1970:(NSTimeInterval)timestamp];
-    NSTimeInterval passed = [now timeIntervalSinceDate:date];
+    NSDate *d = [NSDate dateWithTimeIntervalSince1970:(NSTimeInterval)timestamp];
+    NSTimeInterval passed = [now timeIntervalSinceDate:d];
 
     int min = passed / 60;
     if (min <= 1) {

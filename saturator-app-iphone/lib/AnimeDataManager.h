@@ -22,6 +22,6 @@
 - (void)updateList:(id<AnimeDataManagerDelegate>) view Retry:(int) retry;
 - (NSMutableArray *)getFavorites;
 - (void)setFavorites:(NSMutableArray *)favorites;
-- (void)clearAnimes;
-- (void)clearFavorite;
+//- (void)clearAnimes;
+//- (void)clearFavorite;
 @end

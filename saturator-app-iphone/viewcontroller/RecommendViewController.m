@@ -31,6 +31,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    self.webView.frame = CGRectMake(self.webView.frame.origin.x, self.webView.frame.origin.y, self.webView.frame.size.width, self.webView.frame.size.height - self.tabBarController.rotatingFooterView.bounds.size.height);
     self.webView.delegate = self;
     
     NSMutableArray *tids = [[AnimeDataManager sharedInstance] getFavorites];
@@ -42,7 +43,7 @@
     NSURL *url;
     url = [NSURL URLWithString:urlStr];
     NSURLRequest *req = [NSURLRequest requestWithURL:url];
-    self.webView.scalesPageToFit = YES;
+    [self.webView setScalesPageToFit:YES];
     [self.webView loadRequest:req];
 }
 
