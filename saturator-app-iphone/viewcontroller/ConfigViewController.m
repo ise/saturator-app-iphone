@@ -126,9 +126,7 @@
 	[v setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
 	UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(20.0f, 5.0f, 300.0f, 35.0f)];
 	lbl.backgroundColor = [UIColor clearColor];
-    //#abafbc
-    //67.1, 68.6, 73.7
-    lbl.textColor = [UIColor colorWithRed:0.671 green:0.686 blue:0.737 alpha:1.0];
+    lbl.textColor = [UIColor colorWithRed:0.271 green:0.286 blue:0.337 alpha:1.0];
     lbl.text = [self.headers objectAtIndex:section];
 	lbl.textAlignment = NSTextAlignmentLeft;
 	lbl.font =  [UIFont boldSystemFontOfSize:17.0f];
