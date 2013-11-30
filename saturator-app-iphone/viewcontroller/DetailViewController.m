@@ -9,14 +9,21 @@
 #import "DetailViewController.h"
 #import "ArticleDataManager.h"
 #import "SVProgressHUD.h"
+#import "LINEActivity.h"
+#import "ARChromeActivity.h"
+#import "EGYModalWebViewController.h"
+#import "SimpleWebViewController.h"
 
 @implementation DetailViewController
 
+@synthesize backBarButtonItem, forwardBarButtonItem, refreshBarButtonItem, stopBarButtonItem, actionBarButtonItem, rdbBarButtonItem;
 @synthesize webView = _webView;
+
+
 Article *article;
 bool isTop = NO;
 bool showLoad = YES;
-NSMutableArray* touchPoints;
+
 CGFloat initX;
 CGFloat initY;
 
@@ -40,24 +47,24 @@ CGFloat initY;
     isTop = top;
 }
 
-- (void)viewDidLoad
+- (void)viewWillAppear:(BOOL)animated
 {
-    [super viewDidLoad];
-    showLoad = YES;
-    touchPoints = [[NSMutableArray alloc] init];
-    
-    // タッチイベントをフックするUIWindow
-    GestureWindow* tapWindow;
-    tapWindow = (GestureWindow*)[[UIApplication sharedApplication].windows
-                                 objectAtIndex:0];
-    tapWindow.wView = self.webView;
-    tapWindow.wDelegate = self;
-    
+    [super viewWillAppear:animated];
     //navigationbarを表示
     self.navigationController.navigationBarHidden = NO;
     
     //tabbarは非表示
     ((UITabBarController *)self.parentViewController.parentViewController).tabBar.hidden = YES;
+    
+    //toolbar表示
+    [self.navigationController setToolbarHidden:NO animated:animated];
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    showLoad = YES;
+    
     NSURL *url;
     if (isTop) {
         url = [NSURL URLWithString:article.feedUrl];
@@ -70,17 +77,30 @@ CGFloat initY;
     NSURLRequest *req = [NSURLRequest requestWithURL:url];
     self.webView.scalesPageToFit = YES;
     [self.webView loadRequest:req];
+    
+    [self updateToolbarItems];
+}
+
+- (void)viewDidUnload {
+    [super viewDidUnload];
+    self.webView = nil;
+    backBarButtonItem = nil;
+    forwardBarButtonItem = nil;
+    refreshBarButtonItem = nil;
+    stopBarButtonItem = nil;
+    actionBarButtonItem = nil;
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-    //GestureWindowのdelegateを初期化
-    GestureWindow* tapWindow;
-    tapWindow = (GestureWindow*)[[UIApplication sharedApplication].windows
-                                 objectAtIndex:0];
-    tapWindow.wView = nil;
-    tapWindow.wDelegate = nil;
+    self.navigationController.navigationBarHidden = YES;
     [super viewDidDisappear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.navigationController setToolbarHidden:YES animated:animated];
 }
 
 - (void)didReceiveMemoryWarning
@@ -95,12 +115,20 @@ CGFloat initY;
         [SVProgressHUD show];
         showLoad = NO;
     }
+    [self updateToolbarItems];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     [SVProgressHUD dismiss];
+    [self updateToolbarItems];
 }
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+{
+    [self updateToolbarItems];
+}
+
 
 - (void)_setBookmarkButton
 {
@@ -115,7 +143,8 @@ CGFloat initY;
     }
 }
 
-- (void)_removeBookmark {
+- (void)_removeBookmark
+{
     ArticleDataManager *m = [ArticleDataManager sharedInstance];
     int res = [m removeBookmark:article.url];
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
@@ -137,31 +166,7 @@ CGFloat initY;
     [self _setBookmarkButton];
 }
 
-- (void) touchesBeganWeb:(NSSet *)touches withEvent:(UIEvent *)event {
-    //タッチ開始時の座標保存
-    NSArray *twoTouches = [touches allObjects];
-    UITouch *first = [twoTouches objectAtIndex:0];
-    initX = [first locationInView:self.view].x;
-    initY = [first locationInView:self.view].y;
-}
-
-- (void) touchesMovedWeb:(NSSet *)touches withEvent:(UIEvent *)event {
-    //スワイプ動作を検出する
-    NSArray *twoTouches = [touches allObjects];
-    UITouch *first = [twoTouches objectAtIndex:0];
-    CGFloat x = [first locationInView:self.view].x - initX;
-    CGFloat y = [first locationInView:self.view].y - initY;
-    
-    if (x > GESTURE_LENGTH && y < BLUR_LENGTH) {
-        //[self.navigationController popViewControllerAnimated:YES];
-    }
-}
-
-- (void) touchesEndedWeb:(NSSet *)touches withEvent:(UIEvent *)event {
-
-    
-}
-
+/*
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     if (navigationType == UIWebViewNavigationTypeLinkClicked ) {
@@ -170,6 +175,157 @@ CGFloat initY;
     }
     
     return YES;
+}
+ */
+
+
+- (UIBarButtonItem *)backBarButtonItem
+{
+    if (!backBarButtonItem) {
+        backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"EGYWebViewController.bundle/iPhone/back"] style:UIBarButtonItemStylePlain target:self action:@selector(goBackClicked:)];
+        backBarButtonItem.imageInsets = UIEdgeInsetsMake(2.0f, 0.0f, -2.0f, 0.0f);
+		backBarButtonItem.width = 18.0f;
+    }
+    return backBarButtonItem;
+}
+
+- (UIBarButtonItem *)forwardBarButtonItem
+{
+    if (!forwardBarButtonItem) {
+        forwardBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"EGYWebViewController.bundle/iPhone/forward"] style:UIBarButtonItemStylePlain target:self action:@selector(goForwardClicked:)];
+        forwardBarButtonItem.imageInsets = UIEdgeInsetsMake(2.0f, 0.0f, -2.0f, 0.0f);
+		forwardBarButtonItem.width = 18.0f;
+    }
+    return forwardBarButtonItem;
+}
+
+- (UIBarButtonItem *)refreshBarButtonItem
+{
+    
+    if (!refreshBarButtonItem) {
+        refreshBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(reloadClicked:)];
+    }
+    
+    return refreshBarButtonItem;
+}
+
+- (UIBarButtonItem *)stopBarButtonItem
+{
+    
+    if (!stopBarButtonItem) {
+        stopBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(stopClicked:)];
+    }
+    return stopBarButtonItem;
+}
+
+- (UIBarButtonItem *)actionBarButtonItem
+{
+    
+    if (!actionBarButtonItem) {
+        actionBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(actionButtonClicked:)];
+    }
+    return actionBarButtonItem;
+}
+
+- (UIBarButtonItem *)rdbBarButtonItem
+{
+    if (!rdbBarButtonItem) {
+        rdbBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Readability-activity-iPhone"] style:UIBarButtonItemStylePlain target:self action:@selector(rdbClicked:)];
+        rdbBarButtonItem.imageInsets = UIEdgeInsetsMake(2.0f, 0.0f, -2.0f, 0.0f);
+		rdbBarButtonItem.width = 18.0f;
+    }
+    return rdbBarButtonItem;
+}
+
+- (void)updateToolbarItems
+{
+    self.backBarButtonItem.enabled = self.webView.canGoBack;
+    self.forwardBarButtonItem.enabled = self.webView.canGoForward;
+    //self.actionBarButtonItem.enabled = !self.webView.isLoading;
+    self.actionBarButtonItem.enabled = YES;
+    
+    UIBarButtonItem *refreshStopBarButtonItem = self.webView.isLoading ? self.stopBarButtonItem : self.refreshBarButtonItem;
+    
+    UIBarButtonItem *fixedSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+    fixedSpace.width = 5.0f;
+    UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+
+    NSArray *items;
+
+    items = [NSArray arrayWithObjects:
+             fixedSpace,
+             self.backBarButtonItem,
+             flexibleSpace,
+             self.forwardBarButtonItem,
+             flexibleSpace,
+             refreshStopBarButtonItem,
+             flexibleSpace,
+             self.actionBarButtonItem,
+             flexibleSpace,
+             self.rdbBarButtonItem,
+             fixedSpace,
+             nil];
+    self.navigationController.toolbar.barStyle = self.navigationController.navigationBar.barStyle;
+    self.navigationController.toolbar.tintColor = self.navigationController.navigationBar.tintColor;
+    self.toolbarItems = items;
+}
+
+
+- (void)goBackClicked:(UIBarButtonItem *)sender
+{
+    [self.webView goBack];
+}
+
+- (void)goForwardClicked:(UIBarButtonItem *)sender
+{
+    [self.webView goForward];
+}
+
+- (void)reloadClicked:(UIBarButtonItem *)sender
+{
+    [self.webView reload];
+}
+
+- (void)stopClicked:(UIBarButtonItem *)sender
+{
+    [self.webView stopLoading];
+	[self updateToolbarItems];
+}
+
+- (void)rdbClicked:(UIBarButtonItem *)sender
+{
+    NSURL *cur = self.webView.request.URL;
+    NSString *rdbUrl = @"http://www.readability.com/m?url=";
+    NSURL *url = [[NSURL alloc] initWithString:[rdbUrl stringByAppendingString:[cur absoluteString]]];
+    /*
+    SimpleWebViewController *swv = [[SimpleWebViewController alloc] initWithNibName:@"SimpleWebViewController" bundle:nil];
+    [swv setTargetUrl:url];
+    swv.modalPresentationStyle = UIModalPresentationPageSheet;
+    [self presentViewController: swv animated:YES completion: nil];
+     */
+    EGYModalWebViewController *wvc = [[EGYModalWebViewController alloc] initWithURL:url];
+    wvc.modalPresentationStyle = UIModalPresentationPageSheet;
+    [self presentViewController:wvc animated:YES completion:nil];
+}
+
+- (void)actionButtonClicked:(id)sender
+{
+    NSURL *url = self.webView.request.URL;
+    //NSString *text = [NSString stringWithFormat:@"This link shared from %@ Application", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"]];
+
+    NSArray *activityItems;
+    activityItems = @[url];
+    
+    LINEActivity *line = [[LINEActivity alloc] init];
+    ARChromeActivity *chrome = [[ARChromeActivity alloc] init];
+    NSArray *activities = @[
+                            line,
+                            chrome
+                            ];
+    
+    // UIActivityViewController
+    UIActivityViewController *activityView = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:activities];
+    [self presentViewController:activityView animated:YES completion:nil];
 }
 
 @end

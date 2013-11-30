@@ -8,13 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "Article.h"
-#import "GestureWindow.h"
 
-#define GESTURE_LENGTH  5
-#define BLUR_LENGTH     5
-#define PINCH_DELTA     100
+@interface DetailViewController : UIViewController <UIWebViewDelegate>
 
-@interface DetailViewController : UIViewController <UIWebViewDelegate,GestureWindowDelegate>
+@property (nonatomic, strong, readonly) UIBarButtonItem *backBarButtonItem;
+@property (nonatomic, strong, readonly) UIBarButtonItem *forwardBarButtonItem;
+@property (nonatomic, strong, readonly) UIBarButtonItem *refreshBarButtonItem;
+@property (nonatomic, strong, readonly) UIBarButtonItem *stopBarButtonItem;
+@property (nonatomic, strong, readonly) UIBarButtonItem *actionBarButtonItem;
+@property (nonatomic, strong, readonly) UIBarButtonItem *rdbBarButtonItem;
+
 @property (strong, nonatomic) IBOutlet UIWebView *webView;
 - (void)setArticle:(Article *)a;
 - (void)setTopPage:(BOOL)top;
