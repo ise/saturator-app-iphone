@@ -10,6 +10,7 @@
 #import "TUSafariActivity.h"
 #import "ARChromeActivity.h"
 #import "MLCruxActivity.h"
+#import "SVProgressHUD.h"
 
 @interface EGYWebViewController () <UIWebViewDelegate, UIActionSheetDelegate, MFMailComposeViewControllerDelegate>
 
@@ -21,6 +22,7 @@
 
 @property (nonatomic, strong) UIWebView *mainWebView;
 @property (nonatomic, strong) NSURL *URL;
+@property (nonatomic, readwrite) BOOL showProgress;
 
 - (id)initWithAddress:(NSString*)urlString;
 - (id)initWithURL:(NSURL*)URL;
@@ -42,6 +44,7 @@
 
 @synthesize URL, mainWebView;
 @synthesize backBarButtonItem, forwardBarButtonItem, refreshBarButtonItem, stopBarButtonItem, actionBarButtonItem;
+@synthesize showProgress;
 
 #pragma mark - setters and getters
 
@@ -102,7 +105,6 @@
     if(self = [super init]) {
         self.URL = pageURL;
     }
-    
     return self;
 }
 
@@ -122,6 +124,7 @@
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
+    self.showProgress = YES;
     [self updateToolbarItems];
 }
 
@@ -147,6 +150,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    [SVProgressHUD dismiss];
     
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
         [self.navigationController setToolbarHidden:YES animated:animated];
@@ -261,12 +265,17 @@
 #pragma mark UIWebViewDelegate
 
 - (void)webViewDidStartLoad:(UIWebView *)webView {
+    if (showProgress) {
+        [SVProgressHUD show];
+        showProgress = NO;
+    }
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     [self updateToolbarItems];
 }
 
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
+    [SVProgressHUD dismiss];
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     
     self.navigationItem.title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
@@ -275,6 +284,7 @@
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    [SVProgressHUD dismiss];
     [self updateToolbarItems];
 }
 

@@ -13,6 +13,7 @@
 #import "ARChromeActivity.h"
 #import "EGYModalWebViewController.h"
 #import "SimpleWebViewController.h"
+#import "TUSafariActivity.h"
 
 @implementation DetailViewController
 
@@ -100,6 +101,7 @@ CGFloat initY;
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    [SVProgressHUD dismiss];
     [self.navigationController setToolbarHidden:YES animated:animated];
 }
 
@@ -314,11 +316,13 @@ CGFloat initY;
     //NSString *text = [NSString stringWithFormat:@"This link shared from %@ Application", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"]];
 
     NSArray *activityItems;
-    activityItems = @[url];
+    activityItems = @[url, url.absoluteString];
     
+    TUSafariActivity *safari = [[TUSafariActivity alloc] init];
     LINEActivity *line = [[LINEActivity alloc] init];
     ARChromeActivity *chrome = [[ARChromeActivity alloc] init];
     NSArray *activities = @[
+                            safari,
                             line,
                             chrome
                             ];
