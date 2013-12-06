@@ -168,18 +168,22 @@ CGFloat initY;
     [self _setBookmarkButton];
 }
 
-/*
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
-    if (navigationType == UIWebViewNavigationTypeLinkClicked ) {
-        [[UIApplication sharedApplication] openURL: [request URL]];
-        return NO;
+    if (navigationType == UIWebViewNavigationTypeLinkClicked) {
+        NSError *error = nil;
+        NSString *pattern = article.feedUrl;
+        NSURL *url = [request URL];
+        NSRegularExpression *r = [NSRegularExpression regularExpressionWithPattern:pattern options:NSRegularExpressionCaseInsensitive error:&error];
+        NSUInteger s = [r numberOfMatchesInString:url.absoluteString options:0 range:NSMakeRange(0, url.absoluteString.length)];
+        if (s <= 0) {
+            [[UIApplication sharedApplication] openURL: url];
+            return NO;
+        }
     }
     
     return YES;
 }
- */
-
 
 - (UIBarButtonItem *)backBarButtonItem
 {
