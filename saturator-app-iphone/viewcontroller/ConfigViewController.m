@@ -52,6 +52,8 @@
     [cellHelp addObject:@"ヘルプ"];
     [cellHelp addObject:@"ライセンス"];
     [cellHelp addObject:@"お問い合わせ"];
+    [cellHelp addObject:@"お知らせ"];
+    [cellHelp addObject:@"AppStoreで評価する"];
     [self.configs addObject:cellHelp];
     
     
@@ -152,9 +154,15 @@
             staticFile.hidesBottomBarWhenPushed = YES;
             [staticFile setType:indexPath.row];
             [self.navigationController pushViewController:staticFile animated:YES];
-        } else {
+        } else if (indexPath.row == 2) {
             //お問い合わせフォーム
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://docs.google.com/forms/d/1lUHBFTt_rOlaTgoAgUCQKdCXn4QLLeR336H4Ldkir4U/viewform"]];
+        } else if (indexPath.row == 3) {
+            //お知らせ
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://saturator-info.tumblr.com/"]];
+        } else if (indexPath.row == 4) {
+            //レビュー
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"itms-apps://itunes.apple.com/app/%@", @"id654456984"]]];
         }
     }
 }
