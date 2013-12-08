@@ -37,6 +37,11 @@ int type;
     }
     NSString *path = [[NSBundle mainBundle] pathForResource:name ofType:@"html"];
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:path]]];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     
     self.navigationController.navigationBarHidden = NO;
     ((UITabBarController *)self.parentViewController.parentViewController).tabBar.hidden = YES;
