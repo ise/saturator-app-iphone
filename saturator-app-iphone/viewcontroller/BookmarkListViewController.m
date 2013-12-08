@@ -15,7 +15,7 @@
 - (void)_initEmptyView
 {
     CGFloat marginX = self.view.frame.size.width - self.emptyView.frame.size.width;
-    CGFloat marginY = self.view.frame.size.height - self.emptyView.frame.size.height;
+    CGFloat marginY = self.view.frame.size.height - self.emptyView.frame.size.height - 100;
     self.emptyView.frame = CGRectMake(marginX / 2.0f, marginY / 2.0f, self.emptyView.frame.size.width, self.emptyView.frame.size.height);
     self.emptyView.message.text = @"ブックマークされた記事はありません";
 }
