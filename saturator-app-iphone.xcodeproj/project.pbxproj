@@ -1236,7 +1236,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: MASAAKI TAKEUCHI";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: MASAAKI TAKEUCHI (ZV99LRP697)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "saturator-app-iphone/saturator-app-iphone-Prefix.pch";
 				INFOPLIST_FILE = "saturator-app-iphone/saturator-app-iphone-Info.plist";
@@ -1256,7 +1256,7 @@
 		7869FFEF1698023900E11631 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: MASAAKI TAKEUCHI";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: MASAAKI TAKEUCHI (ZV99LRP697)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "saturator-app-iphone/saturator-app-iphone-Prefix.pch";
 				INFOPLIST_FILE = "saturator-app-iphone/saturator-app-iphone-Info.plist";
